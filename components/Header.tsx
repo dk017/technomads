@@ -4,9 +4,32 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useAuth } from './AuthContext';
 
 const Header = () => {
   const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { user, setUser } = useAuth();
+  const supabase = createClientComponentClient();
+  const [userName, setUserName] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    if (user) {
+      // Access the user's name from metadata
+      const name = user.user_metadata?.name || user.email?.split('@')[0] || 'User';
+      setUserName(name);
+    } else {
+      setUserName(null);
+    }
+  }, [user]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
 
   return (
     <header className="bg-background border-b">
@@ -27,14 +50,23 @@ const Header = () => {
             size="icon"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            {mounted && (theme === 'dark' ? <SunIcon /> : <MoonIcon />)}
           </Button>
-          <Button asChild>
-            <Link href="/post-job">Post a Job</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/login">Log In</Link>
-          </Button>
+          {user ? (
+            <>
+              <span className="mr-4">Welcome,  {userName}</span>
+              <Button onClick={handleSignOut}>Sign Out</Button>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" asChild>
+                <Link href="/login">Log In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/signup">Sign Up</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>
