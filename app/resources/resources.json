@@ -1,0 +1,5012 @@
+[
+    {
+        "id": "964175460",
+        "date_posted": "2024-10-23T00:00:00",
+        "date_created": "2024-10-15T12:02:39.894446",
+        "title": "Remote HVACR Technician and Trainer",
+        "organization": "RSM Atlanta LLC",
+        "organization_url": "http://rsmatl.com",
+        "date_validthrough": "2024-10-24T23:41:00",
+        "locations_raw": [
+            {
+                "address": {
+                    "addressCountry": "us",
+                    "@type": "PostalAddress",
+                    "postalCode": "30360",
+                    "addressLocality": "ATLANTA",
+                    "addressRegion": "GA"
+                },
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"USD\",\"value\":{\"@type\":\"QuantitativeValue\",\"value\":\"Salary based on experience\",\"unitText\":\"DAY\"}}",
+        "employment_type": [
+            "PART_TIME"
+        ],
+        "url": "https://rsmatl.zohorecruit.com/jobs/Careers/445803000006288002/Remote-HVACR-Technician-and-Trainer",
+        "source_type": "ats",
+        "source": "zoho",
+        "source_domain": "rsmatl.zohorecruit.com",
+        "organization_logo": "https://recruit.zoho.com/recruit/ViewLogo?digest=k5yqeBMmW629gpiNlrxh8Q--",
+        "cities_derived": [
+            "Atlanta"
+        ],
+        "regions_derived": [
+            "Georgia"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Atlanta, Georgia, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            33.7628
+        ],
+        "lngs_derived": [
+            -84.422
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "964175500",
+        "date_posted": "2024-10-23T00:00:00",
+        "date_created": "2024-10-15T12:02:42.56166",
+        "title": "Remote HVACR Technician and Trainer (Retired Professionals)",
+        "organization": "RSM Atlanta LLC",
+        "organization_url": "http://rsmatl.com",
+        "date_validthrough": "2024-10-24T00:45:00",
+        "locations_raw": [
+            {
+                "address": {
+                    "addressCountry": "us",
+                    "@type": "PostalAddress",
+                    "postalCode": "30309",
+                    "addressLocality": "Atlanta",
+                    "addressRegion": "GA"
+                },
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"USD\",\"value\":{\"@type\":\"QuantitativeValue\",\"value\":\"TBD Based on Experience\",\"unitText\":\"MONTH\"}}",
+        "employment_type": null,
+        "url": "https://rsmatl.zohorecruit.com/jobs/Careers/445803000006288056/Remote-HVACR-Technician-and-Trainer-Retired-Professionals-",
+        "source_type": "ats",
+        "source": "zoho",
+        "source_domain": "rsmatl.zohorecruit.com",
+        "organization_logo": "https://recruit.zoho.com/recruit/ViewLogo?digest=k5yqeBMmW629gpiNlrxh8Q--",
+        "cities_derived": [
+            "Atlanta"
+        ],
+        "regions_derived": [
+            "Georgia"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Atlanta, Georgia, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            33.7628
+        ],
+        "lngs_derived": [
+            -84.422
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968143082",
+        "date_posted": "2024-10-16T14:35:38.476",
+        "date_created": "2024-10-16T14:37:06.696019",
+        "title": "Operations Coord, PB Coding, Full Time, Days",
+        "organization": "Northwestern Memorial Healthcare",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "streetAddress": "Remote Work Site",
+                    "addressLocality": "Chicago",
+                    "addressRegion": "Illinois",
+                    "postalCode": "60611",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/NorthwesternMedicine/744000020780645-operations-coord-pb-coding-full-time-days",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Chicago"
+        ],
+        "regions_derived": [
+            "Illinois"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Chicago, Illinois, United States"
+        ],
+        "timezones_derived": [
+            "America/Chicago"
+        ],
+        "lats_derived": [
+            41.8375
+        ],
+        "lngs_derived": [
+            -87.6866
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968111685",
+        "date_posted": "2024-10-16T14:27:04.052",
+        "date_created": "2024-10-16T14:29:07.33143",
+        "title": "Senior Director, Product Management",
+        "organization": "Revalize",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "remote",
+                    "addressCountry": "Germany"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Revalize/744000020777845-senior-director-product-management",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Germany"
+        ],
+        "locations_derived": [
+            "Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            52.52
+        ],
+        "lngs_derived": [
+            13.405
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968076893",
+        "date_posted": "2024-10-16T14:10:46.073",
+        "date_created": "2024-10-16T14:13:09.108951",
+        "title": "Corporate Communications Manager",
+        "organization": "insightsoftware",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressRegion": "REMOTE",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.smartrecruiters.com/Insightsoftware/744000020772278-corporate-communications-manager",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968056044",
+        "date_posted": "2024-10-16T14:04:08.392",
+        "date_created": "2024-10-16T14:05:07.438169",
+        "title": "Major Account Manager - Healthcare",
+        "organization": "Palo Alto Networks",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressCountry": "United Kingdom"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/PaloAltoNetworks2/744000020770032-major-account-manager-healthcare",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            51.5072
+        ],
+        "lngs_derived": [
+            -0.1275
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968047862",
+        "date_posted": "2024-10-16T13:59:55.078",
+        "date_created": "2024-10-16T14:01:05.952146",
+        "title": "Team Lead, Technical Support (Philippines Remote)",
+        "organization": "Turnitin, LLC",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Manila",
+                    "addressRegion": "Metro Manila",
+                    "addressCountry": "Philippines"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/TurnitinLLC/744000020769735-team-lead-technical-support-philippines-remote-",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Manila"
+        ],
+        "regions_derived": [
+            "Manila"
+        ],
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Manila, Manila, Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967976897",
+        "date_posted": "2024-10-16T13:24:55.391",
+        "date_created": "2024-10-16T13:29:12.619991",
+        "title": "Java Technical Lead-Remote",
+        "organization": "TMS LLC",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "New York",
+                    "addressRegion": "New York",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Contract"
+        ],
+        "url": "https://jobs.smartrecruiters.com/TMSLLC/744000020759972-java-technical-lead-remote",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": [
+            "New York"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "New York, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            42.6664
+        ],
+        "lngs_derived": [
+            -73.7987
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967954411",
+        "date_posted": "2024-10-16T13:11:27.825",
+        "date_created": "2024-10-16T13:13:07.295128",
+        "title": "Développeur .NET Remote H/F",
+        "organization": "Septeo",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "France Entière",
+                    "addressRegion": "France Entière",
+                    "addressCountry": "France"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Temps complet"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Septeo/744000020756911-developpeur-net-remote-h-f",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "France"
+        ],
+        "locations_derived": [
+            "France"
+        ],
+        "timezones_derived": [
+            "Europe/Paris"
+        ],
+        "lats_derived": [
+            48.8567
+        ],
+        "lngs_derived": [
+            2.3522
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967925337",
+        "date_posted": "2024-10-16T12:56:22.547",
+        "date_created": "2024-10-16T12:57:06.143229",
+        "title": "Front End Developer with Angular",
+        "organization": "Mobica ",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressCountry": "Poland"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Mobica/744000020751812-front-end-developer-with-angular",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Poland"
+        ],
+        "locations_derived": [
+            "Poland"
+        ],
+        "timezones_derived": [
+            "Europe/Warsaw"
+        ],
+        "lats_derived": [
+            52.23
+        ],
+        "lngs_derived": [
+            21.0111
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967915147",
+        "date_posted": "2024-10-16T12:46:25.159",
+        "date_created": "2024-10-16T12:49:08.901655",
+        "title": "Remote Paid Media Specialist",
+        "organization": "Alliance Animal Health",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "streetAddress": "800 Westchester Avenue",
+                    "addressLocality": "White Plains",
+                    "addressRegion": "New York",
+                    "postalCode": "10604",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/AllianceAnimalHealth/744000020751905-remote-paid-media-specialist",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "White Plains"
+        ],
+        "regions_derived": [
+            "New York"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "White Plains, New York, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            41.022
+        ],
+        "lngs_derived": [
+            -73.7547
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968128609",
+        "date_posted": "2024-10-16T12:20:30.201",
+        "date_created": "2024-10-16T14:32:28.723633",
+        "title": "Sales Engineer (m/w/d) - Verbindungstechnik im Raum NDS",
+        "organization": "munerio consulting GmbH",
+        "organization_url": "http://munerio.de/jobs",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Deutschland"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"EUR\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":70000,\"maxValue\":95000,\"unitText\":\"YEAR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/munerio/12685787-sales-engineer-m-w-d-verbindungstechnik-im-raum-nds",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/66fc113f9700ca00084d407a/munerio-consulting-gmb-h-logo-m.jpg",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "968088537",
+        "date_posted": "2024-10-16T12:05:55",
+        "date_created": "2024-10-16T14:19:38.659725",
+        "title": "Manager, Journey Optimization Solutions (REMOTE)",
+        "organization": "Macy's Jobs",
+        "organization_url": "https://ebwh.fa.us2.oraclecloud.com:443/hcmUI/CandidateExperience",
+        "date_validthrough": "2024-10-25T12:05:00",
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Deerfield Township",
+                    "addressRegion": "OH",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full time"
+        ],
+        "url": "https://ebwh.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/66499",
+        "source_type": "ats",
+        "source": "oraclecloud",
+        "source_domain": "ebwh.fa.us2.oraclecloud.com",
+        "organization_logo": "https://employeeconnection.net/CareerSiteMedia/ucmfa43763241.png",
+        "cities_derived": null,
+        "regions_derived": [
+            "Ohio"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Ohio, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            39.9862
+        ],
+        "lngs_derived": [
+            -82.9855
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967778656",
+        "date_posted": "2024-10-16T11:51:16.433",
+        "date_created": "2024-10-16T11:53:07.103126",
+        "title": "Junior Data Engineer",
+        "organization": "Accesa",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Employee can work remotely",
+                    "addressRegion": "Cluj County",
+                    "addressCountry": "Romania"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/ACCESA/744000020740315-junior-data-engineer",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Romania"
+        ],
+        "locations_derived": [
+            "Romania"
+        ],
+        "timezones_derived": [
+            "Europe/Bucharest"
+        ],
+        "lats_derived": [
+            44.4325
+        ],
+        "lngs_derived": [
+            26.1039
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967910250",
+        "date_posted": "2024-10-16T11:42:28.46",
+        "date_created": "2024-10-16T12:47:32.665183",
+        "title": "Amazon E-Commerce Consultant - 100% remote",
+        "organization": "Blankspace Commerce GmbH",
+        "organization_url": "http://blankspace.eu",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Deutschland"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/blankspacecommerce/12685464-amazon-e-commerce-consultant-100-remote",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/6128d201bd6d020008689b65/blankspace-commerce-gmb-h-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "967718421",
+        "date_posted": "2024-10-16T11:26:06.899",
+        "date_created": "2024-10-16T11:29:07.301802",
+        "title": "Junior Data Engineer",
+        "organization": "Accesa",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Employee can work remotely",
+                    "addressRegion": "Cluj County",
+                    "addressCountry": "Romania"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/ACCESA/744000020735525-junior-data-engineer",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Romania"
+        ],
+        "locations_derived": [
+            "Romania"
+        ],
+        "timezones_derived": [
+            "Europe/Bucharest"
+        ],
+        "lats_derived": [
+            44.4325
+        ],
+        "lngs_derived": [
+            26.1039
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967703793",
+        "date_posted": "2024-10-16T11:24:28.16",
+        "date_created": "2024-10-16T11:25:05.420378",
+        "title": "Junior Data Engineer",
+        "organization": "Accesa",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Employee can work remotely",
+                    "addressRegion": "Cluj County",
+                    "addressCountry": "Romania"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/ACCESA/744000020735194-junior-data-engineer",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Romania"
+        ],
+        "locations_derived": [
+            "Romania"
+        ],
+        "timezones_derived": [
+            "Europe/Bucharest"
+        ],
+        "lats_derived": [
+            44.4325
+        ],
+        "lngs_derived": [
+            26.1039
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967426830",
+        "date_posted": "2024-10-16T09:18:06.726",
+        "date_created": "2024-10-16T09:21:08.068939",
+        "title": "Développeur .NET Remote H/F",
+        "organization": "Septeo",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "France Entière",
+                    "addressRegion": "France Entière",
+                    "addressCountry": "France"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Temps complet"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Septeo/744000020709867-developpeur-net-remote-h-f",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "France"
+        ],
+        "locations_derived": [
+            "France"
+        ],
+        "timezones_derived": [
+            "Europe/Paris"
+        ],
+        "lats_derived": [
+            48.8567
+        ],
+        "lngs_derived": [
+            2.3522
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967415106",
+        "date_posted": "2024-10-16T09:12:24.862",
+        "date_created": "2024-10-16T09:13:05.398891",
+        "title": "Lead (m/w/d) Brandpartnerships / Retail Media (remote möglich)",
+        "organization": "E. Breuninger GmbH & Co.",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Stuttgart",
+                    "addressRegion": "",
+                    "addressCountry": "Germany"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Vollzeit"
+        ],
+        "url": "https://jobs.smartrecruiters.com/EBreuningerGmbHCo/744000020709795-lead-m-w-d-brandpartnerships-retail-media-remote-moglich-",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Stuttgart"
+        ],
+        "regions_derived": [
+            "Baden-Württemberg"
+        ],
+        "countries_derived": [
+            "Germany"
+        ],
+        "locations_derived": [
+            "Stuttgart, Baden-Württemberg, Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            48.7775
+        ],
+        "lngs_derived": [
+            9.18
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967396189",
+        "date_posted": "2024-10-16T09:03:47.442",
+        "date_created": "2024-10-16T09:05:06.830467",
+        "title": "Junior Brandpartner (m/w/d) Retail Media – Fokus: Beauty (remote möglich)",
+        "organization": "E. Breuninger GmbH & Co.",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Stuttgart",
+                    "addressRegion": "",
+                    "addressCountry": "Germany"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Vollzeit"
+        ],
+        "url": "https://jobs.smartrecruiters.com/EBreuningerGmbHCo/744000020707410-junior-brandpartner-m-w-d-retail-media-fokus-beauty-remote-moglich-",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Stuttgart"
+        ],
+        "regions_derived": [
+            "Baden-Württemberg"
+        ],
+        "countries_derived": [
+            "Germany"
+        ],
+        "locations_derived": [
+            "Stuttgart, Baden-Württemberg, Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            48.7775
+        ],
+        "lngs_derived": [
+            9.18
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967234615",
+        "date_posted": "2024-10-16T07:55:22.919",
+        "date_created": "2024-10-16T08:01:08.961091",
+        "title": "Junior Social Media Manager:in (Channelownership TikTok & Content Management) // Teil-remote möglich",
+        "organization": "E. Breuninger GmbH & Co.",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Stuttgart",
+                    "addressRegion": "Baden-Württemberg",
+                    "postalCode": "70",
+                    "addressCountry": "Germany"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Vollzeit"
+        ],
+        "url": "https://jobs.smartrecruiters.com/EBreuningerGmbHCo/744000020693136-junior-social-media-manager-in-channelownership-tiktok-content-management-teil-remote-moglich",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Stuttgart"
+        ],
+        "regions_derived": [
+            "Baden-Württemberg"
+        ],
+        "countries_derived": [
+            "Germany"
+        ],
+        "locations_derived": [
+            "Stuttgart, Baden-Württemberg, Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            48.7775
+        ],
+        "lngs_derived": [
+            9.18
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967673535",
+        "date_posted": "2024-10-16T07:50:42.386",
+        "date_created": "2024-10-16T11:11:00.361029",
+        "title": "Online Physics Tutor - Part Time & Flexible Schedule",
+        "organization": "FindTutors",
+        "organization_url": "https://www.findtutors.co.uk",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Ireland"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":20,\"maxValue\":40,\"unitText\":\"HOUR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/findtutors/12683315-online-physics-tutor-part-time-and-flexible-schedule",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/65670d93d0a4570008b8329b/findtutors-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Ireland"
+        ],
+        "locations_derived": [
+            "Ireland"
+        ],
+        "timezones_derived": [
+            "Europe/Dublin"
+        ],
+        "lats_derived": [
+            53.35
+        ],
+        "lngs_derived": [
+            -6.2603
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967673526",
+        "date_posted": "2024-10-16T07:50:37.732",
+        "date_created": "2024-10-16T11:11:00.074395",
+        "title": "Online  Physics Tutor - Part Time: Flexible Schedule & Competitive Salary",
+        "organization": "FindTutors",
+        "organization_url": "https://www.findtutors.co.uk",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":20,\"maxValue\":40,\"unitText\":\"HOUR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/findtutors/12683314-online-physics-tutor-part-time-flexible-schedule-and-competitive-salary",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/65670d93d0a4570008b8329b/findtutors-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            51.5072
+        ],
+        "lngs_derived": [
+            -0.1275
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967673599",
+        "date_posted": "2024-10-16T07:50:02.021",
+        "date_created": "2024-10-16T11:11:02.681287",
+        "title": "Private Science Teacher - No Experience, Flexible Schedule",
+        "organization": "FindTutors",
+        "organization_url": "https://www.findtutors.co.uk",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Ireland"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":20,\"maxValue\":40,\"unitText\":\"HOUR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/findtutors/12683312-private-science-teacher-no-experience-flexible-schedule",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/65670d93d0a4570008b8329b/findtutors-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Ireland"
+        ],
+        "locations_derived": [
+            "Ireland"
+        ],
+        "timezones_derived": [
+            "Europe/Dublin"
+        ],
+        "lats_derived": [
+            53.35
+        ],
+        "lngs_derived": [
+            -6.2603
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967673546",
+        "date_posted": "2024-10-16T07:49:43.364",
+        "date_created": "2024-10-16T11:11:00.748464",
+        "title": "Online Business Tutor - Part Time: No experience",
+        "organization": "FindTutors",
+        "organization_url": "https://www.findtutors.co.uk",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":20,\"maxValue\":40,\"unitText\":\"HOUR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/findtutors/12683311-online-business-tutor-part-time-no-experience",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/65670d93d0a4570008b8329b/findtutors-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            51.5072
+        ],
+        "lngs_derived": [
+            -0.1275
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967673515",
+        "date_posted": "2024-10-16T07:49:26.554",
+        "date_created": "2024-10-16T11:10:59.581825",
+        "title": "Online TOEFL Tutor - Part Time & Flexible Schedule",
+        "organization": "FindTutors",
+        "organization_url": "https://www.findtutors.co.uk",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Ireland"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":20,\"maxValue\":40,\"unitText\":\"HOUR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/findtutors/12683310-online-toefl-tutor-part-time-and-flexible-schedule",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/65670d93d0a4570008b8329b/findtutors-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Ireland"
+        ],
+        "locations_derived": [
+            "Ireland"
+        ],
+        "timezones_derived": [
+            "Europe/Dublin"
+        ],
+        "lats_derived": [
+            53.35
+        ],
+        "lngs_derived": [
+            -6.2603
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968080141",
+        "date_posted": "2024-10-16T07:18:48.512",
+        "date_created": "2024-10-16T14:15:13.240532",
+        "title": "Area Sales Managerin (m/w/d)",
+        "organization": "Gusti Leder GmbH",
+        "organization_url": "http://gusti-leder.de",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Deutschland"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/gusti-leder/12683208-area-sales-managerin-m-w-d",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/6484e6c746ff6800076ebe00/gusti-leder-gmb-h-logo-m.png",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "967032207",
+        "date_posted": "2024-10-16T06:36:50.172",
+        "date_created": "2024-10-16T06:37:05.579846",
+        "title": "Solutions Consultant - SLED",
+        "organization": "Palo Alto Networks",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressRegion": "California",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/PaloAltoNetworks2/744000020682163-solutions-consultant-sled",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": [
+            "California"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "California, United States"
+        ],
+        "timezones_derived": [
+            "America/Los_Angeles"
+        ],
+        "lats_derived": [
+            38.5677
+        ],
+        "lngs_derived": [
+            -121.4685
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967032177",
+        "date_posted": "2024-10-16T06:36:34.903",
+        "date_created": "2024-10-16T06:37:05.064979",
+        "title": "Solutions Consultant - CA State Government",
+        "organization": "Palo Alto Networks",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressRegion": "California",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/PaloAltoNetworks2/744000020682505-solutions-consultant-ca-state-government",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": [
+            "California"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "California, United States"
+        ],
+        "timezones_derived": [
+            "America/Los_Angeles"
+        ],
+        "lats_derived": [
+            38.5677
+        ],
+        "lngs_derived": [
+            -121.4685
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967244965",
+        "date_posted": "2024-10-16T06:33:41.695",
+        "date_created": "2024-10-16T08:05:03.115409",
+        "title": "Servicetechniker:in (all genders) im verfahrenstechnischen Anlagenbau",
+        "organization": "munerio consulting GmbH",
+        "organization_url": "http://munerio.de/jobs",
+        "date_validthrough": null,
+        "locations_raw": null,
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Deutschland"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"EUR\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":50000,\"maxValue\":60000,\"unitText\":\"YEAR\"}}",
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://join.com/companies/munerio/12683126-servicetechniker-in-all-genders-im-verfahrenstechnischen-anlagenbau",
+        "source_type": "ats",
+        "source": "join.com",
+        "source_domain": "join.com",
+        "organization_logo": "https://cdn.join.com/66fc113f9700ca00084d407a/munerio-consulting-gmb-h-logo-m.jpg",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "966615871",
+        "date_posted": "2024-10-16T04:00:31.519",
+        "date_created": "2024-10-16T04:01:05.732203",
+        "title": "Senior Director, Product Management",
+        "organization": "Revalize",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Remote",
+                    "addressRegion": "GERMANY",
+                    "addressCountry": "Germany"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Revalize/744000020671145-senior-director-product-management",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Germany"
+        ],
+        "locations_derived": [
+            "Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            52.52
+        ],
+        "lngs_derived": [
+            13.405
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "966535349",
+        "date_posted": "2024-10-16T03:26:56.814",
+        "date_created": "2024-10-16T03:29:05.509009",
+        "title": "Operations Officer – Data Validation (Remote)",
+        "organization": "Growthdesk",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "streetAddress": "Manila",
+                    "addressLocality": "Manila",
+                    "addressCountry": "Philippines"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/Growthdesk/744000020664681-operations-officer-data-validation-remote-",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Manila"
+        ],
+        "regions_derived": [
+            "Manila"
+        ],
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Manila, Manila, Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "966440296",
+        "date_posted": "2024-10-16T02:54:08.805",
+        "date_created": "2024-10-16T02:57:20.46189",
+        "title": "Human Resource Manager (Remote & Part-time_UK based)",
+        "organization": "SmartDev",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "streetAddress": "Station Road",
+                    "addressLocality": "Marlow",
+                    "addressRegion": "England",
+                    "postalCode": "SL7",
+                    "addressCountry": "United Kingdom"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Part-time"
+        ],
+        "url": "https://jobs.smartrecruiters.com/SmartDev1/744000020655449-human-resource-manager-remote-part-time-uk-based-",
+        "source_type": "ats",
+        "source": "smartrecruiters",
+        "source_domain": "jobs.smartrecruiters.com",
+        "organization_logo": null,
+        "cities_derived": [
+            "Marlow"
+        ],
+        "regions_derived": [
+            "Buckinghamshire"
+        ],
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "Marlow, Buckinghamshire, United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            51.57
+        ],
+        "lngs_derived": [
+            -0.78
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "965947417",
+        "date_posted": "2024-10-16T01:47:39",
+        "date_created": "2024-10-16T00:01:15.184718",
+        "title": "HOSPITAL CODING SPECIALIST (REMOTE)",
+        "organization": "OCHIN",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "PORTLAND",
+                    "addressRegion": "OR",
+                    "addressCountry": "US"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"USD\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":24.01,\"maxValue\":33.61,\"unitText\":\"HOUR\"}}",
+        "employment_type": null,
+        "url": "https://recruiting.paylocity.com/Recruiting/Jobs/Details/2668248",
+        "source_type": "ats",
+        "source": "paylocity",
+        "source_domain": "recruiting.paylocity.com",
+        "organization_logo": "https://recruiting.paylocity.com/recruiting/jobs/GetLogoFile?moduleId=14269",
+        "cities_derived": [
+            "Portland"
+        ],
+        "regions_derived": [
+            "Oregon"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Portland, Oregon, United States"
+        ],
+        "timezones_derived": [
+            "America/Los_Angeles"
+        ],
+        "lats_derived": [
+            45.5371
+        ],
+        "lngs_derived": [
+            -122.65
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967206639",
+        "date_posted": "2024-10-16T00:44:09",
+        "date_created": "2024-10-16T07:48:49.869264",
+        "title": "Director, Customer Experience (IT Solutions - QNXT & Salesforce) - REMOTE",
+        "organization": "Molina Talent Acquisition",
+        "organization_url": "https://hckd.fa.us2.oraclecloud.com:443/hcmUI/CandidateExperience",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Louisville",
+                    "addressRegion": "KY",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "Full time"
+        ],
+        "url": "https://hckd.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2028519",
+        "source_type": "ats",
+        "source": "oraclecloud",
+        "source_domain": "hckd.fa.us2.oraclecloud.com",
+        "organization_logo": "https://careers.molinahealthcare.com/",
+        "cities_derived": [
+            "Louisville"
+        ],
+        "regions_derived": [
+            "Kentucky"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Louisville, Kentucky, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.1663
+        ],
+        "lngs_derived": [
+            -85.6485
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "966561177",
+        "date_posted": "2024-10-16T00:33:59",
+        "date_created": "2024-10-16T03:36:25.790923",
+        "title": "Infusion Collection Specialist - Remote",
+        "organization": "Soleo Health Inc",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "OFF-SITE",
+                    "addressLocality": "San Francisco",
+                    "addressRegion": "CA",
+                    "addressCountry": "US"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"USD\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":19,\"maxValue\":23,\"unitText\":\"HOUR\"}}",
+        "employment_type": null,
+        "url": "https://recruiting.paylocity.com/Recruiting/Jobs/Details/2796072",
+        "source_type": "ats",
+        "source": "paylocity",
+        "source_domain": "recruiting.paylocity.com",
+        "organization_logo": "https://recruiting.paylocity.com/recruiting/jobs/GetLogoFile?moduleId=23144",
+        "cities_derived": [
+            "San Francisco"
+        ],
+        "regions_derived": [
+            "California"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "San Francisco, California, United States"
+        ],
+        "timezones_derived": [
+            "America/Los_Angeles"
+        ],
+        "lats_derived": [
+            37.7558
+        ],
+        "lngs_derived": [
+            -122.4449
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968201723",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:57:34.563336",
+        "title": "Energy Efficiency Project Engineer",
+        "organization": "Resource Innovations",
+        "organization_url": "https://jobs.workable.com/company/mCftjozGevas6msJvmjEBM/jobs-at-resource-innovations",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Phoenix",
+                    "addressRegion": "Arizona",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/k4MkcAaccoDiW5ntFeqgp5/hybrid-energy-efficiency-project-engineer-in-phoenix-at-resource-innovations",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/385704/logo",
+        "cities_derived": [
+            "Phoenix"
+        ],
+        "regions_derived": [
+            "Arizona"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Phoenix, Arizona, United States"
+        ],
+        "timezones_derived": [
+            "America/Phoenix"
+        ],
+        "lats_derived": [
+            33.5722
+        ],
+        "lngs_derived": [
+            -112.0892
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968200811",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:57:19.395908",
+        "title": "French Interpreter",
+        "organization": "Datamark, Inc.",
+        "organization_url": "https://jobs.workable.com/company/sTRP3hFwZB84jWGcCVwj8H/jobs-at-datamark%2C-inc.",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "India"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/7Ruf6pPqwc683gJrjasUqx/remote-french-interpreter-in-mumbra-at-datamark%2C-inc.",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/631425/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "India"
+        ],
+        "locations_derived": [
+            "India"
+        ],
+        "timezones_derived": [
+            "Asia/Kolkata"
+        ],
+        "lats_derived": [
+            28.6139
+        ],
+        "lngs_derived": [
+            77.209
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968183101",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:50:28.776272",
+        "title": "Software Procurement Manager",
+        "organization": "Kyriba",
+        "organization_url": "",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "United Kingdom",
+                    "addressLocality": "Remote UK"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://kyriba.wd5.myworkdayjobs.com/Kyriba-Careers/job/Remote-UK/Software-Procurement-Manager_R-04802",
+        "source_type": "ats",
+        "source": "workday",
+        "source_domain": "kyriba.wd5.myworkdayjobs.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            51.5072
+        ],
+        "lngs_derived": [
+            -0.1275
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968191581",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:54:33.99302",
+        "title": "Cloud Security Auditor",
+        "organization": "Maveris",
+        "organization_url": "https://jobs.workable.com/company/sA6P28gfXBeWSZ5NauZxam/jobs-at-maveris",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/2AanHLDctywFcDg2wpPfZ9/remote-cloud-security-auditor-in-alexandria-at-maveris",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/442352/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968195458",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:55:49.100637",
+        "title": "E-Commerce Marketing Manager",
+        "organization": "Resource Innovations",
+        "organization_url": "https://jobs.workable.com/company/mCftjozGevas6msJvmjEBM/jobs-at-resource-innovations",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/qvw9Ujr1ArLqGwDkGpfmhg/remote-e-commerce-marketing-manager-in-madison-at-resource-innovations",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/385704/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968121676",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:31:22.132006",
+        "title": "Software Quality Agent (100% Remote EUR)",
+        "organization": "Bitfinex",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "ES",
+                    "addressLocality": "Spain",
+                    "addressRegion": "MD",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Spain"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://bitfinex.recruitee.com/o/software-quality-agent-100-remote-2",
+        "source_type": "ats",
+        "source": "recruitee",
+        "source_domain": "bitfinex.recruitee.com",
+        "organization_logo": "",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Spain"
+        ],
+        "locations_derived": [
+            "Spain"
+        ],
+        "timezones_derived": [
+            "Europe/Madrid"
+        ],
+        "lats_derived": [
+            40.4169
+        ],
+        "lngs_derived": [
+            -3.7033
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968125293",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:31:54.237933",
+        "title": "Full-Stack Engineer",
+        "organization": "constellr GmbH",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "DE",
+                    "addressLocality": "Munich",
+                    "addressRegion": "BY",
+                    "postalCode": "79100",
+                    "streetAddress": "Constellr GmbH"
+                }
+            },
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "DE",
+                    "addressLocality": "Freiburg am Breisgau",
+                    "addressRegion": "BW",
+                    "postalCode": "79100",
+                    "streetAddress": "Constellr GmbH"
+                }
+            },
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "BE",
+                    "addressLocality": "Brussels ",
+                    "addressRegion": "BRU",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            },
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "FR",
+                    "addressLocality": "Toulouse",
+                    "addressRegion": "OCC",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Germany"
+            },
+            {
+                "@type": "Country",
+                "name": "Belgium"
+            },
+            {
+                "@type": "Country",
+                "name": "France"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://constellr.recruitee.com/o/full-stack-engineer-2-6",
+        "source_type": "ats",
+        "source": "recruitee",
+        "source_domain": "constellr.recruitee.com",
+        "organization_logo": "https://careers.recruiteecdn.com/image/upload/production/images/AS1M/BRl970l79SaZ.png",
+        "cities_derived": [
+            "Brussels",
+            "Toulouse",
+            "Munich"
+        ],
+        "regions_derived": [
+            "Brussels-Capital Region",
+            "Occitanie",
+            "Bavaria"
+        ],
+        "countries_derived": [
+            "Belgium",
+            "France",
+            "Germany",
+            "Germany"
+        ],
+        "locations_derived": [
+            "Brussels, Brussels-Capital Region, Belgium",
+            "Toulouse, Occitanie, France",
+            "Munich, Bavaria, Germany",
+            "Germany"
+        ],
+        "timezones_derived": [
+            "Europe/Brussels",
+            "Europe/Paris",
+            "Europe/Berlin",
+            "Europe/Berlin"
+        ],
+        "lats_derived": [
+            50.8467,
+            43.6045,
+            48.1375,
+            52.52
+        ],
+        "lngs_derived": [
+            4.3525,
+            1.444,
+            11.575,
+            13.405
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968146993",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:39:33.671363",
+        "title": "Funding Quality Assurance Associate",
+        "organization": "First Help Financial",
+        "organization_url": "https://jobs.workable.com/company/tWC39A9a51ubwRfWCRbZtJ/jobs-at-first-help-financial",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/wuvjVXXApeQYumj8UcfjDN/remote-funding-quality-assurance-associate-in-needham-at-first-help-financial",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/346448/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968147024",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:39:34.797453",
+        "title": "Analyst/Medical Writer Internship",
+        "organization": "Costello Medical",
+        "organization_url": "https://jobs.workable.com/company/191pj137RUjFDG4MCtrL7a/jobs-at-costello-medical",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Boston",
+                    "addressRegion": "Massachusetts",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "CONTRACTOR"
+        ],
+        "url": "https://jobs.workable.com/view/cCMT418uk18ZnSxqX8Y15H/hybrid-analyst%2Fmedical-writer-internship-in-boston-at-costello-medical",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/150423/Costello_Logo_RGB_JPG.jpg",
+        "cities_derived": [
+            "Boston"
+        ],
+        "regions_derived": [
+            "Massachusetts"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Boston, Massachusetts, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            42.3188
+        ],
+        "lngs_derived": [
+            -71.0852
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968151584",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:41:43.865144",
+        "title": "Analyst/Medical Writer",
+        "organization": "Costello Medical",
+        "organization_url": "https://jobs.workable.com/company/191pj137RUjFDG4MCtrL7a/jobs-at-costello-medical",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Cambridge",
+                    "addressRegion": "England",
+                    "addressCountry": "United Kingdom"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/wasNmJtZGFjKP6zA9ySZZ2/hybrid-analyst%2Fmedical-writer-in-cambridge-at-costello-medical",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/150423/Costello_Logo_RGB_JPG.jpg",
+        "cities_derived": [
+            "Cambridge"
+        ],
+        "regions_derived": [
+            "Cambridgeshire"
+        ],
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "Cambridge, Cambridgeshire, United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            52.2053
+        ],
+        "lngs_derived": [
+            0.1192
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968151588",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:41:43.952643",
+        "title": "Analyst - Pro Bono",
+        "organization": "Costello Medical",
+        "organization_url": "https://jobs.workable.com/company/191pj137RUjFDG4MCtrL7a/jobs-at-costello-medical",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Cambridge",
+                    "addressRegion": "England",
+                    "addressCountry": "United Kingdom"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/a3sYCUFoCFWHAZVU8wUf3r/hybrid-analyst---pro-bono-in-cambridge-at-costello-medical",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/150423/Costello_Logo_RGB_JPG.jpg",
+        "cities_derived": [
+            "Cambridge"
+        ],
+        "regions_derived": [
+            "Cambridgeshire"
+        ],
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "Cambridge, Cambridgeshire, United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            52.2053
+        ],
+        "lngs_derived": [
+            0.1192
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968151598",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:41:44.005555",
+        "title": "Analyst - Health Technology Assessment (HTA)",
+        "organization": "Costello Medical",
+        "organization_url": "https://jobs.workable.com/company/191pj137RUjFDG4MCtrL7a/jobs-at-costello-medical",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Cambridge",
+                    "addressRegion": "England",
+                    "addressCountry": "United Kingdom"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/5hkm1o3QRLeruUoxu9NeaY/hybrid-analyst---health-technology-assessment-(hta)-in-cambridge-at-costello-medical",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/150423/Costello_Logo_RGB_JPG.jpg",
+        "cities_derived": [
+            "Cambridge"
+        ],
+        "regions_derived": [
+            "Cambridgeshire"
+        ],
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "Cambridge, Cambridgeshire, United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            52.2053
+        ],
+        "lngs_derived": [
+            0.1192
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968169377",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:47:11.316339",
+        "title": "Senior Frontend Developer - React",
+        "organization": "2am.tech",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "RS",
+                    "addressLocality": "Remote",
+                    "addressRegion": "00",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            },
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "PT",
+                    "addressLocality": "Lisboa",
+                    "addressRegion": "11",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            },
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "BR",
+                    "addressLocality": "Rio de Janeiro",
+                    "addressRegion": "RJ",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Serbia"
+            },
+            {
+                "@type": "Country",
+                "name": "Portugal"
+            },
+            {
+                "@type": "Country",
+                "name": "Brazil"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://2am.recruitee.com/o/fullstack-js-2amtech-2",
+        "source_type": "ats",
+        "source": "recruitee",
+        "source_domain": "2am.recruitee.com",
+        "organization_logo": "https://careers.recruiteecdn.com/image/upload/production/images/AdW2/LROeTvb5WDF2.png",
+        "cities_derived": [
+            "Rio de Janeiro",
+            "Lisbon"
+        ],
+        "regions_derived": [
+            "Rio de Janeiro",
+            "Lisboa"
+        ],
+        "countries_derived": [
+            "Brazil",
+            "Portugal",
+            "Serbia"
+        ],
+        "locations_derived": [
+            "Rio de Janeiro, Rio de Janeiro, Brazil",
+            "Lisbon, Lisboa, Portugal",
+            "Serbia"
+        ],
+        "timezones_derived": [
+            "America/Sao_Paulo",
+            "Europe/Lisbon",
+            "Europe/Belgrade"
+        ],
+        "lats_derived": [
+            -22.9111,
+            38.7253,
+            44.82
+        ],
+        "lngs_derived": [
+            -43.2056,
+            -9.15,
+            20.46
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968046308",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:00:23.811455",
+        "title": "Sr. Employee Relations & Compliance Specialist",
+        "organization": "Sonder",
+        "organization_url": "",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "Romania",
+                    "addressLocality": "Remote - Romania"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Romania"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://sonder.wd1.myworkdayjobs.com/Join_Sonder/job/Remote---Romania/Sr-Employee-Relations---Compliance-Specialist_JR102144",
+        "source_type": "ats",
+        "source": "workday",
+        "source_domain": "sonder.wd1.myworkdayjobs.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Romania"
+        ],
+        "locations_derived": [
+            "Romania"
+        ],
+        "timezones_derived": [
+            "Europe/Bucharest"
+        ],
+        "lats_derived": [
+            44.4325
+        ],
+        "lngs_derived": [
+            26.1039
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968049219",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:02:11.497411",
+        "title": "Sales Agent (Portuguese-speaking)",
+        "organization": "Neo Group",
+        "organization_url": "https://jobs.workable.com/company/ei632Axwd5x4FZRkFMR4K9/jobs-at-neo-group",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Cape Town",
+                    "addressRegion": "Western Cape",
+                    "addressCountry": "South Africa"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "South Africa"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.workable.com/view/qH2k5wtxHCp6oWU7N9dKg9/hybrid-sales-agent-(portuguese-speaking)-in-cape-town-at-neo-group",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/637316/logo",
+        "cities_derived": [
+            "Cape Town"
+        ],
+        "regions_derived": [
+            "Western Cape"
+        ],
+        "countries_derived": [
+            "South Africa"
+        ],
+        "locations_derived": [
+            "Cape Town, Western Cape, South Africa"
+        ],
+        "timezones_derived": [
+            "Africa/Johannesburg"
+        ],
+        "lats_derived": [
+            -33.9253
+        ],
+        "lngs_derived": [
+            18.4239
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968050581",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:02:48.060754",
+        "title": "Joist - iOS Engineer, Remote - Fixed Term (Canada)",
+        "organization": "Evercommerce",
+        "organization_url": "https://careers.evercommerce.com/us/en",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "43.5406737",
+                    "longitude": "-79.7101887"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "postalCode": "L5L 4X5",
+                    "addressCountry": "Canada",
+                    "addressLocality": "Ontario",
+                    "addressRegion": "Ontario"
+                },
+                "@type": "Place"
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://careers.evercommerce.com/us/en/job/R-104538/Joist-iOS-Engineer-Remote-Fixed-Term-Canada",
+        "source_type": "ats",
+        "source": "phenompeople",
+        "source_domain": "careers.evercommerce.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": [
+            "Ontario"
+        ],
+        "countries_derived": [
+            "Canada"
+        ],
+        "locations_derived": [
+            "Ontario, Canada"
+        ],
+        "timezones_derived": [
+            "America/Toronto"
+        ],
+        "lats_derived": [
+            43.7417
+        ],
+        "lngs_derived": [
+            -79.3733
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057424",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:32.71215",
+        "title": "Dutch Customer Advisor for a Big Tech Company- Fully Paid Relocation to Greece",
+        "organization": "Patrique Mercier Recruitment JP",
+        "organization_url": "https://jobs.workable.com/company/fcKmponyfSLJy1tgXCfNvP/jobs-at-patrique-mercier-recruitment-jp",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/d9BweqgHCGyxvJ9qkA3mrT/remote-dutch-customer-advisor-for-a-big-tech-company--fully-paid-relocation-to-greece-in-athens-at-patrique-mercier-recruitment-jp",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057439",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:32.828118",
+        "title": "Dutch Speaking E-commerce Assistant - Relocation Package to Greece",
+        "organization": "Patrique Mercier Recruitment JP",
+        "organization_url": "https://jobs.workable.com/company/fcKmponyfSLJy1tgXCfNvP/jobs-at-patrique-mercier-recruitment-jp",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/rZULE3q6Pf3Re6tx6Vk8kV/remote-dutch-speaking-e-commerce-assistant---relocation-package-to-greece-in-athens-at-patrique-mercier-recruitment-jp",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057803",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:40.657586",
+        "title": "Czech Speaking Customer Advisor for Banking - Athens, Greece",
+        "organization": "Patrique Mercier Recruitment PT",
+        "organization_url": "https://jobs.workable.com/company/3xWuF8gUcFKtb1jWu5jrfQ/jobs-at-patrique-mercier-recruitment-pt",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/hTLhobA6SPNaxLrTv4W2vK/remote-czech-speaking-customer-advisor-for-banking---athens%2C-greece-in-athens-at-patrique-mercier-recruitment-pt",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057829",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:41.181126",
+        "title": "Czech Speaking Technical Support for Telecommunications - REMOTE in Greece",
+        "organization": "Patrique Mercier Recruitment PT",
+        "organization_url": "https://jobs.workable.com/company/3xWuF8gUcFKtb1jWu5jrfQ/jobs-at-patrique-mercier-recruitment-pt",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/hd7rfJUCHZwLe3Pd5hFkPd/czech-speaking-technical-support-for-telecommunications---remote-in-greece-in-athens-at-patrique-mercier-recruitment-pt",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057838",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:41.270589",
+        "title": "Czech Speaking Customer Service for the Top Electronics Company - Athens, Greece",
+        "organization": "Patrique Mercier Recruitment PT",
+        "organization_url": "https://jobs.workable.com/company/3xWuF8gUcFKtb1jWu5jrfQ/jobs-at-patrique-mercier-recruitment-pt",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/sLXEb1fN8HFQGQ8zsyFGDK/remote-czech-speaking-customer-service-for-the-top-electronics-company---athens%2C-greece-in-athens-at-patrique-mercier-recruitment-pt",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057844",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:41.314781",
+        "title": "Polish Speaking Customer Service Premium Coffee Subscription Service, Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/vZVFRjAhtrZAhg3nmeFapE/remote-polish-speaking-customer-service-premium-coffee-subscription-service%2C-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057845",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:41.315457",
+        "title": "Polish Speaking Travel Consultant for Eco-Friendly Trips, Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/eZqfvzrdExCaiQDxfKFi8p/remote-polish-speaking-travel-consultant-for-eco-friendly-trips%2C-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057930",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:42.896344",
+        "title": "Dutch Speaking Travel Consultant - Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/rkaXLyADqRUU7EAeS3Bv2o/remote-dutch-speaking-travel-consultant---greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057956",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:43.483087",
+        "title": "Norwegian Speaking Customer Support Representative - Work in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/wZmSnsurePYhkkEZK8KQmi/remote-norwegian-speaking-customer-support-representative---work-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968057985",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:43.851306",
+        "title": "Norwegian Speaking Customer Support Representative - Work in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/gmJ5YrLSuo4KCDQVbmEQqx/remote-norwegian-speaking-customer-support-representative---work-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058044",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.377514",
+        "title": "Norwegian Speaking Customer Support Representative - Work in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/axnwRsCMQpLKNjNdKYoUo4/remote-norwegian-speaking-customer-support-representative---work-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058045",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.379059",
+        "title": "Danish Speaking Customer Service Representative - Work from Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/vmAHUDKX7vai1DaVXKfNzV/remote-danish-speaking-customer-service-representative---work-from-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058051",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.413025",
+        "title": "Danish Speaking Customer Service Representative - Work from Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/rRyHJRfr9jbskvP5Rac4Xy/remote-danish-speaking-customer-service-representative---work-from-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058056",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.438105",
+        "title": "Danish Speaking Customer Service Representative - Work from Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/utD8LwzaWzd7CmWkiqTLVV/remote-danish-speaking-customer-service-representative---work-from-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058060",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.48509",
+        "title": "Danish Speaking Customer Service Representative - Work from Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/6etLaWnVziQ5gu1eM1QPPh/remote-danish-speaking-customer-service-representative---work-from-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058065",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.572509",
+        "title": "Svensktalande Kundsupport I Grekland - Gratis Flytt till Grekland",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Sweden"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/mnUjgnNYcPparsHsViVqo2/remote-svensktalande-kundsupport-i-grekland---gratis-flytt-till-grekland-in-sweden-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Sweden"
+        ],
+        "locations_derived": [
+            "Sweden"
+        ],
+        "timezones_derived": [
+            "Europe/Stockholm"
+        ],
+        "lats_derived": [
+            59.3294
+        ],
+        "lngs_derived": [
+            18.0686
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058076",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:45.751152",
+        "title": "Native Slovak Speaking Customer Service Job Opportunity in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/ffS95WDVYrtzDKQCcTrS6Y/remote-native-slovak-speaking-customer-service-job-opportunity-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058125",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:47.182609",
+        "title": "Native Lithuanian Speaking Customer Service Job Opportunity in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/cfMoURfAT8mcunbbCBtBWd/remote-native-lithuanian-speaking-customer-service-job-opportunity-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058131",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:47.306518",
+        "title": "Native Irish Speaking Customer Service Job Opportunity in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/7AXN1LCDYZdutBv7BPJggb/remote-native-irish-speaking-customer-service-job-opportunity-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058132",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:47.307524",
+        "title": "Native Icelandic Speaking Customer Service Job Opportunity in Greece",
+        "organization": "Patrique Mercier Recruitment",
+        "organization_url": "https://jobs.workable.com/company/iwtf5pDMovXww4bwbK6qGF/jobs-at-patrique-mercier-recruitment",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/i3hLq4Ge54YMtzGc7xgCjS/remote-native-icelandic-speaking-customer-service-job-opportunity-in-greece-in-athens-at-patrique-mercier-recruitment",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/611053/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058368",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:51.807879",
+        "title": "Italian Speaking IT Support Analyst, Greece",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/2sn7AhG8tmVxr22q79fVFx/remote-italian-speaking-it-support-analyst%2C-greece-in-athens-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058519",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:54.364511",
+        "title": "English Speaking Freelance Recruiter - Work Remote",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "İstanbul",
+                    "addressRegion": "İstanbul",
+                    "addressCountry": "Turkey"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/gQXkbJQYsU5RnqcUby13sF/english-speaking-freelance-recruiter---work-remote-in-i%CC%87stanbul-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": [
+            "Istanbul"
+        ],
+        "regions_derived": [
+            "İstanbul"
+        ],
+        "countries_derived": [
+            "Turkey"
+        ],
+        "locations_derived": [
+            "Istanbul, İstanbul, Turkey"
+        ],
+        "timezones_derived": [
+            "Europe/Istanbul"
+        ],
+        "lats_derived": [
+            41.0136
+        ],
+        "lngs_derived": [
+            28.955
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058522",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:54.420426",
+        "title": "Italian Speaking Customer Support for Mobile App Services, Greece",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/uKrWXvFXuwr9owzEmA8ZEo/remote-italian-speaking-customer-support-for-mobile-app-services%2C-greece-in-greece-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058553",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:54.807468",
+        "title": "Italian Speaking Customer Success Manager, Greece",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/8y7LQDLah9YLi8pwvzGHd1/remote-italian-speaking-customer-success-manager%2C-greece-in-greece-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058575",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:55.017734",
+        "title": "Italian Speaking Customer Service for a Premium Coffee Subscription Service",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/nYRZJM1DEwfid1X8pdBBFj/remote-italian-speaking-customer-service-for-a-premium-coffee-subscription-service-in-athens-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968058576",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:05:55.035647",
+        "title": "Italian Speaking Travel Consultant for Eco-Friendly Trips, Greece",
+        "organization": "The House Of Mercier",
+        "organization_url": "https://jobs.workable.com/company/krYWZgAYavGLaWBMzwAqQb/jobs-at-the-house-of-mercier",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/hNJxSwVcWqLytqDZbzHnkR/remote-italian-speaking-travel-consultant-for-eco-friendly-trips%2C-greece-in-greece-at-the-house-of-mercier",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/670912/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968065514",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:07:59.306094",
+        "title": "Senior Product Manager, Grafana Datasources (Remote, US EST)",
+        "organization": "Grafana Labs",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": null,
+                    "addressRegion": null,
+                    "addressCountry": null,
+                    "postalCode": null
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://boards.greenhouse.io/grafanalabs/jobs/5350008004",
+        "source_type": "ats",
+        "source": "greenhouse",
+        "source_domain": "boards.greenhouse.io",
+        "organization_logo": "https://s4-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/744/400/resized/Grafana-Labs-Careers.png?1665522865",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "968065517",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:07:59.339405",
+        "title": "Senior Product Manager, Grafana Datasources (Remote, Canada EST)",
+        "organization": "Grafana Labs",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": null,
+                    "addressRegion": null,
+                    "addressCountry": null,
+                    "postalCode": null
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://boards.greenhouse.io/grafanalabs/jobs/5350009004",
+        "source_type": "ats",
+        "source": "greenhouse",
+        "source_domain": "boards.greenhouse.io",
+        "organization_logo": "https://s4-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/744/400/resized/Grafana-Labs-Careers.png?1665522865",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "968065545",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:07:59.624608",
+        "title": "Senior Product Manager, Grafana Datasources (Remote, UK)",
+        "organization": "Grafana Labs",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": null,
+                    "addressRegion": null,
+                    "addressCountry": null,
+                    "postalCode": null
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://boards.greenhouse.io/grafanalabs/jobs/5350010004",
+        "source_type": "ats",
+        "source": "greenhouse",
+        "source_domain": "boards.greenhouse.io",
+        "organization_logo": "https://s4-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/744/400/resized/Grafana-Labs-Careers.png?1665522865",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "968071730",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:10:24.314396",
+        "title": "Senior Manager Regulatory Strategy - Remote Opportunity",
+        "organization": "Lundbeck",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "address": {
+                    "addressLocality": "Deerfield",
+                    "addressRegion": "Illi",
+                    "addressCountry": "US"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.lundbeck/job/Deerfield-Senior-Manager-Regulatory-Strategy-Remote-Opportunity-Illi/1132061201/",
+        "source_type": "ats",
+        "source": "successfactors",
+        "source_domain": "jobs.lundbeck",
+        "organization_logo": null,
+        "cities_derived": [
+            "Deerfield Beach"
+        ],
+        "regions_derived": [
+            "Florida"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Deerfield Beach, Florida, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            26.305
+        ],
+        "lngs_derived": [
+            -80.1277
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968087608",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:19:12.001058",
+        "title": "Application Developer",
+        "organization": "iKnowHow S.A.",
+        "organization_url": "https://jobs.workable.com/company/xa1AgtCsGyBM5oSKZEwhVc/jobs-at-iknowhow-s.a.",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Athens",
+                    "addressRegion": "Attica",
+                    "addressCountry": "Greece"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.workable.com/view/jscUgQfAqXHLYjLJRsdTNW/hybrid-application-developer-in-athens-at-iknowhow-s.a.",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/107394/logo",
+        "cities_derived": [
+            "Athens"
+        ],
+        "regions_derived": [
+            "Attikí"
+        ],
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Athens, Attikí, Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968087644",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:19:12.660736",
+        "title": "Senior Sustainability Reporting Expert, SOFTONE Global Sustain",
+        "organization": "SOFTONE",
+        "organization_url": "https://jobs.workable.com/company/roXPL5Si85xsQ9tpGthWEB/jobs-at-softone",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Athens",
+                    "addressRegion": "Attica",
+                    "addressCountry": "Greece"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Greece"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/oYnKks8K9hSfeLK4fQHFVo/hybrid-senior-sustainability-reporting-expert%2C-softone-global-sustain-in-athens-at-softone",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/332/logo",
+        "cities_derived": [
+            "Athens"
+        ],
+        "regions_derived": [
+            "Attikí"
+        ],
+        "countries_derived": [
+            "Greece"
+        ],
+        "locations_derived": [
+            "Athens, Attikí, Greece"
+        ],
+        "timezones_derived": [
+            "Europe/Athens"
+        ],
+        "lats_derived": [
+            37.9842
+        ],
+        "lngs_derived": [
+            23.7281
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968094061",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:22:13.823714",
+        "title": "Senior Product Designer",
+        "organization": "Replicant",
+        "organization_url": "{}",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": ""
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": ""
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.ashbyhq.com/Replicant/96edb8f7-8d34-4a18-9554-ea51b0c1b27a",
+        "source_type": "ats",
+        "source": "ashby",
+        "source_domain": "jobs.ashbyhq.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": null,
+        "locations_derived": null,
+        "timezones_derived": null,
+        "lats_derived": null,
+        "lngs_derived": null,
+        "remote_derived": true
+    },
+    {
+        "id": "968098571",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:23:59.943986",
+        "title": "Jr. Data Visualization Analyst",
+        "organization": "The Providencia Group",
+        "organization_url": "",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "United States of America",
+                    "addressLocality": "Remote"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://kmkp.wd1.myworkdayjobs.com/TPGCareers/job/Remote/Jr-Data-Visualization-Analyst_R-2401002",
+        "source_type": "ats",
+        "source": "workday",
+        "source_domain": "kmkp.wd1.myworkdayjobs.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968098588",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:24:00.076413",
+        "title": "Unification Specialist (Remote) - South",
+        "organization": "The Providencia Group",
+        "organization_url": "",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "United States of America",
+                    "addressLocality": "Remote"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "PART_TIME"
+        ],
+        "url": "https://kmkp.wd1.myworkdayjobs.com/TPGCareers/job/Remote/Unification-Specialist--Remote----South_R-2401011",
+        "source_type": "ats",
+        "source": "workday",
+        "source_domain": "kmkp.wd1.myworkdayjobs.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            38.9047
+        ],
+        "lngs_derived": [
+            -77.0163
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968104544",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:25:49.981154",
+        "title": "Marketing and Communications Coordinator",
+        "organization": "Community FoodBank of New Jersey",
+        "organization_url": "https://jobs.workable.com/company/uazSGtLAhXJzsfqAaX3irE/jobs-at-community-foodbank-of-new-jersey",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Hillside",
+                    "addressRegion": "New Jersey",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United States"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/2Q6JP2gkt7H1xd8yPKZa8v/hybrid-marketing-and-communications-coordinator-in-hillside-at-community-foodbank-of-new-jersey",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/608934/logo",
+        "cities_derived": [
+            "Hillside"
+        ],
+        "regions_derived": [
+            "New Jersey"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Hillside, New Jersey, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            40.6961
+        ],
+        "lngs_derived": [
+            -74.2286
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968105548",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T14:26:07.062209",
+        "title": "Project Manager",
+        "organization": "Uni Systems",
+        "organization_url": "https://jobs.workable.com/company/8ReRGvVpgTz71fpRSp21WN/jobs-at-uni-systems",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "The Hague",
+                    "addressRegion": "South Holland",
+                    "addressCountry": "Netherlands"
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Netherlands"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/8DeMY2sUtyHP7tY844YXYc/hybrid-project-manager-in-the-hague-at-uni-systems",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/492828/logo",
+        "cities_derived": [
+            "The Hague"
+        ],
+        "regions_derived": [
+            "Zuid-Holland"
+        ],
+        "countries_derived": [
+            "Netherlands"
+        ],
+        "locations_derived": [
+            "The Hague, Zuid-Holland, Netherlands"
+        ],
+        "timezones_derived": [
+            "Europe/Amsterdam"
+        ],
+        "lats_derived": [
+            52.08
+        ],
+        "lngs_derived": [
+            4.31
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968010744",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:42:41.753021",
+        "title": "Python Developer",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/tkdBS73aDs5d43YiCAE66b/remote-python-developer-in-philippines-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968010750",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:42:42.014282",
+        "title": "CRM Manager",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Hong Kong"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.workable.com/view/a1YY8Lqod9HZVC6WgUamzv/remote-crm-manager-in-hong-kong-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Hong Kong"
+        ],
+        "locations_derived": [
+            "Hong Kong"
+        ],
+        "timezones_derived": [
+            "Asia/Hong_Kong"
+        ],
+        "lats_derived": [
+            22.3
+        ],
+        "lngs_derived": [
+            114.2
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968010753",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:42:42.11843",
+        "title": "Full Stack Developer",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/ig82xZ9aRHaGJnrVn4paZG/remote-full-stack-developer-in-philippines-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968017901",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:45:47.739975",
+        "title": "Procurement Manager",
+        "organization": "Crescent Purchasing Consortium",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "GB",
+                    "addressLocality": "South",
+                    "addressRegion": "ENG",
+                    "postalCode": "EC1",
+                    "streetAddress": null
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "United Kingdom"
+            }
+        ],
+        "salary_raw": "{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"maxValue\":52000,\"minValue\":50000,\"unitText\":\"YEAR\"}}",
+        "employment_type": [
+            "PART_TIME"
+        ],
+        "url": "https://cpc.recruitee.com/o/procurement-manager-2-5",
+        "source_type": "ats",
+        "source": "recruitee",
+        "source_domain": "cpc.recruitee.com",
+        "organization_logo": "https://careers.recruiteecdn.com/image/upload/production/images/Adkc/dcvyiiycalY_.png",
+        "cities_derived": null,
+        "regions_derived": [
+            "South Ayrshire"
+        ],
+        "countries_derived": [
+            "United Kingdom"
+        ],
+        "locations_derived": [
+            "South Ayrshire, United Kingdom"
+        ],
+        "timezones_derived": [
+            "Europe/London"
+        ],
+        "lats_derived": [
+            55.458
+        ],
+        "lngs_derived": [
+            -4.629
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968022504",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:47:25.090495",
+        "title": "SZERVIZTECHNIKUS / SERVICE TECHNICIAN",
+        "organization": "Envipco",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "HU",
+                    "addressLocality": "Budapest",
+                    "addressRegion": "PE",
+                    "postalCode": null,
+                    "streetAddress": null
+                }
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Hungary"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://envipco.recruitee.com/o/szerviztechnikus-service-technician-2-3",
+        "source_type": "ats",
+        "source": "recruitee",
+        "source_domain": "envipco.recruitee.com",
+        "organization_logo": "https://careers.recruiteecdn.com/image/upload/production/images/AqqJ/Pr_ZrUjA07V0.png",
+        "cities_derived": [
+            "Budapest"
+        ],
+        "regions_derived": [
+            "Budapest"
+        ],
+        "countries_derived": [
+            "Hungary"
+        ],
+        "locations_derived": [
+            "Budapest, Budapest, Hungary"
+        ],
+        "timezones_derived": [
+            "Europe/Budapest"
+        ],
+        "lats_derived": [
+            47.4925
+        ],
+        "lngs_derived": [
+            19.0514
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968033166",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:52:31.10664",
+        "title": "Senior SEO Strategist",
+        "organization": "Support Shepherd",
+        "organization_url": "https://jobs.workable.com/company/uHQ2kshfww7gAbGSRLTWwW/jobs-at-support-shepherd",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Colombia"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/9ZanYzxn5m7yS1rvJBcmjK/remote-senior-seo-strategist-in-colombia-at-support-shepherd",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/582408/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Colombia"
+        ],
+        "locations_derived": [
+            "Colombia"
+        ],
+        "timezones_derived": [
+            "America/Bogota"
+        ],
+        "lats_derived": [
+            4.7111
+        ],
+        "lngs_derived": [
+            -74.0722
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968033734",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:52:57.050656",
+        "title": "Remote Back-end Developer (Golang)",
+        "organization": "MagicPace",
+        "organization_url": "https://jobs.workable.com/company/hfyuNHM3Lq5JpEZPe2Zw3C/jobs-at-magicpace",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": null,
+        "url": "https://jobs.workable.com/view/u6ZXi6sPam4EXRgyhAXANQ/remote-back-end-developer-(golang)-in-metro-manila-at-magicpace",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "968033754",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:52:59.111078",
+        "title": "Sales Representative for Recruiting Firm",
+        "organization": "MagicPace",
+        "organization_url": "https://jobs.workable.com/company/hfyuNHM3Lq5JpEZPe2Zw3C/jobs-at-magicpace",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Canada"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/3JjAUhfCNZqAtNLWoBQsHb/remote-sales-representative-for-recruiting-firm-in-toronto-at-magicpace",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": null,
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Canada"
+        ],
+        "locations_derived": [
+            "Canada"
+        ],
+        "timezones_derived": [
+            "America/Montreal"
+        ],
+        "lats_derived": [
+            45.4247
+        ],
+        "lngs_derived": [
+            -75.695
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967930911",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:00:58.014156",
+        "title": "Front End Developer - Active Pooling",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/vnqxnpub6V2e53RTh3z3NQ/remote-front-end-developer---active-pooling-in-philippines-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967930917",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:00:58.078742",
+        "title": "UX/UI Designer (Active Pooling)",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/b3QmXPqkie5vx21DasfUWA/remote-ux%2Fui-designer-(active-pooling)-in-philippines-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    },
+    {
+        "id": "967930988",
+        "date_posted": "2024-10-16T00:00:00",
+        "date_created": "2024-10-16T13:00:59.703209",
+        "title": "Mobile Developer - Active Pooling",
+        "organization": "Activate Talent",
+        "organization_url": "https://jobs.workable.com/company/kHFKsfd3NDgpPnY3GcwgQ2/jobs-at-activate-talent",
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place"
+            }
+        ],
+        "location_type": "TELECOMMUTE",
+        "location_requirements_raw": [
+            {
+                "@type": "Country",
+                "name": "Philippines"
+            }
+        ],
+        "salary_raw": null,
+        "employment_type": [
+            "FULL_TIME"
+        ],
+        "url": "https://jobs.workable.com/view/vchv1n4axVYPyL9zvpDMfr/remote-mobile-developer---active-pooling-in-metro-manila-at-activate-talent",
+        "source_type": "ats",
+        "source": "workable",
+        "source_domain": "jobs.workable.com",
+        "organization_logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/654197/logo",
+        "cities_derived": null,
+        "regions_derived": null,
+        "countries_derived": [
+            "Philippines"
+        ],
+        "locations_derived": [
+            "Philippines"
+        ],
+        "timezones_derived": [
+            "Asia/Manila"
+        ],
+        "lats_derived": [
+            14.5958
+        ],
+        "lngs_derived": [
+            120.9772
+        ],
+        "remote_derived": true
+    }
+]

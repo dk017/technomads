@@ -1,25 +1,21 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { MoonIcon, SunIcon } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { useAuth } from './AuthContext';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useAuth } from "./AuthContext";
+import { useEffect, useState } from "react";
 
 const Header = () => {
-  const { setTheme, theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const { user, setUser } = useAuth();
   const supabase = createClientComponentClient();
   const [userName, setUserName] = useState<string | null>(null);
 
-
   useEffect(() => {
     if (user) {
       // Access the user's name from metadata
-      const name = user.user_metadata?.name || user.email?.split('@')[0] || 'User';
+      const name =
+        user.user_metadata?.name || user.email?.split("@")[0] || "User";
       setUserName(name);
     } else {
       setUserName(null);
@@ -39,22 +35,33 @@ const Header = () => {
         </Link>
         <nav>
           <ul className="flex space-x-4">
-            <li><Link href="/jobs" className="text-foreground hover:text-primary">Jobs</Link></li>
-            <li><Link href="/companies" className="text-foreground hover:text-primary">Companies</Link></li>
-            <li><Link href="/resources" className="text-foreground hover:text-primary">Resources</Link></li>
+            <li>
+              <Link href="/jobs" className="text-foreground hover:text-primary">
+                Jobs
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/companies"
+                className="text-foreground hover:text-primary"
+              >
+                Companies
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/resources"
+                className="text-foreground hover:text-primary"
+              >
+                Resources
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            {mounted && (theme === 'dark' ? <SunIcon /> : <MoonIcon />)}
-          </Button>
           {user ? (
             <>
-              <span className="mr-4">Welcome,  {userName}</span>
+              <span className="mr-4">Welcome, {userName}</span>
               <Button onClick={handleSignOut}>Sign Out</Button>
             </>
           ) : (

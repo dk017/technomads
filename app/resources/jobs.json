@@ -1,0 +1,57 @@
+[
+    {
+        "id": "952640928",
+        "date_posted": "2024-10-10T00:00:00",
+        "date_created": "2024-10-12T09:54:40.236759",
+        "title": "Application Security Developer - REMOTE",
+        "organization": "Flashfood",
+        "organization_url": null,
+        "date_validthrough": null,
+        "locations_raw": [
+            {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Camp Hill",
+                    "addressRegion": "Pennsylvania",
+                    "postalCode": "17011",
+                    "addressCountry": "United States"
+                }
+            }
+        ],
+        "location_type": null,
+        "location_requirements_raw": null,
+        "salary_raw": null,
+        "employment_type": [
+            "OTHER"
+        ],
+        "url": "https://flashfood.bamboohr.com/careers/205",
+        "source_type": "ats",
+        "source": "bamboohr",
+        "source_domain": "flashfood.bamboohr.com",
+        "organization_logo": "https://images3.bamboohr.com/285951/logos/cropped.jpg?v=45",
+        "cities_derived": [
+            "Camp Hill"
+        ],
+        "regions_derived": [
+            "Pennsylvania"
+        ],
+        "countries_derived": [
+            "United States"
+        ],
+        "locations_derived": [
+            "Camp Hill, Pennsylvania, United States"
+        ],
+        "timezones_derived": [
+            "America/New_York"
+        ],
+        "lats_derived": [
+            40.2422
+        ],
+        "lngs_derived": [
+            -76.9274
+        ],
+        "remote_derived": true,
+        "description_text": "As we continue our rapid growth at Flashfood, we are looking for a talented Application Security Developer to join our Engineering team. You'll lead the way for the expansion of the Application Security Developer program at Flashfood. The mission for the team is to proactively discover, to fix security vulnerabilities and to implement solutions that automate, scale and enhance application security. We’re looking for someone who is just as passionate about automating key areas of the Secure Software Development Lifecycle (SSDLC) as well as partnering with developers to securely build and fortify our applications. The key areas of focus for the AppSec Development program are: Secure Application Design, Tools/DevSecOps and Application Vulnerability Management.\n\nWho We Are: \nWith the rising cost of food and the challenges faced by our supply chain, Flashfood has become a staple in many North American families. At Flashfood, we are on a mission to reduce the environmental impact of food waste and provide our communities with easier access to healthy, affordable food. We are tackling this gigantic problem together, with a diverse team of people from all over the globe. \nWhat You Will Do:\nPropose solutions for secure application design, DevSecOps automation, tool optimization, application vulnerability management and strategies for risk reduction\nCollaborate with Lead Devs, Product Managers, Program Managers, and other teams to deliver high-quality products.\nBuild relationships with Infrastructure teams and Software Development teams.\nWork with multiple internal teams to ensure products are designed and implemented according to security policies, standards, and best practices.\nWork as part of the AppSec team using Agile methodologies.\nLead AppSec SPLC programs such as the Security Champions program, AppSec Certification program, and numerous company-wide security events.\nHelp identify and validate best-in-class security standards implementation\nValidate finding from security scanning tools and ideate data-driven enhancement strategies for dynamic (DAST), static (SAST), open source application security testing (SCA) and container security scanning including troubleshooting, and continuous process improvement\nPropose product feature enhancements to enhance security of our application\nTest, replicate and validate security vulnerabilities in applications\nPerform threat modeling of upcoming features and products\nDrive adoption of Policy as Code, adherence to software security metrics\nPractical knowledge and experience working in public cloud environments & IAM solutions (Azure, AWS,GCP etc.)\nYou have a “can do” attitude. Our teams create high-quality work on quick timelines. Owning a problem doesn’t scare you, but rather empowers you to take 100% responsibility for achieving our mission.\nYou appreciate direct communication. You’re both an active communicator and an eager listener - because let’s face it, you can’t have one without the other. You’re cool with candid feedback and see every setback as an opportunity to grow.\nWho You Are:\n3+ years of work experience specializing in Application Security, preferably in a consulting role.\n8+ years of IT experience, preferably in information security.\nStrong verbal and written communication skills.\nKnowledge and Experience with one or more AppSec tools such as Snyk, Orca Security etc.\nKnowledge of OWASP top-10 App/API and a deep understanding of web application and mobile app vulnerabilities.\nExperience in facilitating technical conversations between engineering and operations teams.\nExperience in analyzing systems designs and code, and identifying security problems\nStrong knowledge of software release process and release pipeline.\nStrong programming skills in Python, Golang, or Javascript/Typescript\nNice to Have:\nUnderstanding of regulatory compliance frameworks such as NIST, SOC 2\nUnderstanding of MITRE framework and threat intelligence\nUnderstanding of infrastructure as code\nUnderstanding of Kubernetes\nStrong knowledge of GitHub\nCompany Perks\nCompetitive base salary\nCompany-wide performance bonus\nCasual and remote-friendly work environment \nFlexible working hours\nMonthly team events (virtual friendly) \nMaternity & Parental Leave Top Up Plan\nProfessional development opportunities - $1,750/year\nOpportunity to work with a growing company passionate about sustainability and making an impact on our communities\nThe requirements listed in job descriptions are guidelines, not hard and fast rules. You don’t have to satisfy every requirement or meet every qualification listed. If your skills are transferable and you are in the ballpark with the number of years of experience Flashfood is looking for, apply. Applying gives you the opportunity to be considered.\nFlashfood is an equal opportunity employer and is committed to providing an accessible recruitment process. Please advise should you need any accommodation throughout the recruitment process. All your information will be treated confidentially."
+    }
+]
