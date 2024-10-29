@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/client";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { JobSkeleton } from "@/components/JobSkeleton";
+import PricingSection from "@/components/PricingSection";
+import { loadStripe } from "@stripe/stripe-js";
 
 const imageUrls = ["/dk1.png", "/dk2.png", "/dk3.png", "/dk4.jpg", "/dk5.png"];
 interface FilterParams {
@@ -85,6 +87,47 @@ export default function Home() {
       }, 500),
     [pathname, router, searchParams]
   );
+
+  const handleSubscribe = async (priceId: string) => {
+    if (!user) {
+      alert("Please sign in to subscribe.");
+      return;
+    }
+
+    const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+    if (!stripeKey) {
+      console.error("Stripe publishable key is not defined");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ priceId }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create checkout session");
+      }
+
+      const session = await response.json();
+      const stripe = await loadStripe(stripeKey);
+
+      if (!stripe) throw new Error("Failed to load Stripe");
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.sessionId,
+      });
+
+      if (result.error) throw new Error(result.error.message);
+    } catch (error) {
+      console.error("Error during Stripe checkout:", error);
+      alert("An error occurred during checkout. Please try again.");
+    }
+  };
 
   const handleFilterChange = useCallback(
     async (location: string, keywords: string, title: string) => {
@@ -263,6 +306,10 @@ export default function Home() {
                   Subscribe now to unlock all job opportunities
                 </p>
               </div>
+              <PricingSection
+                onSubscribe={handleSubscribe}
+                isLoading={isLoading}
+              />
             </div>
           </div>
         )}

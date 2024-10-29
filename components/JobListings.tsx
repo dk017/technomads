@@ -95,7 +95,7 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                         <div className="flex items-center">
                           <div className="w-16 h-16 mr-4 relative">
                             <Image
-                              src={job.logo_url || "/default-company-logo.png"}
+                              src={"/default-company-logo.png"}
                               alt={`${job.company_name} logo`}
                               width={100}
                               height={100}
