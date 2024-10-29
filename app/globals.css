@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -25,7 +25,7 @@
     --ring: 201 100% 36%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -48,12 +48,33 @@
     --ring: 201 100% 36%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-gradient {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--background)) 100%
+    );
+  }
+}
+
+@layer utilities {
+  .bg-gradient-overlay {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      hsl(var(--background)) 50%,
+      hsl(var(--background)) 100%
+    );
   }
 }

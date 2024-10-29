@@ -63,7 +63,7 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">{job.title}</h1>
+        <h1 className="text-3xl font-bold pt-4 mb-2">{job.title}</h1>
         <p className="text-xl text-gray-600 mb-4">{job.company_name}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           <Badge variant="secondary" className="bg-blue-100 text-blue-800">

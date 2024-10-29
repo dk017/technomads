@@ -1,41 +1,40 @@
-'use client'
+"use client";
 
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { User } from '@supabase/auth-helpers-nextjs';
-import { supabase } from '@/app/supabaseClient';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
+import { createClient } from "@/app/utils/supabase/client";
 
 type AuthContextType = {
   user: User | null;
-  isVerified: boolean;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const supabase = createClient();
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
-      setIsVerified(!!session?.user?.email_confirmed_at);
+      setIsLoading(false);
     });
 
-    return () => subscription.unsubscribe();
-  }, [supabase.auth]);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, isVerified, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  const value = {
+    user,
+    isLoading,
+  };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export const useAuth = () => useContext(AuthContext);

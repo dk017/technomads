@@ -1,18 +1,26 @@
-import { NextResponse } from 'next/server'
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import { type EmailOtpType } from "@supabase/supabase-js"
+import { type NextRequest, NextResponse } from "next/server"
+import { createClient } from "@/app/utils/supabase/client"
+import { redirect } from "next/navigation"
 
-export const dynamic = 'force-dynamic' // This line tells Next.js to always render this route dynamically
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const token_hash = searchParams.get("token_hash")
+  const type = searchParams.get("type") as EmailOtpType | null
+  const next = searchParams.get("next") ?? "/"
 
-export async function GET(request: Request) {
-  const requestUrl = new URL(request.url)
-  const code = requestUrl.searchParams.get('code')
+  if (token_hash && type) {
+    const supabase = createClient()
 
-  if (code) {
-    const supabase = createRouteHandlerClient({ cookies })
-    await supabase.auth.exchangeCodeForSession(code)
+    const { error } = await supabase.auth.verifyOtp({
+      type,
+      token_hash,
+    })
+    if (!error) {
+      // redirect user to specified redirect URL or root of app
+      redirect(next)
+    }
   }
-
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin)
+  // redirect the user to an error page with some instructions
+  redirect("/error")
 }

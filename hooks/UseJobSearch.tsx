@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { supabase } from "@/app/supabaseClient";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/client";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
 import { jobTitleOptions } from "@/app/constants/jobTitleOptions";
 
@@ -59,6 +59,7 @@ export function useJobSearch() {
     async (page: number) => {
       setLoading(true);
       try {
+        const supabase = createClient();
         const { location, keyword, title } = queryParams;
 
         const locationOption = jobLocationOptions.find(
@@ -69,7 +70,6 @@ export function useJobSearch() {
         const titleOption = jobTitleOptions.find(
           (option) => option.value === title
         );
-
         let query = supabase
           .from("jobs_tn")
           .select("*")

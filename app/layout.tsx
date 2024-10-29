@@ -1,18 +1,22 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { AuthProvider } from '@/components/AuthContext';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Suspense } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/components/AuthContext";
+import { QueryClient } from "@tanstack/react-query";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Remote Launchpad - Find Your Dream Remote Job',
-  description: 'Discover and apply to the best remote jobs from around the world.',
+  title: "Remote Launchpad - Find Your Dream Remote Job",
+  description:
+    "Discover and apply to the best remote jobs from around the world.",
 };
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -24,7 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

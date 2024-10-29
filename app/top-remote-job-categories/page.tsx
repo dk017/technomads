@@ -423,9 +423,11 @@ export default function TopRemoteJobCategories() {
             {category.jobs.map((job, jobIndex) => (
               <div key={jobIndex}>
                 <Link
-                  href={`/jobs/${encodeURIComponent(
-                    job.toLowerCase().replace(/ /g, "-")
-                  )}`}
+                  href={
+                    category.title === "Jobs by Country"
+                      ? `/jobs?location=${encodeURIComponent(job)}`
+                      : `/jobs?title=${encodeURIComponent(job)}`
+                  }
                   className="text-cyan-300 hover:text-cyan-100 transition-colors duration-200"
                 >
                   {job}

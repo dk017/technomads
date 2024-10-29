@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { useCallback, useEffect, useState, useRef } from "react";
-import { supabase } from "@/app/supabaseClient";
+import { supabase } from "@/app/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { debounce } from "lodash";
 import { useAuth } from "@/components/AuthContext";
@@ -45,9 +45,8 @@ export default function JobPage() {
   const title = params.title as string; // Get the title from the URL
   const category = params.title as string; // Get the category from the URL
 
-  const { user, isVerified } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
-
   const [jobs, setJobs] = useState<Job[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -71,7 +70,7 @@ export default function JobPage() {
     if (title) {
       const searchTerm = title.replace(/-/g, " "); // Convert hyphens to spaces
       query = query.or(
-        `job_slug.ilike.%${searchTerm}%,title.ilike.%${searchTerm}%,skills.ilike.%${searchTerm}%,category.ilike.%${searchTerm}%`
+        `job_slug.ilike.%${searchTerm}%,title.ilike.%${searchTerm}%,skills.ilike.%${searchTerm}%`
       );
     }
 
@@ -206,7 +205,7 @@ export default function JobPage() {
             </div>
           </div>
           <section>
-            {(!user || !isVerified) && (
+            {(!user || !user?.email_confirmed_at) && (
               <div className="flex flex-wrap gap-4 p-4 justify-center">
                 <Button variant="secondary" className="w-full sm:w-auto">
                   🔓 Unlock All Jobs
@@ -221,7 +220,7 @@ export default function JobPage() {
       </div>
       <JobFilters
         user={user}
-        isVerified={isVerified}
+        isVerified={!!user?.email_confirmed_at}
         onFilterChange={handleFilterChange}
         initialLocation={location}
         initialKeywords={keywords}
@@ -232,7 +231,8 @@ export default function JobPage() {
           ...job,
           skills: job.skills.split(",").map((skill) => skill.trim()),
         }))}
-        isVerified={isVerified}
+        isLoading={false}
+        isVerified={!!user?.email_confirmed_at}
         user={user}
       />
       {loading && <p>Loading more jobs...</p>}

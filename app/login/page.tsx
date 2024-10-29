@@ -1,67 +1,95 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState, useEffect } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from '@/components/AuthContext';
-import { supabase } from '../supabaseClient';
-
-
+import { useAuth } from "@/components/AuthContext";
+import { createClient } from "@/app/utils/supabase/client";
+import { revalidatePath } from "next/cache";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const { setUser } = useAuth();
 
+  const { user, isLoading: authLoading } = useAuth() || {};
+
+  useEffect(() => {
+    if (user && !authLoading) {
+      router.push("/");
+    }
+  }, [user, authLoading, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const supabase = createClient();
+    console.log("Logging in with email:", email);
     try {
-      const {data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
       if (error) throw error;
-      setUser(data.user);
-      router.push('/');
-    } catch (error:any) {
+      console.log("Login successful", data);
+      toast({
+        title: "Success",
+        description: "You have successfully logged in.",
+      });
+      revalidatePath("/");
+      redirect("/");
+      // Wait for the next tick to ensure state updates before navigation
+    } catch (error: any) {
+      console.error("Login error:", error);
       toast({
         title: "Error",
         description: error.message,
         variant: "destructive",
-      })
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    const supabase = createClient();
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
       if (error) throw error;
-    } catch (error:any) {
+    } catch (error: any) {
       toast({
         title: "Error",
         description: error.message,
         variant: "destructive",
-      })
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  if (authLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    return null; // or a loading indicator
+  }
 
   return (
     <div className="container mx-auto px-4 py-12 flex justify-center items-center min-h-screen">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Log In</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Log In
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -71,7 +99,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              autoComplete='email'
+              autoComplete="email"
             />
             <Input
               type="password"
@@ -79,13 +107,20 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              autoComplete='current-password'
+              autoComplete="current-password"
             />
-            <Button type="submit" className="w-full">Log In</Button>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Log In"}
+            </Button>
           </form>
           <div className="mt-4">
-            <Button onClick={handleGoogleLogin} variant="outline" className="w-full">
-              Log In with Google
+            <Button
+              onClick={handleGoogleLogin}
+              variant="outline"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? "Processing..." : "Log In with Google"}
             </Button>
           </div>
         </CardContent>

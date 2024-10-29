@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAuth } from "./AuthContext";
 import { useEffect, useState } from "react";
-
+import { createClient } from "@/app/utils/supabase/client";
 const Header = () => {
-  const { user, setUser } = useAuth();
-  const supabase = createClientComponentClient();
+  const authContext = useAuth();
+  const user = authContext?.user;
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,8 +22,8 @@ const Header = () => {
   }, [user]);
 
   const handleSignOut = async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
-    setUser(null);
   };
 
   return (

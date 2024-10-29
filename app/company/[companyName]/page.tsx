@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import JobListings from "@/components/JobListings";
 import CompanyProfileCard from "@/components/CompaniesPage";
-import { supabase } from "@/app/supabaseClient";
 import { useAuth } from "@/components/AuthContext";
-
+import { createClient } from "@/app/utils/supabase/client";
 interface Company {
   id: number;
   name: string;
@@ -47,8 +46,7 @@ interface Job {
 function CompanyJobsPage({ params }: { params: { companyName: string } }) {
   const companyName = decodeURIComponent(params.companyName);
   const router = useRouter();
-  const { user, isVerified } = useAuth();
-
+  const { user } = useAuth();
   const [company, setCompany] = useState<Company | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +55,7 @@ function CompanyJobsPage({ params }: { params: { companyName: string } }) {
     async function fetchCompanyAndJobs() {
       setLoading(true);
       console.log("Fetching company:", companyName);
-
+      const supabase = createClient();
       const { data: companyData, error: companyError } = await supabase
         .from("companies")
         .select("*")
@@ -112,7 +110,15 @@ function CompanyJobsPage({ params }: { params: { companyName: string } }) {
           size={company.size}
           jobCount={company.jobCount}
         />
-        <JobListings jobs={jobs as any} isVerified={isVerified} user={user} />
+        <JobListings
+          jobs={jobs.map((job) => ({
+            ...job,
+            skills: job.skills.split(",").map((skill) => skill.trim()),
+          }))}
+          isVerified={!!user?.email_confirmed_at}
+          user={user}
+          isLoading={false}
+        />
       </div>
     </div>
   );

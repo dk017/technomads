@@ -1,77 +1,147 @@
 import React from "react";
-import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { supabase } from "@/app/supabaseClient";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  GlobeIcon,
+  ClockIcon,
+  BriefcaseIcon,
+  BuildingIcon,
+  MapPinIcon,
+} from "lucide-react";
 
-interface RelevantJobsProps {
-  currentJobId: number;
-  tags: string[];
+interface RelatedJob {
+  id: number;
+  title: string;
+  company_name: string;
+  job_slug: string;
+  country: string;
+  employment_type: string;
+  experience: string;
+  category: string;
+  company_size: string;
+  short_description: string;
+  logo_url: string;
+  city: string;
+  salary: string;
 }
 
-const RelevantJobs: React.FC<RelevantJobsProps> = async ({
-  currentJobId,
-  tags,
-}) => {
-  const { data: relevantJobs } = await supabase
-    .from("jobs_tn")
-    .select("*")
-    .neq("id", currentJobId)
-    .contains("skills", tags)
-    .limit(3);
+interface RelatedJobsProps {
+  jobs: RelatedJob[];
+}
 
-  if (!relevantJobs || relevantJobs.length === 0) {
-    return null;
-  }
+function generateSlug(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
-  const generateSlug = (text: string) => {
-    return text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-  };
+const RelatedJobs: React.FC<RelatedJobsProps> = ({ jobs }) => {
+  if (jobs.length === 0) return null;
 
   return (
-    <div className="mt-12">
-      <h2 className="text-2xl font-semibold mb-4">Similar Jobs</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {relevantJobs.map((job) => (
-          <Link
+    <div className="mt-8 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div className="flex justify-center mb-4">
+        <h2 className="text-2xl font-bold">Related Jobs</h2>
+      </div>
+      <div className="space-y-4">
+        {jobs.map((job) => (
+          <Card
             key={job.id}
-            href={`/companies/${generateSlug(
-              job.company_name
-            )}/jobs/${generateSlug(job.title)}`}
-            passHref
+            className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300"
           >
-            <Card className="hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-              <CardContent className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{job.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">{job.company_name}</p>
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {job.skills
-                    .split(",")
-                    .slice(0, 3)
-                    .map((skill: string, index: number) => (
-                      <Badge
-                        key={index}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {skill.trim()}
-                      </Badge>
-                    ))}
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center">
+                  <div className="w-16 h-16 mr-4 relative">
+                    <Image
+                      src={job.logo_url || "/default-company-logo.png"}
+                      alt={`${job.company_name} logo`}
+                      width={100}
+                      height={100}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
+                      {job.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                      {job.company_name}
+                    </p>
+                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      <BuildingIcon className="h-4 w-4 mr-2" />
+                      <span>{job.company_size}</span>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-500">
-                  {job.city}, {job.country}
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+              </div>
+              <p className="mb-4 text-gray-700 dark:text-gray-200">
+                {job.short_description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <Badge
+                  variant="secondary"
+                  className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
+                >
+                  <GlobeIcon className="h-3 w-3 mr-1" />
+                  {job.country}
+                </Badge>
+                <Badge
+                  variant="secondary"
+                  className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
+                >
+                  <ClockIcon className="h-3 w-3 mr-1" />
+                  {job.employment_type}
+                </Badge>
+                <Badge
+                  variant="secondary"
+                  className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100"
+                >
+                  <BriefcaseIcon className="h-3 w-3 mr-1" />
+                  {job.experience}
+                </Badge>
+                <Badge
+                  variant="secondary"
+                  className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
+                >
+                  {job.category}
+                </Badge>
+              </div>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <MapPinIcon className="h-4 w-4 mr-2" />
+                  <span>{job.city}</span>
+                </div>
+                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <span>{job.salary}</span>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                  asChild
+                >
+                  <Link
+                    href={`/companies/${generateSlug(
+                      job.company_name
+                    )}/jobs/${generateSlug(job.job_slug)}`}
+                  >
+                    View Job
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
   );
 };
 
-export default RelevantJobs;
+export default RelatedJobs;

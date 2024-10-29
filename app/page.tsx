@@ -4,15 +4,108 @@ import { useAuth } from "@/components/AuthContext";
 import JobFilters from "@/components/JobFilters";
 import JobListings from "@/components/JobListings";
 import JobExplorationSection from "@/components/JobExplorationSection";
-import { useJobSearch } from "@/hooks/UseJobSearch";
+import { usePathname, useSearchParams } from "next/navigation";
 import FAQSection from "@/components/FAQ";
 import { BriefcaseIcon, RocketIcon, GlobeIcon } from "lucide-react";
+import { useJobs } from "@/hooks/useJobs";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import debounce from "lodash/debounce";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/client";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { JobSkeleton } from "@/components/JobSkeleton";
 
 const imageUrls = ["/dk1.png", "/dk2.png", "/dk3.png", "/dk4.jpg", "/dk5.png"];
+interface FilterParams {
+  location: string;
+  keyword: string;
+  title: string;
+  category?: string;
+}
+
+const ITEMS_PER_PAGE = 10;
+const FREE_USER_LIMIT = 10;
 
 export default function Home() {
-  const { user, isVerified } = useAuth();
-  const { jobs, loading, queryParams, handleFilterChange } = useJobSearch();
+  const { user, isLoading: authLoading } = useAuth() || {};
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [filters, setFilters] = useState<FilterParams>({
+    location: "",
+    keyword: "",
+    title: "",
+  });
+
+  const [isSubscribed, setIsSubscribed] = useState(false); // Add this
+  const {
+    jobs,
+    isLoading,
+    jobCount,
+    fetchJobs,
+    hasMore,
+    loadMoreJobs,
+    isLoadingMore,
+  } = useJobs(isSubscribed);
+  // Add subscription check
+  useEffect(() => {
+    const checkSubscription = async () => {
+      if (!user) return;
+
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("subscriptions")
+        .select("status")
+        .eq("user_id", user.id)
+        .single();
+
+      setIsSubscribed(data?.status === "active");
+    };
+
+    checkSubscription();
+  }, [user]);
+
+  const debouncedUpdateURL = useMemo(
+    () =>
+      debounce((newFilters: FilterParams) => {
+        const updatedSearchParams = new URLSearchParams(
+          searchParams.toString()
+        );
+        Object.entries(newFilters).forEach(([key, value]) => {
+          if (value) {
+            updatedSearchParams.set(key, value.toString());
+          } else {
+            updatedSearchParams.delete(key);
+          }
+        });
+
+        router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
+          scroll: false,
+        });
+      }, 500),
+    [pathname, router, searchParams]
+  );
+
+  const handleFilterChange = useCallback(
+    async (location: string, keywords: string, title: string) => {
+      const newFilters: FilterParams = { location, keyword: keywords, title };
+
+      try {
+        await Promise.all([
+          fetchJobs(newFilters, 1, true),
+          new Promise((resolve) => {
+            debouncedUpdateURL(newFilters);
+            setTimeout(resolve, 500);
+          }),
+        ]);
+      } catch (error) {
+        console.error("Error updating filters:", error);
+      }
+
+      setFilters(newFilters);
+    },
+    [fetchJobs, debouncedUpdateURL]
+  );
 
   return (
     <>
@@ -89,23 +182,91 @@ export default function Home() {
           </div>
         </section>
         <JobExplorationSection />
-        <JobFilters
-          user={user}
-          isVerified={isVerified}
-          onFilterChange={(location, keyword, titleData) => {
+        {/* <JobFilters
+          user={user ?? null}
+          isVerified={!!user?.email_confirmed_at}
+          onFilterChange={(location, keyword, title) => {
             handleFilterChange({
               location,
               keyword,
-              title: titleData.title,
+              title,
             });
           }}
-          initialLocation={queryParams.location}
-          initialKeywords={queryParams.keyword}
-          initialTitle={queryParams.title}
+          initialLocation={queryParams?.location ?? ""}
+          initialKeywords={queryParams?.keyword ?? ""}
+          initialTitle={queryParams?.title ?? ""}
+        /> */}
+        <JobFilters
+          user={user ?? null}
+          isVerified={!!user?.email_confirmed_at}
+          onFilterChange={handleFilterChange}
+          initialLocation={filters.location}
+          initialKeywords={filters.keyword}
+          initialTitle={filters.title}
         />
-        <JobListings jobs={jobs} isVerified={isVerified} user={user} />
+
+        {isLoading && jobs.length === 0 ? (
+          <div className="space-y-4">
+            {[...Array(5)].map((_, index) => (
+              <JobSkeleton key={index} />
+            ))}
+          </div>
+        ) : (
+          <InfiniteScroll
+            dataLength={jobs.length}
+            next={loadMoreJobs}
+            hasMore={isSubscribed ? hasMore : jobs.length < FREE_USER_LIMIT}
+            loader={
+              isLoadingMore && (
+                <div className="mt-4 space-y-4">
+                  {[...Array(3)].map((_, index) => (
+                    <JobSkeleton key={index} />
+                  ))}
+                </div>
+              )
+            }
+            endMessage={
+              <div className="text-center p-4 text-gray-400">
+                {jobs.length === 0
+                  ? "No jobs found matching your criteria"
+                  : !isSubscribed && jobCount > FREE_USER_LIMIT
+                  ? `${
+                      jobCount - FREE_USER_LIMIT
+                    } more jobs available with subscription`
+                  : "No more jobs to load"}
+              </div>
+            }
+            scrollThreshold={0.8}
+            className="space-y-6"
+          >
+            <JobListings
+              jobs={jobs}
+              isVerified={!!user?.email_confirmed_at}
+              user={user ?? null}
+              isLoading={isLoading}
+            />
+          </InfiniteScroll>
+        )}
+
+        {!isSubscribed && jobCount > FREE_USER_LIMIT && (
+          <div className="relative">
+            <div
+              className="absolute -top-40 left-0 w-full h-40 bg-gradient-to-b from-transparent to-background z-10"
+              aria-hidden="true"
+            />
+            <div className="relative z-20">
+              <div className="text-center mb-8">
+                <p className="text-2xl font-bold text-primary">
+                  +{jobCount - FREE_USER_LIMIT} More Jobs Available!
+                </p>
+                <p className="text-xl text-primary mt-2">
+                  Subscribe now to unlock all job opportunities
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
         <FAQSection />
-        {loading && <p>Loading jobs...</p>}
       </div>
     </>
   );
