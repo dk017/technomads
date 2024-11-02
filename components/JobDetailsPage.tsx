@@ -124,7 +124,7 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
             <CardContent className="p-3">
               <div className="flex flex-col items-center mb-4">
                 <Image
-                  src={job.logo_url}
+                  src="/public/default-company-logo.png"
                   alt={`${job.company_name} logo`}
                   width={100}
                   height={100}

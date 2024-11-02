@@ -104,7 +104,7 @@ function CompanyJobsPage({ params }: { params: { companyName: string } }) {
       <div className="space-y-6">
         <CompanyProfileCard
           {...company}
-          logo={company.logo_url}
+          logo="/public/default-company-logo.png"
           description={company.description}
           tags={company.tags}
           size={company.size}

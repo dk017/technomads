@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { createClient } from "@/app/utils/supabase/client";
 
 interface FilterParams {
   location: string;
   keyword: string;
   title: string;
-  category?: string;
+  minSalary?: string;
 }
 
 interface Job {
@@ -38,11 +38,11 @@ interface Job {
 const ITEMS_PER_PAGE = 10;
 const FREE_USER_LIMIT = 10;
 
-export const useJobs = (isSubscribed: boolean) => {
+export const useJobs = (showAllJobs: boolean) => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false); // Add this
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [jobCount, setJobCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentFilters, setCurrentFilters] = useState<FilterParams>({
@@ -51,93 +51,104 @@ export const useJobs = (isSubscribed: boolean) => {
     title: '',
   });
 
+  const isFetchingRef = useRef(false);
+  const pendingFetchRef = useRef<FilterParams | null>(null);
+  const [isPendingFetch, setIsPendingFetch] = useState(false);
 
   const fetchJobs = useCallback(
-    async (
-      filters: FilterParams,
-      page: number,
-      isNewFilter: boolean = false
-    ) => {
-      if (isNewFilter) {
-        setIsLoading(true);
-        setCurrentFilters(filters);
-      } else {
-        setIsLoadingMore(true);
-      }
-      const supabase = createClient();
+    async (filters: FilterParams, page: number, isNewFilter: boolean = false) => {
+      if (isPendingFetch) return;
+      setIsPendingFetch(true);
 
       try {
+        if (isFetchingRef.current) {
+          pendingFetchRef.current = filters;
+          return;
+        }
+
+        isFetchingRef.current = true;
+        console.log('Fetching jobs with filters:', filters);
+
+        if (isNewFilter) {
+          setIsLoading(true);
+          setCurrentFilters(filters);
+        } else {
+          setIsLoadingMore(true);
+        }
+
+        const supabase = createClient();
         let query = supabase
           .from("jobs_tn")
-          .select("*", { count: "exact" })
-          .order("created_at", { ascending: false });
+          .select("*", { count: "exact" });
 
-        // Calculate range based on subscription status
+        if (filters.location?.trim()) {
+          query = query.ilike('country', `%${filters.location.trim()}%`);
+        }
+
+        if (filters.keyword?.trim()) {
+          const keywordFilter = filters.keyword.trim();
+          query = query.or(`title.ilike.%${keywordFilter}%,description.ilike.%${keywordFilter}%`);
+        }
+
+        if (filters.title?.trim()) {
+          query = query.ilike('title', `%${filters.title.trim()}%`);
+        }
+
+        if (filters.minSalary && filters.minSalary !== "0") {
+          const minSalaryValue = parseInt(filters.minSalary);
+          query = query.or(`
+            salary_min::integer >= ${minSalaryValue},
+            salary_max::integer >= ${minSalaryValue},
+            salary::integer >= ${minSalaryValue}
+          `);
+        }
+
+        query = query.order('created_at', { ascending: false });
+
         const start = (page - 1) * ITEMS_PER_PAGE;
-        const end = isSubscribed
-          ? page * ITEMS_PER_PAGE - 1
-          : Math.min(FREE_USER_LIMIT - 1, page * ITEMS_PER_PAGE - 1);
-
+        const end = showAllJobs ? start + ITEMS_PER_PAGE - 1 : FREE_USER_LIMIT - 1;
         query = query.range(start, end);
 
-        // Apply filters
-        if (currentFilters.category) {
-          query = query.eq("category", currentFilters.category);
-        }
-        if (currentFilters.location?.trim()) {
-          query = query.or(
-            `country.ilike.%${currentFilters.location}%,city.ilike.%${currentFilters.location}%`
-          );
-        }
-        if (currentFilters.title) {
-          query = query.ilike("title", `%${currentFilters.title}%`);
-        }
-        if (currentFilters.keyword) {
-          query = query.or(
-            `title.ilike.%${currentFilters.keyword}%,tags.ilike.%${currentFilters.keyword}%,skills.ilike.%${currentFilters.keyword}%`
-          );
-        }
-
+        console.log('Executing query with filters:', filters);
         const { data, error, count } = await query;
 
         if (error) throw error;
 
-        setJobs((prevJobs) => {
-          if (isNewFilter || page === 1) return data || [];
-          return [...prevJobs, ...(data || [])];
-        });
+        console.log('Query results:', { resultCount: data?.length, totalCount: count });
 
-        if (count !== null) {
-          setJobCount(count);
+        if (isNewFilter) {
+          setJobs(data || []);
+        } else {
+          setJobs(prevJobs => [...prevJobs, ...(data || [])]);
         }
 
-        // Update hasMore based on subscription status
-        const hasMoreItems = isSubscribed
-          ? (count || 0) > page * ITEMS_PER_PAGE
-          : false;
-        setHasMore(hasMoreItems);
-
+        if (count !== null) setJobCount(count);
+        setHasMore(showAllJobs ? (count || 0) > (page * ITEMS_PER_PAGE) : false);
         setCurrentPage(page);
-        return { data, count };
+
       } catch (error) {
         console.error("Error fetching jobs:", error);
-        throw error;
       } finally {
-        if (isNewFilter) {
-          setIsLoading(false);
-        } else {
-          setIsLoadingMore(false);
+        setIsLoading(false);
+        setIsLoadingMore(false);
+        isFetchingRef.current = false;
+
+        // Handle any pending fetches
+        if (pendingFetchRef.current) {
+          const pendingFilters = pendingFetchRef.current;
+          pendingFetchRef.current = null;
+          fetchJobs(pendingFilters, 1, true);
         }
       }
     },
-    [isSubscribed]
+    [showAllJobs]
   );
 
   const loadMoreJobs = useCallback(() => {
-    if (!isLoading && hasMore) {
+    if (!isLoading && !isLoadingMore && hasMore && !isFetchingRef.current) {
       fetchJobs(currentFilters, currentPage + 1);
     }
-  }, [fetchJobs, hasMore, isLoading, currentPage, currentFilters]);
+  }, [fetchJobs, hasMore, isLoading, isLoadingMore, currentPage, currentFilters]);
 
   return {
     jobs,
@@ -147,7 +158,8 @@ export const useJobs = (isSubscribed: boolean) => {
     currentPage,
     fetchJobs,
     loadMoreJobs,
-    isLoadingMore
+    isLoadingMore,
+    setJobs
   };
 };
 

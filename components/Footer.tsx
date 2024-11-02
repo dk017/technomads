@@ -119,7 +119,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/obs?title=product"
+                  href="/jobs?title=product"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Product Manager Jobs
@@ -143,7 +143,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/obs?title=marketing"
+                  href="/jobs?title=marketing"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Marketing Jobs
@@ -151,7 +151,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/obs?title=devops"
+                  href="/jobs?title=devops"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote DevOps Jobs

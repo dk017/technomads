@@ -1,14 +1,78 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/app/utils/supabase/middleware'
+import { createServerClient } from "@supabase/ssr"
+
+// Define public routes that don't require authentication
+
+const publicRoutes = [
+  '/',
+  '/login',
+  '/signup',
+  '/jobs/.*',
+  '/jobs',
+  '/company/.*',
+  '/companies/.*',
+  '/api/.*',
+];
+
+
+// Define auth-related routes that should bypass middleware completely
+const bypassRoutes = [
+  '/api/webhook/stripe',
+  '/_next',
+  '/favicon.ico',
+  '/static',
+];
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname === "/api/webhook/stripe") {
-    console.log('Webhook route detected, bypassing middleware');
+  const { pathname } = request.nextUrl;
+
+
+  if (bypassRoutes.some(route =>
+    pathname.startsWith(route) ||
+    pathname.match(new RegExp(route)))) {
     return NextResponse.next();
   }
-  console.log("Applying middleware to route:", request.nextUrl.pathname);
 
-  return await updateSession(request);
+  // Check if it's a public route
+  const isPublicRoute = publicRoutes.some(route =>
+    pathname === route ||
+    pathname.match(new RegExp(`^${route}$`)));
+
+  try {
+    const response = await updateSession(request);
+
+    // If it's a public route, always allow access
+    if (isPublicRoute) {
+      return response;
+    }
+
+    // For protected routes, check authentication
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return request.cookies.get(name)?.value
+          },
+        },
+      }
+    );
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // If user is not authenticated and trying to access protected route
+    if (!user && !isPublicRoute) {
+      console.log('Middleware - Redirecting unauthenticated user to login');
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Middleware - Error:', error);
+    return NextResponse.redirect(new URL('/error', request.url));
+  }
 }
 
 export const config = {

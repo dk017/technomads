@@ -5,21 +5,31 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "./AuthContext";
 import { useEffect, useState } from "react";
 import { createClient } from "@/app/utils/supabase/client";
+import { useRouter } from "next/dist/client/components/navigation";
 const Header = () => {
+  const router = useRouter();
   const authContext = useAuth();
   const user = authContext?.user;
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
+    router.prefetch("/");
+    router.prefetch("/login");
+    router.prefetch("/forgot-password");
     if (user) {
-      // Access the user's name from metadata
+      // Access the user's name from metadata with fallbacks
       const name =
-        user.user_metadata?.name || user.email?.split("@")[0] || "User";
+        user.user_metadata?.name ||
+        user.user_metadata?.full_name ||
+        user.email?.split("@")[0] ||
+        "User";
       setUserName(name);
+
+      // Prefetch authenticated routes
     } else {
       setUserName(null);
     }
-  }, [user]);
+  }, [user, router]);
 
   const handleSignOut = async () => {
     const supabase = createClient();

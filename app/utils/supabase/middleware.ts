@@ -30,18 +30,14 @@ export async function updateSession(request: NextRequest) {
 )
 
 try {
-  const { data: { user }, error } = await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser();
+  console.log("Middleware - Processing request for:", request.nextUrl.pathname);
   console.log("Middleware - User check:", {
     hasUser: !!user,
     path: request.nextUrl.pathname
   });
 
-  if (user && request.nextUrl.pathname === '/login') {
-    console.log("Middleware - Redirecting authenticated user from login to home");
-    return NextResponse.redirect(new URL('/', request.url))
-  }
-
-  if (!user && request.nextUrl.pathname !== '/login') {
+  if (!user) {
     console.log("Middleware - Unauthenticated user accessing:", request.nextUrl.pathname);
   }
 

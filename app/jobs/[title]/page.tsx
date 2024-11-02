@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { useCallback, useEffect, useState, useRef } from "react";
-import { supabase } from "@/app/utils/supabase/client";
+import { createClient } from "@/app/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { debounce } from "lodash";
 import { useAuth } from "@/components/AuthContext";
@@ -51,6 +51,7 @@ export default function JobPage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const supabase = createClient();
 
   const location = searchParams.get("locations") || "";
   const keywords = searchParams.get("keywords") || "";

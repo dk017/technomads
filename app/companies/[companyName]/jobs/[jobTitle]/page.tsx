@@ -59,7 +59,7 @@ async function getRelatedJobs(currentJobId: number, jobTitle: string) {
     category: job.category || "Uncategorized",
     company_size: job.company_size || "Not specified",
     short_description: job.short_description || "",
-    logo_url: job.logo_url || "",
+    logo_url: "/public/default-company-logo.png",
     city: job.city || "Not specified",
     salary: job.salary || "Not specified",
   }));
@@ -149,7 +149,7 @@ export default async function JobPage({
           category: job.category || "Uncategorized",
           company_size: job.company_size || "Not specified",
           short_description: job.short_description || "",
-          logo_url: job.logo_url || "",
+          logo_url: "/public/default-company-logo.png",
           city: job.city || "Not specified",
           salary: job.salary || "Not specified",
         }))}

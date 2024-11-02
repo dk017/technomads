@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/app/utils/supabaseClient";
+import { createClient } from "@/app/utils/supabase/client";
 
 export default function VerifyEmail() {
   const [isVerified, setIsVerified] = useState(false);
   const router = useRouter();
-
+  const supabase = createClient();
   useEffect(() => {
     const checkVerification = async () => {
       const {
@@ -24,7 +24,7 @@ export default function VerifyEmail() {
     const interval = setInterval(checkVerification, 5000); // Check every 5 seconds
 
     return () => clearInterval(interval);
-  }, [router]);
+  }, [router, supabase]);
 
   return (
     <div className="container mx-auto px-4 py-12 flex justify-center items-center min-h-screen">

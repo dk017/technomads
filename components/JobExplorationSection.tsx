@@ -37,7 +37,7 @@ const JobCategoryCard: React.FC<JobCategoryCardProps> = ({
         <h3 className="text-lg font-semibold">{title}</h3>
       </div>
       <p className="text-sm text-gray-400 mb-6">{description}</p>
-      <Link href={`/jobs/${slug}`} passHref>
+      <Link href={`/jobs?title=${slug}`} passHref>
         <Button
           variant="ghost"
           className="text-blue-400 hover:text-blue-300 p-0 mt-auto"

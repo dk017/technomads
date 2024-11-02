@@ -5,52 +5,111 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/app/utils/supabaseClient";
+import { createClient } from "@/app/utils/supabase/client";
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const { toast } = useToast();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const createTrialPeriod = async (userId: string) => {
+    const supabase = createClient();
+    const trialEnd = new Date();
+    trialEnd.setDate(trialEnd.getDate() + 2); // 2 days trial
+
+    const { error } = await supabase.from("trial_periods").insert({
+      user_id: userId,
+      trial_end: trialEnd.toISOString(),
+      is_active: true,
+    });
+
+    if (error) {
+      console.error("Error creating trial period:", error);
+      throw error;
+    }
+  };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
+    const supabase = createClient();
+
     try {
-      const { data, error } = await supabase.auth.signUp({
+      console.log("Attempting signup with email:", email);
+
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: {
-            name: name,
-          },
+          data: { name: name },
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
-      if (error) throw error;
-      toast({
-        title: "Sign up successful",
-        description: "Please check your email to verify your account.",
-      });
-      toast({
-        title: "Sign up successful",
-        description:
-          "Please check your email to verify your account before logging in.",
-      });
 
-      router.push("/verify-email");
+      console.log("Signup response:", { data, error: signUpError });
+
+      if (signUpError || !data.user) {
+        console.log("Signup failed:", signUpError);
+        let message = "An unexpected error occurred. Please try again later.";
+
+        if (
+          signUpError?.status === 400 ||
+          signUpError?.message?.toLowerCase().includes("email")
+        ) {
+          message = "An account with this email already exists.";
+        } else if (signUpError?.message) {
+          message = signUpError.message;
+        }
+
+        setErrorMessage(message);
+        return;
+      }
+
+      // Additional check for user state
+      if (data.user?.identities?.length === 0) {
+        console.log("User already exists (no identities created)");
+        setErrorMessage("An account with this email already exists.");
+        return;
+      }
+
+      // Handle successful signup
+      if (data.user) {
+        console.log("User created successfully:", data.user.id);
+        try {
+          // Check if trial period already exists
+          const { data: existingTrial } = await supabase
+            .from("trial_periods")
+            .select("id")
+            .eq("user_id", data.user.id)
+            .single();
+
+          if (!existingTrial) {
+            await createTrialPeriod(data.user.id);
+          }
+
+          console.log("Trial period handled, showing success toast");
+          setErrorMessage(
+            "Please check your email to verify your account before logging in."
+          );
+          router.push("/verify-email");
+        } catch (trialError) {
+          console.log("Trial period creation failed:", trialError);
+          setErrorMessage(
+            "Account created but trial period setup failed. Please contact support."
+          );
+        }
+      }
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+      console.log("Unexpected error during signup:", error);
+      setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
 
   const handleGoogleSignUp = async () => {
     try {
+      const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
@@ -59,11 +118,7 @@ export default function SignUp() {
       });
       if (error) throw error;
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+      setErrorMessage(error.message);
     }
   };
 
@@ -76,6 +131,11 @@ export default function SignUp() {
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {errorMessage && (
+            <div className="mb-4 p-3 text-sm text-red-500 bg-red-100 dark:bg-red-900/30 rounded-md">
+              {errorMessage}
+            </div>
+          )}
           <form onSubmit={handleSignUp} className="space-y-4">
             <Input
               type="text"

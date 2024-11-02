@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 type AuthContextType = {
   user: User | null;
   isLoading: boolean;
+  isInitialized: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,16 +34,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const {
           data: { user },
-          error,
         } = await supabase.auth.getUser();
         logAuthFlow("initial-user-check", { hasUser: !!user });
         setUser(user);
       } catch (error) {
-        logAuthFlow("initial-user-check-error", {
-          error: error,
-        });
+        logAuthFlow("initial-user-check-error", { error });
       } finally {
         setIsLoading(false);
+        setIsInitialized(true);
       }
     };
 
@@ -50,34 +50,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      logAuthFlow("auth-state-change", {
-        event,
-        hasSession: !!session,
-        pathname: window.location.pathname,
-      });
-
-      if (session?.user) {
-        setUser(session.user);
-        if (window.location.pathname === "/login") {
-          router.replace("/");
-        }
-      } else {
-        setUser(null);
-        if (window.location.pathname !== "/login") {
-          router.replace("/login");
-        }
-      }
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      logAuthFlow("auth-state-change", { event, hasSession: !!session });
+      setUser(session?.user ?? null);
       setIsLoading(false);
     });
 
     return () => {
       subscription.unsubscribe();
     };
-  }, [router]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, isLoading, isInitialized }}>
       {children}
     </AuthContext.Provider>
   );

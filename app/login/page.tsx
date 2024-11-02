@@ -61,7 +61,7 @@ export default function Login() {
           title: "Welcome back!",
           description: "Login successful.",
         });
-
+        router.prefetch("/");
         // Use replace instead of push to prevent back navigation to login
         router.replace("/");
       }

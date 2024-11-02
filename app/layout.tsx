@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/components/AuthContext";
 import { QueryClient } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
+import { LoadingSpinner } from "@/components/loading-spinner";
+import { TrialBanner } from "@/components/TrialBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,14 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center min-h-screen">
+                  <LoadingSpinner />
+                </div>
+              }
+            >
+              <TrialBanner />
               <Header />
               <main className="min-h-screen">{children}</main>
               <Footer />

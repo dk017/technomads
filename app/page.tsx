@@ -16,13 +16,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { JobSkeleton } from "@/components/JobSkeleton";
 import PricingSection from "@/components/PricingSection";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { LoadingSpinner } from "@/components/loading-spinner";
+import { useTrialStatus } from "@/hooks/useTrialStatus";
 const imageUrls = ["/dk1.png", "/dk2.png", "/dk3.png", "/dk4.jpg", "/dk5.png"];
 interface FilterParams {
   location: string;
   keyword: string;
   title: string;
-  category?: string;
+  minSalary?: string;
 }
 
 const ITEMS_PER_PAGE = 10;
@@ -30,6 +31,10 @@ const FREE_USER_LIMIT = 10;
 
 export default function Home() {
   const { user, isLoading: authLoading } = useAuth() || {};
+  const { isInitialized } = useAuth();
+  const { isTrialActive, isLoading: trialLoading } = useTrialStatus();
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const showAllJobs = isSubscribed || isTrialActive; // Add this
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -39,7 +44,6 @@ export default function Home() {
     title: "",
   });
 
-  const [isSubscribed, setIsSubscribed] = useState(false); // Add this
   const {
     jobs,
     isLoading,
@@ -48,8 +52,48 @@ export default function Home() {
     hasMore,
     loadMoreJobs,
     isLoadingMore,
-  } = useJobs(isSubscribed);
-  // Add subscription check
+    setJobs,
+  } = useJobs(showAllJobs);
+
+  const handleFilterChange = useCallback(
+    (location: string, keywords: string, title: string, minSalary: string) => {
+      const newFilters: FilterParams = {
+        location,
+        keyword: keywords,
+        title,
+        minSalary,
+      };
+
+      // Update filters state first
+      setFilters(newFilters);
+
+      // Update URL
+      const updatedSearchParams = new URLSearchParams();
+      Object.entries(newFilters).forEach(([key, value]) => {
+        if (value) {
+          updatedSearchParams.set(key, value.toString());
+        } else {
+          updatedSearchParams.delete(key);
+        }
+      });
+
+      router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
+        scroll: false,
+      });
+    },
+    [pathname, router]
+  );
+
+  // Single effect to handle filter changes
+  useEffect(() => {
+    if (isInitialized) {
+      // Reset jobs when filters change
+      setJobs([]);
+      fetchJobs(filters, 1, true);
+    }
+  }, [isInitialized, fetchJobs, filters, setJobs]);
+
+  // Keep the subscription check effect
   useEffect(() => {
     const checkSubscription = async () => {
       if (!user) return;
@@ -66,27 +110,6 @@ export default function Home() {
 
     checkSubscription();
   }, [user]);
-
-  const debouncedUpdateURL = useMemo(
-    () =>
-      debounce((newFilters: FilterParams) => {
-        const updatedSearchParams = new URLSearchParams(
-          searchParams.toString()
-        );
-        Object.entries(newFilters).forEach(([key, value]) => {
-          if (value) {
-            updatedSearchParams.set(key, value.toString());
-          } else {
-            updatedSearchParams.delete(key);
-          }
-        });
-
-        router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
-          scroll: false,
-        });
-      }, 500),
-    [pathname, router, searchParams]
-  );
 
   const handleSubscribe = async (priceId: string) => {
     if (!user) {
@@ -129,26 +152,13 @@ export default function Home() {
     }
   };
 
-  const handleFilterChange = useCallback(
-    async (location: string, keywords: string, title: string) => {
-      const newFilters: FilterParams = { location, keyword: keywords, title };
-
-      try {
-        await Promise.all([
-          fetchJobs(newFilters, 1, true),
-          new Promise((resolve) => {
-            debouncedUpdateURL(newFilters);
-            setTimeout(resolve, 500);
-          }),
-        ]);
-      } catch (error) {
-        console.error("Error updating filters:", error);
-      }
-
-      setFilters(newFilters);
-    },
-    [fetchJobs, debouncedUpdateURL]
-  );
+  if (!isInitialized) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -225,20 +235,6 @@ export default function Home() {
           </div>
         </section>
         <JobExplorationSection />
-        {/* <JobFilters
-          user={user ?? null}
-          isVerified={!!user?.email_confirmed_at}
-          onFilterChange={(location, keyword, title) => {
-            handleFilterChange({
-              location,
-              keyword,
-              title,
-            });
-          }}
-          initialLocation={queryParams?.location ?? ""}
-          initialKeywords={queryParams?.keyword ?? ""}
-          initialTitle={queryParams?.title ?? ""}
-        /> */}
         <JobFilters
           user={user ?? null}
           isVerified={!!user?.email_confirmed_at}
@@ -246,6 +242,7 @@ export default function Home() {
           initialLocation={filters.location}
           initialKeywords={filters.keyword}
           initialTitle={filters.title}
+          initialSalary={filters.minSalary}
         />
 
         {isLoading && jobs.length === 0 ? (
@@ -258,7 +255,7 @@ export default function Home() {
           <InfiniteScroll
             dataLength={jobs.length}
             next={loadMoreJobs}
-            hasMore={isSubscribed ? hasMore : jobs.length < FREE_USER_LIMIT}
+            hasMore={showAllJobs ? hasMore : jobs.length < FREE_USER_LIMIT}
             loader={
               isLoadingMore && (
                 <div className="mt-4 space-y-4">
@@ -272,7 +269,7 @@ export default function Home() {
               <div className="text-center p-4 text-gray-400">
                 {jobs.length === 0
                   ? "No jobs found matching your criteria"
-                  : !isSubscribed && jobCount > FREE_USER_LIMIT
+                  : !showAllJobs && jobCount > FREE_USER_LIMIT
                   ? `${
                       jobCount - FREE_USER_LIMIT
                     } more jobs available with subscription`
@@ -291,7 +288,7 @@ export default function Home() {
           </InfiniteScroll>
         )}
 
-        {!isSubscribed && jobCount > FREE_USER_LIMIT && (
+        {!showAllJobs && jobCount > FREE_USER_LIMIT && (
           <div className="relative">
             <div
               className="absolute -top-40 left-0 w-full h-40 bg-gradient-to-b from-transparent to-background z-10"
