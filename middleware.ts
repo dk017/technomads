@@ -12,6 +12,7 @@ const publicRoutes = [
   '/jobs',
   '/company/.*',
   '/companies/.*',
+  '/companies',
   '/api/.*',
 ];
 
