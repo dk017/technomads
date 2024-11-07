@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     // you can implement some basic check here like, is user valid or not
     const data = await request.json();
     const priceId = data.priceId;
+    const userId = data.userId;
     const checkoutSession: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
         success_url: `${process.env.NEXT_BASE_URL}/billing`,
         cancel_url: `${process.env.NEXT_BASE_URL}/billing`,
         metadata: {
-          userId: loggedUser.id,
+          userId: userId,
           priceId
         }
       });
