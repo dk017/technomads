@@ -99,4 +99,5 @@ export const titleOptions = [
   { value: 'objective_c', label: 'Objective C' },
   { value: 'social_media', label: 'Social Media' },
   { value: 'vue', label: 'Vue' },
+  { value: 'data_entry', label: 'Data Entry' },
 ];

@@ -14,6 +14,7 @@ const publicRoutes = [
   '/companies/.*',
   '/companies',
   '/api/.*',
+  '/blog/.*',
 ];
 
 

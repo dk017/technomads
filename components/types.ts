@@ -16,3 +16,12 @@ export interface Description {
     updated_at: string;
     payment_intent_id: string | null;
   }
+
+  export interface BlogPost {
+    [x: string]: string;
+    title: string;
+    date: string;
+    excerpt: string;
+    author: string;
+    slug: string;
+  }

@@ -40,7 +40,7 @@ const Header = () => {
     <header className="bg-background border-b">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-primary">
-          Remote Launchpad
+          Only Remote Jobs
         </Link>
         <nav>
           <ul className="flex space-x-4">
@@ -58,11 +58,8 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link
-                href="/resources"
-                className="text-foreground hover:text-primary"
-              >
-                Resources
+              <Link href="/blog" className="text-foreground hover:text-primary">
+                Blog
               </Link>
             </li>
           </ul>

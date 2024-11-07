@@ -1,0 +1,76 @@
+/* Article Typography */
+.mdx-article h1 {
+  @apply text-4xl font-bold mb-8;
+}
+
+.mdx-article h2 {
+  @apply text-2xl font-semibold mt-12 mb-6;
+}
+
+.mdx-article p {
+  @apply leading-relaxed mb-6;
+}
+
+/* Lists */
+.mdx-article ul, .mdx-article ol {
+  @apply mb-6 ml-6;
+}
+
+.mdx-article li {
+  @apply mb-2;
+}
+
+.mdx-article ul > li {
+  @apply list-disc;
+}
+
+.mdx-article ol > li {
+  @apply list-decimal;
+}
+
+/* Blockquotes */
+.mdx-article blockquote {
+  @apply pl-4 border-l-4 border-blue-500 italic my-6;
+}
+
+/* Code blocks */
+.mdx-article pre {
+  @apply bg-gray-800 p-4 rounded-lg my-6 overflow-x-auto;
+}
+
+.mdx-article code {
+  @apply text-gray-100 font-mono text-sm;
+}
+
+/* Inline code */
+.mdx-article p > code,
+.mdx-article li > code {
+  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono;
+}
+
+/* Syntax highlighting */
+.mdx-article .syntax-highlight {
+  @apply text-blue-400;
+}
+
+.mdx-article .keyword {
+  @apply text-purple-400;
+}
+
+.mdx-article .string {
+  @apply text-green-400;
+}
+
+.mdx-article .function {
+  @apply text-yellow-400;
+}
+
+/* Emphasis */
+.mdx-article strong {
+  @apply font-semibold;
+}
+
+/* Horizontal Rule */
+.mdx-article hr {
+  @apply my-12 border-gray-200;
+}
