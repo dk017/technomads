@@ -18,7 +18,7 @@ export async function generateStaticParams() {
   );
 }
 
-export function extractKeywordsFromTitle(title: string): string[] {
+function extractKeywordsFromTitle(title: string): string[] {
   return titleOptions
     .filter((option) =>
       title.toLowerCase().includes(option.value.toLowerCase())
