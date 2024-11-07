@@ -1,4 +1,4 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const limit = 15;
   const offset = (page - 1) * limit;
 
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = createClient();
 
   const { data: companies, error } = await supabase
     .from("companies")
