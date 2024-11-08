@@ -16,6 +16,7 @@ export async function POST(request: Request) {
   let event: Stripe.Event;
 
   try {
+    if (!sig || !process.env.STRIPE_SECRET_WEBHOOK_KEY) return;
     event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_SECRET_WEBHOOK_KEY!);
     console.log('Event type:', event.type);
   } catch (err: any) {
