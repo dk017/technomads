@@ -12,12 +12,13 @@ export async function POST(request: Request) {
   const supabase = createClient();
 
   const sig = request.headers.get('stripe-signature') as string;
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event: Stripe.Event;
 
   try {
-    if (!sig || !process.env.STRIPE_SECRET_WEBHOOK_KEY) return;
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_SECRET_WEBHOOK_KEY!);
+    if (!sig || !webhookSecret) return;
+    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     console.log('Event type:', event.type);
   } catch (err: any) {
     console.error('Error verifying webhook signature:', err.message);
