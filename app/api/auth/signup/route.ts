@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/app/utils/supabase/server';
+export const runtime = 'edge'; // Add this line
+
 
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url);

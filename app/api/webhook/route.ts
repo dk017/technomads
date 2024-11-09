@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createClient } from '@/app/utils/supabase/server';
+export const runtime = 'edge'; // Add this line
+
 const relevantEvents = new Set([
   'product.created',
   'product.updated',

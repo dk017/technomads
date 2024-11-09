@@ -8,6 +8,8 @@ import { debounce } from "lodash";
 import { useAuth } from "@/components/AuthContext";
 import JobFilters from "@/components/JobFilters";
 import JobListings from "@/components/JobListings";
+export const runtime = 'edge'; // Add this line
+
 
 // Define the type for a job
 

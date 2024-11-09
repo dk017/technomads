@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import "../../../mdx.css";
+export const runtime = "edge"; // Add this line
 
 interface BlogPost {
   title: string;

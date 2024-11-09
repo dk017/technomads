@@ -15,6 +15,7 @@ import { useTrialStatus } from "@/hooks/useTrialStatus";
 import { Button } from "@/components/ui/button";
 import { useSubscription } from "@/hooks/useSubscription";
 import debounce from "lodash/debounce";
+export const runtime = "edge"; // Add this line
 
 // Type definitions
 interface FilterParams {

@@ -1,6 +1,8 @@
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+export const runtime = 'edge'; // Add this line
+
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

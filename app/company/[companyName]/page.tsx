@@ -6,6 +6,8 @@ import JobListings from "@/components/JobListings";
 import CompanyProfileCard from "@/components/CompaniesPage";
 import { useAuth } from "@/components/AuthContext";
 import { createClient } from "@/app/utils/supabase/client";
+export const runtime = "edge"; // Add this line
+
 interface Company {
   id: number;
   name: string;
