@@ -1,6 +1,7 @@
-import { supabase } from "@/app/utils/supabaseClient";
+import { createClient } from "@/app/utils/supabase/server";
 
 export async function generateStaticParams() {
+  const supabase = createClient();
   // Fetch job titles from your database or define them statically
   const { data: jobs, error } = await supabase.from("jobs_nh").select("title");
 
