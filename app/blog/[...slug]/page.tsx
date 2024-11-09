@@ -1,9 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import "../../../mdx.css";
-export const runtime = "edge"; // Add this line
+
+export const runtime = "edge";
 
 interface BlogPost {
   title: string;
@@ -13,21 +11,50 @@ interface BlogPost {
 }
 
 async function getPost(slug: string[]): Promise<BlogPost | null> {
-  const blogDir = path.join(process.cwd(), "content/blog");
+  try {
+    // Instead of reading from filesystem, fetch from public URL
+    const response = await fetch(
+      `https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/content/blog/${slug.join(
+        "/"
+      )}.mdx`
+    );
 
-  // Join the slug array with forward slashes
-  const fullPath = path.join(blogDir, `${slug.join("/")}.mdx`);
-  console.log("Attempting to read:", fullPath);
+    if (!response.ok) {
+      return null;
+    }
 
-  if (fs.existsSync(fullPath)) {
-    const source = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(source);
-    return { ...(data as BlogPost), content };
+    const source = await response.text();
+
+    // Simple frontmatter parsing since we can't use gray-matter in Edge
+    const frontMatterRegex = /---\n([\s\S]*?)\n---/;
+    const match = source.match(frontMatterRegex);
+
+    if (!match) {
+      return null;
+    }
+
+    const frontMatter = match[1];
+    const content = source.replace(frontMatterRegex, "").trim();
+
+    // Parse frontmatter manually
+    const data: any = {};
+    frontMatter.split("\n").forEach((line) => {
+      const [key, ...valueParts] = line.split(":");
+      if (key && valueParts.length) {
+        data[key.trim()] = valueParts.join(":").trim();
+      }
+    });
+
+    return {
+      title: data.title || "",
+      author: data.author || "",
+      date: data.date || "",
+      content,
+    };
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return null;
   }
-
-  // If not found, return null
-  console.log("File not found:", fullPath);
-  return null;
 }
 
 export default async function BlogPost({
