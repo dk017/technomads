@@ -3,6 +3,7 @@ import RelevantJobs from "@/components/RelevantJobs";
 import { createClient } from "@/app/utils/supabase/client";
 import JobDetailPage from "@/components/JobDetailsPage";
 import { titleOptions } from "@/app/constants/titleOptions";
+export const runtime = "edge";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
