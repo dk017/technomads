@@ -15,33 +15,7 @@ import {
   DollarSignIcon,
 } from "lucide-react";
 import { JobSkeleton } from "@/components/JobSkeleton";
-
-interface Job {
-  id: number;
-  title: string;
-  country: string;
-  skills: string[];
-  visa_sponsorship: boolean;
-  company_name: string;
-  company_size: string;
-  employment_type: string;
-  salary: string;
-  logo_url: string;
-  job_url: string;
-  short_description: string;
-  description: string;
-  category: string;
-  company_url: string;
-  experience: string;
-  city: string;
-  job_slug: string;
-  formatted_description: {
-    sections: {
-      title: string;
-      items: string[];
-    }[];
-  };
-}
+import { Job } from "./types";
 
 function generateSlug(str: string): string {
   return str

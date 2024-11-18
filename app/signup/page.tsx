@@ -14,20 +14,44 @@ export default function SignUp() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const createTrialPeriod = async (userId: string) => {
+  const createTrialSubscription = async (userId: string) => {
     const supabase = createClient();
     const trialEnd = new Date();
     trialEnd.setDate(trialEnd.getDate() + 2); // 2 days trial
+    const now = new Date().toISOString();
 
-    const { error } = await supabase.from("trial_periods").insert({
-      user_id: userId,
-      trial_end: trialEnd.toISOString(),
-      is_active: true,
-    });
+    // First check if user already has a subscription
+    const { data: existingSubscription } = await supabase
+      .from("subscriptions")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("status", "active")
+      .single();
 
-    if (error) {
-      console.error("Error creating trial period:", error);
-      throw error;
+    if (existingSubscription) {
+      console.log("User already has an active subscription");
+      return;
+    }
+
+    // Create new trial subscription
+    const { error: subscriptionError } = await supabase
+      .from("subscriptions")
+      .insert({
+        user_id: userId,
+        status: "active",
+        price_id: "trial",
+        quantity: 1,
+        trial_start: now,
+        trial_end: trialEnd.toISOString(),
+        current_period_start: now,
+        current_period_end: trialEnd.toISOString(),
+        created_at: now,
+        cancel_at_period_end: false,
+      });
+
+    if (subscriptionError) {
+      console.error("Error creating subscription:", subscriptionError);
+      throw subscriptionError;
     }
   };
 
@@ -78,26 +102,27 @@ export default function SignUp() {
       if (data.user) {
         console.log("User created successfully:", data.user.id);
         try {
-          // Check if trial period already exists
-          const { data: existingTrial } = await supabase
-            .from("trial_periods")
+          // Check if subscription already exists
+          const { data: existingSubscription } = await supabase
+            .from("subscriptions")
             .select("id")
             .eq("user_id", data.user.id)
+            .eq("status", "active")
             .single();
 
-          if (!existingTrial) {
-            await createTrialPeriod(data.user.id);
+          if (!existingSubscription) {
+            await createTrialSubscription(data.user.id);
           }
 
-          console.log("Trial period handled, showing success toast");
+          console.log("Trial subscription handled, showing success toast");
           setErrorMessage(
             "Please check your email to verify your account before logging in."
           );
           router.push("/verify-email");
-        } catch (trialError) {
-          console.log("Trial period creation failed:", trialError);
+        } catch (error) {
+          console.log("Trial subscription creation failed:", error);
           setErrorMessage(
-            "Account created but trial period setup failed. Please contact support."
+            "Account created but trial setup failed. Please contact support."
           );
         }
       }

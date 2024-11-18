@@ -27,16 +27,16 @@ export function useTrialStatus(): TrialStatus {
       const supabase = createClient();
 
       try {
-        // Check trial period only
-        const { data: trial } = await supabase
-          .from('trial_periods')
-          .select('trial_end, is_active')
+        const { data: subscription } = await supabase
+          .from('subscriptions')
+          .select('trial_end, status')
           .eq('user_id', user.id)
+          .eq('status', 'active')
           .single();
 
-        if (trial) {
-          const trialEnd = new Date(trial.trial_end);
-          const isActive = trial.is_active && trialEnd > new Date();
+        if (subscription) {
+          const trialEnd = new Date(subscription.trial_end);
+          const isActive = subscription.status === 'active' && trialEnd > new Date();
 
           setIsTrialActive(isActive);
           setTrialEndsAt(trialEnd);

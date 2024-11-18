@@ -1,47 +1,60 @@
-import { useState, useEffect } from 'react';
-import { createClient } from "@/app/utils/supabase/client";
-import { User } from '@supabase/supabase-js';
+'use client';
 
-export const useSubscription = (user: User | null) => {
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/components/AuthContext';
+import { createClient } from '@/app/utils/supabase/client';
+
+export const useSubscription = () => {
+  const { user } = useAuth();
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const abortController = new AbortController();
+    let isMounted = true;
+
     const checkSubscription = async () => {
       if (!user) {
-        setIsSubscribed(false);
-        setIsLoading(false);
+        if (isMounted) {
+          setIsSubscribed(false);
+          setIsLoading(false);
+        }
         return;
       }
 
       try {
         const supabase = createClient();
 
-        // First check if any subscription exists
-        const { data, error } = await supabase
+        // Get the most recent active subscription
+        const { data: subscription, error } = await supabase
           .from('subscriptions')
-          .select('status')
+          .select('*')
           .eq('user_id', user.id)
+          .eq('status', 'active')
+          .order('created_at', { ascending: false })
+          .limit(1)
           .maybeSingle();
 
-
-        if (error) {
-          console.error('Error checking subscription:', error);
-          setIsSubscribed(false);
-        } else {
-          // Check if data exists and status is active
-          setIsSubscribed(data?.status === 'active');
+        if (isMounted) {
+          setIsSubscribed(!!subscription);
+          setIsLoading(false);
         }
       } catch (error) {
-        console.error('Error checking subscription:', error);
-        setIsSubscribed(false);
-      } finally {
-        setIsLoading(false);
+        console.error('Subscription check error:', error);
+        if (isMounted) {
+          setIsSubscribed(false);
+          setIsLoading(false);
+        }
       }
     };
 
     checkSubscription();
-  }, [user]);
+
+    return () => {
+      isMounted = false;
+      abortController.abort();
+    };
+  }, [user?.id]); // Only depend on user.id, not the entire user object
 
   return { isSubscribed, isLoading };
 };

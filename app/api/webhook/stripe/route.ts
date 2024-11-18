@@ -1,23 +1,45 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createClient } from '@/app/utils/supabase/server';
-export const runtime = 'edge'; // Add this line
+import { headers } from 'next/headers';
+import { createWebhookClient } from '@/app/utils/supabase/webhook-client';
+//export const runtime = 'edge'; // Add this line
 
+
+
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('STRIPE_SECRET_KEY is not set');
+}
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-09-30.acacia",
+  apiVersion: "2024-10-28.acacia",
 });
 
 export async function POST(request: Request) {
   console.log("Stripe webhook received");
   const body = await request.text();
-  const supabase = createClient();
+  const supabase = createWebhookClient();
 
   const sig = request.headers.get('stripe-signature') as string;
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = process.env.STRIPE_SECRET_WEBHOOK_KEY;
+    if (!webhookSecret) {
+      console.error('STRIPE_WEBHOOK_SECRET is not configured');
+      return NextResponse.json(
+        { error: 'Webhook secret not configured' },
+        { status: 500 }
+      );
+    }
 
+    if (!sig) {
+      console.error('No stripe signature found');
+      return NextResponse.json(
+        { error: 'No signature' },
+        { status: 400 }
+      );
+    }
   let event: Stripe.Event;
-
+  console.log("Received webhook event:", body);
+  console.log("Signature:", sig);
+  console.log("Webhook secret:", webhookSecret);
   try {
     if (!sig || !webhookSecret) return;
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);

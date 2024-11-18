@@ -1,154 +1,155 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { createClient } from "@/app/utils/supabase/client";
+import { Job } from '@/components/types';
+// Removed the import of 'Job' from '@/components/types' due to the error indicating it's not an exported member.
 
+const ITEMS_PER_PAGE = 10;
+const FREE_USER_LIMIT = 10;
 interface FilterParams {
   location: string;
   keyword: string;
   title: string;
+  category?: string;
   minSalary?: string;
 }
 
-interface Job {
-  id: number;
-  title: string;
-  country: string;
-  skills: string[];
-  visa_sponsorship: boolean;
-  company_name: string;
-  company_size: string;
-  employment_type: string;
-  salary: string;
-  logo_url: string;
-  job_url: string;
-  short_description: string;
-  description: string;
-  category: string;
-  company_url: string;
-  experience: string;
-  city: string;
-  job_slug: string;
-  formatted_description: {
-    sections: {
-      title: string;
-      items: string[];
-    }[];
-  };
-}
 
-const ITEMS_PER_PAGE = 10;
-const FREE_USER_LIMIT = 10;
+async function fetchJobsFromAPI(
+  filters: FilterParams,
+  page: number,
+  limit: number
+): Promise<{ data: Job[]; count: number }> {
+  const supabase = createClient();
+  const offset = (page - 1) * limit;
+
+  // Start building the query
+  let query = supabase
+    .from('jobs_tn')
+    .select('*', { count: 'exact' });
+
+  // Apply filters
+  if (filters.location) {
+    query = query.ilike('country', `%${filters.location}%`);
+  }
+
+  if (filters.keyword) {
+    query = query.or(`
+      title.ilike.%${filters.keyword}%,
+      description.ilike.%${filters.keyword}%,
+      company_name.ilike.%${filters.keyword}%
+    `);
+  }
+
+  if (filters.title) {
+    query = query.ilike('title', `%${filters.title}%`);
+  }
+
+  if (filters.minSalary) {
+    // Assuming salary is stored as a number
+    query = query.gte('salary', filters.minSalary);
+  }
+
+  // Add pagination
+  query = query
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  console.log('Supabase query:', query);
+
+  try {
+    const { data, error, count } = await query;
+
+    if (error) {
+      console.error('Supabase error:', error);
+      throw error;
+    }
+
+    console.log('Fetched jobs:', {
+      page,
+      limit,
+      offset,
+      count,
+      resultsCount: data?.length,
+      filters
+    });
+
+    return {
+      data: data || [],
+      count: count || 0
+    };
+  } catch (error) {
+    console.error('Error in fetchJobsFromAPI:', error);
+    return {
+      data: [],
+      count: 0
+    };
+  }
+}
 
 export const useJobs = (showAllJobs: boolean) => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [jobCount, setJobCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [currentFilters, setCurrentFilters] = useState<FilterParams>({
     location: '',
     keyword: '',
-    title: '',
+    title: ''
   });
 
-  const isFetchingRef = useRef(false);
-  const pendingFetchRef = useRef<FilterParams | null>(null);
-  const [isPendingFetch, setIsPendingFetch] = useState(false);
+  const fetchJobs = useCallback(async (filters: FilterParams, page: number) => {
+    setCurrentFilters(filters);
+    setIsLoading(true);
+    try {
+      const limit = showAllJobs ? ITEMS_PER_PAGE : FREE_USER_LIMIT;
+      console.log('Fetching jobs with params:', { filters, page, limit });
 
-  const fetchJobs = useCallback(
-    async (filters: FilterParams, page: number, isNewFilter: boolean = false) => {
-      if (isPendingFetch) return;
-      setIsPendingFetch(true);
+      const { data: newJobs, count } = await fetchJobsFromAPI(filters, page, limit);
 
-      try {
-        if (isFetchingRef.current) {
-          pendingFetchRef.current = filters;
-          return;
-        }
+      console.log('Fetched jobs result:', {
+        jobsCount: newJobs?.length,
+        totalCount: count,
+        jobs: newJobs
+      });
 
-        isFetchingRef.current = true;
-        console.log('Fetching jobs with filters:', filters);
-
-        if (isNewFilter) {
-          setIsLoading(true);
-          setCurrentFilters(filters);
-        } else {
-          setIsLoadingMore(true);
-        }
-
-        const supabase = createClient();
-        let query = supabase
-          .from("jobs_tn")
-          .select("*", { count: "exact" });
-
-        if (filters.location?.trim()) {
-          query = query.ilike('country', `%${filters.location.trim()}%`);
-        }
-
-        if (filters.keyword?.trim()) {
-          const keywordFilter = filters.keyword.trim();
-          query = query.or(`title.ilike.%${keywordFilter}%,description.ilike.%${keywordFilter}%`);
-        }
-
-        if (filters.title?.trim()) {
-          query = query.ilike('title', `%${filters.title.trim()}%`);
-        }
-
-        if (filters.minSalary && filters.minSalary !== "0") {
-          const minSalaryValue = parseInt(filters.minSalary);
-          query = query.or(`
-            salary_min::integer >= ${minSalaryValue},
-            salary_max::integer >= ${minSalaryValue},
-            salary::integer >= ${minSalaryValue}
-          `);
-        }
-
-        query = query.order('created_at', { ascending: false });
-
-        const start = (page - 1) * ITEMS_PER_PAGE;
-        const end = showAllJobs ? start + ITEMS_PER_PAGE - 1 : FREE_USER_LIMIT - 1;
-        query = query.range(start, end);
-
-        console.log('Executing query with filters:', filters);
-        const { data, error, count } = await query;
-
-        if (error) throw error;
-
-        console.log('Query results:', { resultCount: data?.length, totalCount: count });
-
-        if (isNewFilter) {
-          setJobs(data || []);
-        } else {
-          setJobs(prevJobs => [...prevJobs, ...(data || [])]);
-        }
-
-        if (count !== null) setJobCount(count);
-        setHasMore(showAllJobs ? (count || 0) > (page * ITEMS_PER_PAGE) : false);
-        setCurrentPage(page);
-
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      } finally {
-        setIsLoading(false);
-        setIsLoadingMore(false);
-        isFetchingRef.current = false;
-
-        // Handle any pending fetches
-        if (pendingFetchRef.current) {
-          const pendingFilters = pendingFetchRef.current;
-          pendingFetchRef.current = null;
-          fetchJobs(pendingFilters, 1, true);
-        }
-      }
-    },
-    [showAllJobs]
-  );
-
-  const loadMoreJobs = useCallback(() => {
-    if (!isLoading && !isLoadingMore && hasMore && !isFetchingRef.current) {
-      fetchJobs(currentFilters, currentPage + 1);
+      setJobs(newJobs || []);
+      setJobCount(count || 0);
+      setCurrentPage(page);
+      setHasMore((newJobs?.length || 0) >= limit);
+    } catch (error) {
+      console.error('Error in fetchJobs:', error);
+      setJobs([]);
+      setJobCount(0);
+    } finally {
+      setIsLoading(false);
     }
-  }, [fetchJobs, hasMore, isLoading, isLoadingMore, currentPage, currentFilters]);
+  }, [showAllJobs]);
+
+  const loadMoreJobs = useCallback(async () => {
+    if (isLoadingMore || !hasMore) return;
+
+    try {
+      setIsLoadingMore(true);
+      const nextPage = currentPage + 1;
+      const limit = showAllJobs ? ITEMS_PER_PAGE : FREE_USER_LIMIT;
+
+      const { data: newJobs } = await fetchJobsFromAPI(currentFilters, nextPage, limit);
+
+      if (newJobs && newJobs.length > 0) {
+        setJobs(prevJobs => [...prevJobs, ...newJobs]);
+        setCurrentPage(nextPage);
+        setHasMore(newJobs.length >= limit);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Error loading more jobs:', error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [currentPage, hasMore, isLoadingMore, showAllJobs, currentFilters]);
 
   return {
     jobs,
@@ -159,8 +160,8 @@ export const useJobs = (showAllJobs: boolean) => {
     fetchJobs,
     loadMoreJobs,
     isLoadingMore,
-    setJobs
+    setJobs,
   };
-};
+}
 
 export type { FilterParams, Job };

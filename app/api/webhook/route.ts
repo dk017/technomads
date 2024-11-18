@@ -64,8 +64,9 @@ async function manageSubscriptionStatusChange(
 export async function POST(req: Request) {
   const body = await req.text();
   const sig = headers().get('Stripe-Signature') as string;
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = process.env.STRIPE_SECRET_WEBHOOK_KEY;
   let event: Stripe.Event;
+  console.log("Received webhook event:", body);
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2024-09-30.acacia',
   });
@@ -80,24 +81,37 @@ export async function POST(req: Request) {
 
   try {
     switch (event.type) {
-      case 'checkout.session.completed':
-        const checkoutSession = event.data.object as Stripe.Checkout.Session;
-        // Update checkout_sessions table
+      case 'checkout.session.completed':{
+        const session = event.data.object as Stripe.Checkout.Session;
+        console.log('Processing checkout session:', session.id);
         const supabase = createClient();
-        await supabase
-          .from('checkout_sessions')
-          .update({ status: checkoutSession.status })
-          .eq('session_id', checkoutSession.id);
 
-        if (checkoutSession.mode === 'subscription') {
-          const subscriptionId = checkoutSession.subscription;
-          await manageSubscriptionStatusChange(
-            subscriptionId as string,
-            checkoutSession.customer as string,
-            true
-          );
+        // Retrieve subscription
+        const subscription = await stripe.subscriptions.retrieve(
+          session.subscription as string
+        );
+
+        // Insert into subscriptions table
+        const { error: insertError } = await supabase
+          .from('subscriptions')
+          .insert({
+            user_id: session.metadata?.user_id,
+            stripe_subscription_id: subscription.id,
+            stripe_customer_id: session.customer as string,
+            status: subscription.status,
+            price_id: subscription.items.data[0].price.id,
+            current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
+            current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+          });
+
+        if (insertError) {
+          console.error('Error inserting subscription:', insertError);
+          throw insertError;
         }
+
+        console.log('Subscription saved successfully');
         break;
+      }
 
       case 'customer.subscription.created':
       case 'customer.subscription.updated':

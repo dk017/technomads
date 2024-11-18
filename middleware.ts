@@ -1,8 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/app/utils/supabase/middleware'
-import { createServerClient } from "@supabase/ssr"
-
-// Define public routes that don't require authentication
+import { createClient } from "@/app/utils/supabase/server"
 
 const publicRoutes = [
   '/',
@@ -15,10 +13,9 @@ const publicRoutes = [
   '/companies',
   '/api/.*',
   '/blog/.*',
+  '/auth/callback',
 ];
 
-
-// Define auth-related routes that should bypass middleware completely
 const bypassRoutes = [
   '/api/webhook/stripe',
   '/_next',
@@ -29,6 +26,12 @@ const bypassRoutes = [
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  console.log('Middleware - Processing request for:', pathname);
+
+  if (pathname === '/auth/callback') {
+    console.log('Middleware - Processing auth callback');
+    return NextResponse.next();
+  }
 
   if (bypassRoutes.some(route =>
     pathname.startsWith(route) ||
@@ -36,36 +39,28 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if it's a public route
   const isPublicRoute = publicRoutes.some(route =>
     pathname === route ||
     pathname.match(new RegExp(`^${route}$`)));
 
   try {
     const response = await updateSession(request);
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    // If it's a public route, always allow access
+    console.log('Middleware - User check:', { hasUser: !!user, path: pathname });
+
+    if (user && ['/login', '/signup'].includes(pathname)) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+
     if (isPublicRoute) {
+      console.log('Middleware - Public route access:', pathname);
       return response;
     }
 
-    // For protected routes, check authentication
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          get(name: string) {
-            return request.cookies.get(name)?.value
-          },
-        },
-      }
-    );
-
-    const { data: { user } } = await supabase.auth.getUser();
-
-    // If user is not authenticated and trying to access protected route
     if (!user && !isPublicRoute) {
+      console.log('Middleware - Unauthenticated user accessing:', pathname);
       console.log('Middleware - Redirecting unauthenticated user to login');
       return NextResponse.redirect(new URL('/login', request.url));
     }
@@ -79,13 +74,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

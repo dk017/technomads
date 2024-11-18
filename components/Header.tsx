@@ -6,11 +6,14 @@ import { useAuth } from "./AuthContext";
 import { useEffect, useState } from "react";
 import { createClient } from "@/app/utils/supabase/client";
 import { useRouter } from "next/dist/client/components/navigation";
-const Header = () => {
+import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
+import { SubscriptionUpgrade } from "./SubscriptionUpgrade";
+export function Header() {
   const router = useRouter();
   const authContext = useAuth();
   const user = authContext?.user;
   const [userName, setUserName] = useState<string | null>(null);
+  const { tier, expiresAt, canUpgrade } = useSubscriptionStatus();
 
   useEffect(() => {
     router.prefetch("/");
@@ -34,6 +37,24 @@ const Header = () => {
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
+  };
+
+  const getSubscriptionBadge = () => {
+    if (!user) return null;
+
+    switch (tier) {
+      case "trial":
+        const daysLeft = Math.ceil(
+          (new Date(expiresAt!).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+        );
+        return `Trial (${daysLeft} days left)`;
+      case "monthly":
+        return "Monthly Plan";
+      case "annual":
+        return "Annual Plan";
+      default:
+        return null;
+    }
   };
 
   return (
@@ -64,10 +85,24 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+
         <div className="flex items-center space-x-4">
           {user ? (
             <>
               <span className="mr-4">Welcome, {userName}</span>
+              {getSubscriptionBadge() && (
+                <span className="text-sm text-muted-foreground mr-4">
+                  {getSubscriptionBadge()}
+                </span>
+              )}
+              {canUpgrade && tier !== "annual" && (
+                <Button
+                  variant="outline"
+                  className="bg-primary/10 hover:bg-primary/20 text-primary"
+                >
+                  <SubscriptionUpgrade />
+                </Button>
+              )}
               <Button onClick={handleSignOut}>Sign Out</Button>
             </>
           ) : (
@@ -84,6 +119,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

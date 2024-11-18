@@ -33,19 +33,27 @@ export async function POST(request: Request) {
     }
 
     if (user) {
-      // Add trial period for new user
       const trialEnd = new Date();
-      trialEnd.setDate(trialEnd.getDate() + 2); // 2 days from now
+      trialEnd.setDate(trialEnd.getDate() + 2);
+      const now = new Date().toISOString();
 
-      const { error: trialError } = await supabase
-        .from('trial_periods')
+      const { error: subscriptionError } = await supabase
+        .from('subscriptions')
         .insert({
           user_id: user.id,
+          status: 'active',
+          trial_start: now,
           trial_end: trialEnd.toISOString(),
+          current_period_start: now,
+          current_period_end: trialEnd.toISOString(),
+          price_id: 'trial',
+          quantity: 1,
+          created_at: now,
+          cancel_at_period_end: false
         });
 
-      if (trialError) {
-        console.error('Error creating trial period:', trialError);
+      if (subscriptionError) {
+        console.error('Error creating subscription:', subscriptionError);
       }
     }
 

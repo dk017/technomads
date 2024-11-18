@@ -43,23 +43,32 @@ const PricingSection: React.FC<PricingSectionProps> = ({
       price: "$5",
       period: "week",
       highlight: false,
-      priceId: process.env.NEXT_PUBLIC_WEEKLY_PRICE_ID,
+      priceId: process.env.NEXT_PUBLIC_WEEKLY_PRICE_ID || "",
     },
     {
       name: "Monthly",
       price: "$20",
       period: "month",
       highlight: true,
-      priceId: process.env.NEXT_PUBLIC_MONTHLY_PRICE_ID,
+      priceId: process.env.NEXT_PUBLIC_MONTHLY_PRICE_ID || "",
     },
     {
       name: "Annual",
       price: "$80",
       period: "year",
       highlight: false,
-      priceId: process.env.NEXT_PUBLIC_ANNUAL_PRICE_ID,
+      priceId: process.env.NEXT_PUBLIC_ANNUAL_PRICE_ID || "",
     },
   ];
+
+  const handleSubscribeClick = async (priceId: string) => {
+    try {
+      await onSubscribe(priceId);
+    } catch (error) {
+      console.error("Subscription error:", error);
+      alert("Failed to initiate checkout. Please try again.");
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
@@ -101,7 +110,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
             <CardFooter className="flex justify-center pb-6">
               <Button
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                onClick={() => plan.priceId && onSubscribe(plan.priceId)}
+                onClick={() => handleSubscribeClick(plan.priceId)}
                 disabled={isLoading}
               >
                 Get Started

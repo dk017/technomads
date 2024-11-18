@@ -1,39 +1,48 @@
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
 import { createClient } from '@/app/utils/supabase/server';
-export const runtime = 'edge'; // Add this line
+import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
   const supabase = createClient();
-  if (code) {
 
+  if (code) {
     try {
       const { data: { user }, error: authError } = await supabase.auth.exchangeCodeForSession(code);
 
       if (authError) throw authError;
 
       if (user) {
-        // Check if user already has a trial period
-        const { data: existingTrial } = await supabase
-          .from('trial_periods')
+        // Check if user already has an active subscription
+        const { data: existingSubscription } = await supabase
+          .from('subscriptions')
           .select('id')
           .eq('user_id', user.id)
+          .eq('status', 'active')
           .single();
 
-        if (!existingTrial) {
-          // Create trial period for new OAuth user
+        if (!existingSubscription) {
           const trialEnd = new Date();
           trialEnd.setDate(trialEnd.getDate() + 2);
+          const now = new Date().toISOString();
 
-          await supabase
-            .from('trial_periods')
+          const { error: subscriptionError } = await supabase
+            .from('subscriptions')
             .insert({
               user_id: user.id,
+              status: 'active',
+              price_id: 'trial',
+              quantity: 1,
+              trial_start: now,
               trial_end: trialEnd.toISOString(),
-              is_active: true
+              current_period_start: now,
+              current_period_end: trialEnd.toISOString(),
+              created_at: now,
+              cancel_at_period_end: false
             });
+
+          console.log('Subscription creation:', subscriptionError ? 'Failed' : 'Success');
+          if (subscriptionError) console.error('Subscription creation error:', subscriptionError);
         }
       }
     } catch (error) {
@@ -41,6 +50,5 @@ export async function GET(request: Request) {
     }
   }
 
-  // Redirect to the jobs page after successful signup
   return NextResponse.redirect(new URL('/jobs', requestUrl.origin));
 }

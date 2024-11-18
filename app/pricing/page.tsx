@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Shield, Clock, Globe } from "lucide-react";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
 import FAQ from "@/components/FAQ";
+import { createClient } from "@/app/utils/supabase/client";
 
 export default function PricingPage() {
   const { user } = useAuth();
@@ -24,14 +25,28 @@ export default function PricingPage() {
       console.error("Stripe publishable key is not defined");
       return;
     }
+    const supabase = createClient();
+    const {
+      data: { session: authSession },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !authSession?.access_token) {
+      throw new Error("Authentication required");
+    }
 
     try {
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authSession.access_token}`,
+        },
         credentials: "include",
         body: JSON.stringify({ priceId }),
       });
+
+      console.log("Response:", response);
 
       if (!response.ok) {
         const errorData = await response.json();

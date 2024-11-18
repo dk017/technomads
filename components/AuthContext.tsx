@@ -1,68 +1,55 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/app/utils/supabase/client";
-import { useRouter } from "next/navigation";
 
-type AuthContextType = {
+interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  isInitialized: boolean;
-};
+}
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  isLoading: true,
+});
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const router = useRouter();
+  const supabase = createClient();
 
   useEffect(() => {
-    const supabase = createClient();
-    const logAuthFlow = (step: string, data: any) => {
-      const logs = JSON.parse(localStorage.getItem("authFlow") || "[]");
-      logs.push({ timestamp: new Date().toISOString(), step, data });
-      localStorage.setItem("authFlow", JSON.stringify(logs));
-    };
-
-    logAuthFlow("auth-context-init", { pathname: window.location.pathname });
-
-    // Initial session check
     const initializeAuth = async () => {
       try {
+        // Get initial session
         const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        logAuthFlow("initial-user-check", { hasUser: !!user });
-        setUser(user);
+          data: { session },
+        } = await supabase.auth.getSession();
+        setUser(session?.user ?? null);
+
+        // Set up auth state listener
+        const {
+          data: { subscription },
+        } = supabase.auth.onAuthStateChange(async (_event, session) => {
+          setUser(session?.user ?? null);
+        });
+
+        return () => {
+          subscription.unsubscribe();
+        };
       } catch (error) {
-        logAuthFlow("initial-user-check-error", { error });
+        console.error("Auth initialization error:", error);
       } finally {
         setIsLoading(false);
-        setIsInitialized(true);
       }
     };
 
     initializeAuth();
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      logAuthFlow("auth-state-change", { event, hasSession: !!session });
-      setUser(session?.user ?? null);
-      setIsLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, isInitialized }}>
+    <AuthContext.Provider value={{ user, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
@@ -70,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;

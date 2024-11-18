@@ -17,6 +17,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import debounce from "lodash/debounce";
 export const runtime = "edge"; // Add this line
 
+import { createClient } from "@/app/utils/supabase/client";
 // Type definitions
 interface FilterParams {
   location: string;
@@ -56,8 +57,7 @@ const generateHeaderText = (filters: FilterParams, jobCount: number) => {
 
 export default function JobsPage() {
   const { user, isLoading: authLoading } = useAuth();
-  const { isSubscribed, isLoading: subscriptionLoading } =
-    useSubscription(user);
+  const { isSubscribed, isLoading: subscriptionLoading } = useSubscription();
   const { isTrialActive, isLoading: trialLoading } = useTrialStatus();
 
   const pathname = usePathname();
@@ -67,9 +67,21 @@ export default function JobsPage() {
   // Abort controller ref for cleanup
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Loading states
-  const isAccessLoading = authLoading || subscriptionLoading || trialLoading;
-  const showAllJobs = isSubscribed || isTrialActive;
+  // Memoize these values to prevent unnecessary re-renders
+  const isAccessLoading = useMemo(
+    () => authLoading || subscriptionLoading || trialLoading,
+    [authLoading, subscriptionLoading, trialLoading]
+  );
+
+  const showAllJobs = useMemo(
+    () => isSubscribed || isTrialActive,
+    [isSubscribed, isTrialActive]
+  );
+
+  const canAccessAllJobs = useMemo(
+    () => isSubscribed || isTrialActive,
+    [isSubscribed, isTrialActive]
+  );
 
   // State for filters
   const [filters, setFilters] = useState<FilterParams>(() => ({
@@ -89,6 +101,19 @@ export default function JobsPage() {
     isLoadingMore,
     setJobs,
   } = useJobs(showAllJobs);
+
+  // Add this effect to refetch when subscription status changes
+  useEffect(() => {
+    if (!isAccessLoading) {
+      fetchJobs(filters, 1);
+    }
+  }, [
+    isSubscribed,
+    isTrialActive,
+    isAccessLoading,
+    fetchJobs,
+    JSON.stringify(filters),
+  ]);
 
   // Debounced filter change handler
   const debouncedFilterChange = useMemo(
@@ -177,17 +202,27 @@ export default function JobsPage() {
       router.push("/login");
       return;
     }
-
+    const supabase = createClient();
     const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
     if (!stripeKey) {
       console.error("Stripe publishable key is not defined");
       return;
     }
+    const {
+      data: { session: authSession },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
+    if (sessionError || !authSession?.access_token) {
+      throw new Error("Authentication required");
+    }
     try {
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authSession.access_token}`,
+        },
         credentials: "include",
         body: JSON.stringify({ priceId }),
       });
@@ -214,7 +249,11 @@ export default function JobsPage() {
   };
 
   const isInitialLoading = jobsLoading && jobs.length === 0;
-  const canAccessAllJobs = isSubscribed || isTrialActive;
+  const shouldShowPricing =
+    !isAccessLoading && !canAccessAllJobs && jobCount > FREE_USER_LIMIT;
+
+  // Remove or comment out console.log statements in production
+  // console.log('Debug:', { totalJobCount, currentJobsLength, hasMore, canAccessAllJobs, showAllJobs });
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -247,25 +286,37 @@ export default function JobsPage() {
           <InfiniteScroll
             dataLength={jobs.length}
             next={loadMoreJobs}
-            hasMore={canAccessAllJobs ? hasMore : jobs.length < FREE_USER_LIMIT}
+            hasMore={
+              canAccessAllJobs
+                ? jobs.length < jobCount
+                : jobs.length < FREE_USER_LIMIT
+            }
             loader={
-              isLoadingMore && (
-                <div className="mt-4 space-y-4">
-                  {[...Array(3)].map((_, index) => (
-                    <JobSkeleton key={index} />
-                  ))}
-                </div>
-              )
+              <div className="mt-4 space-y-4">
+                {[...Array(3)].map((_, index) => (
+                  <JobSkeleton key={index} />
+                ))}
+              </div>
             }
             endMessage={
               <div className="text-center p-4 text-gray-400">
-                {jobs.length === 0
-                  ? "No jobs found matching your criteria"
-                  : !canAccessAllJobs && jobCount > FREE_USER_LIMIT
-                  ? `${
-                      jobCount - FREE_USER_LIMIT
-                    } more jobs available with subscription`
-                  : "No more jobs to load"}
+                {jobs.length === 0 ? (
+                  "No jobs found matching your criteria"
+                ) : !canAccessAllJobs && jobCount > FREE_USER_LIMIT ? (
+                  <div>
+                    <p>
+                      Showing {jobs.length} of {jobCount} jobs
+                    </p>
+                    <p>
+                      {jobCount - FREE_USER_LIMIT} more jobs available with
+                      subscription
+                    </p>
+                  </div>
+                ) : jobs.length >= jobCount ? (
+                  "All jobs loaded"
+                ) : (
+                  "Loading more jobs..."
+                )}
               </div>
             }
             scrollThreshold={0.8}
@@ -275,13 +326,13 @@ export default function JobsPage() {
               jobs={jobs}
               isVerified={!!user?.email_confirmed_at}
               user={user}
-              isLoading={false}
+              isLoading={jobsLoading}
             />
           </InfiniteScroll>
         )}
 
-        {!canAccessAllJobs && jobCount > FREE_USER_LIMIT && (
-          <div className="relative">
+        {shouldShowPricing && (
+          <div className="relative mt-8">
             <div
               className="absolute -top-40 left-0 w-full h-40 bg-gradient-to-b from-transparent to-background z-10"
               aria-hidden="true"

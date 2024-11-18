@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/app/utils/supabase/client';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-09-30.acacia", // Use the latest API version
+  apiVersion: "2024-10-28.acacia", // Use the latest API version
 });
 
 export async function POST(req: Request) {
@@ -24,7 +24,14 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      mode: 'subscription',
+      metadata: {
+        user_id: user.id // Make sure this is set
+      },
+      subscription_data: {
+        metadata: {
+          user_id: user.id // Also set it here for subscription
+        }
+      },
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/jobs?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/jobs`,
       client_reference_id: user.id,

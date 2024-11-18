@@ -1,27 +1,34 @@
 "use client";
-import { useTrialStatus } from "@/hooks/useTrialStatus";
-import { formatDistanceToNow } from "date-fns";
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+
+import { useSubscription } from "@/hooks/useSubscription";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export function TrialBanner() {
-  const { isTrialActive, trialEndsAt } = useTrialStatus();
-  const router = useRouter();
+  const { isSubscribed, isLoading } = useSubscription();
+  const [dismissed, setDismissed] = useState(false);
 
-  if (!isTrialActive || !trialEndsAt) return null;
+  if (isLoading || !isSubscribed || dismissed) {
+    return null;
+  }
 
   return (
-    <div className="bg-primary/10 p-2 text-center">
-      <p className="text-sm">
-        Trial expires in {formatDistanceToNow(trialEndsAt)}.{" "}
-        <Button
-          variant="link"
-          className="text-primary font-semibold"
-          onClick={() => router.push("/pricing")}
-        >
-          Upgrade now
-        </Button>
-      </p>
-    </div>
+    <Alert className="rounded-none border-b">
+      <AlertDescription className="flex items-center justify-between">
+        <span>
+          You&apos;re currently on a free trial. Upgrade to access all features.
+        </span>
+        <div className="flex gap-4">
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => setDismissed(true)}
+          >
+            Dismiss
+          </Button>
+        </div>
+      </AlertDescription>
+    </Alert>
   );
 }
