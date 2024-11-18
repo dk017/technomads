@@ -4,6 +4,10 @@ import { createClient } from "@/app/utils/supabase/client";
 import JobDetailPage from "@/components/JobDetailsPage";
 import { titleOptions } from "@/app/constants/titleOptions";
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   const supabase = createClient();
   const { data: jobs } = await supabase

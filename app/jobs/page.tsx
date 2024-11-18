@@ -107,13 +107,7 @@ export default function JobsPage() {
     if (!isAccessLoading) {
       fetchJobs(filters, 1);
     }
-  }, [
-    isSubscribed,
-    isTrialActive,
-    isAccessLoading,
-    fetchJobs,
-    JSON.stringify(filters),
-  ]);
+  }, [isSubscribed, isTrialActive, isAccessLoading, fetchJobs, filters]);
 
   // Debounced filter change handler
   const debouncedFilterChange = useMemo(
