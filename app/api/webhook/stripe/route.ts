@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createWebhookClient } from '@/app/utils/supabase/webhook-client';
-//export const runtime = 'edge'; // Add this line
+export const runtime = 'edge'; // Add this line
 
 
 

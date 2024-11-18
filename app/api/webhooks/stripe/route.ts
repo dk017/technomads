@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createWebhookClient } from '@/app/utils/supabase/webhook-client';
 import { headers } from 'next/headers';
+export const runtime = 'edge';
+
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('STRIPE_SECRET_KEY is not set');
