@@ -6,6 +6,8 @@ import { createClient } from "@/app/utils/supabase/client";
 import JobDetailPage from "@/components/JobDetailsPage";
 import { useEffect, useState } from "react";
 
+export const runtime = "edge";
+
 export default function JobPage({
   params,
 }: {
