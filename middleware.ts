@@ -4,16 +4,19 @@ import { updateSession } from '@/app/utils/supabase/middleware'
 import { createClient } from "@/app/utils/supabase/server"
 
 const publicRoutes = [
-  '/',
   '/login',
   '/signup',
   '/jobs',
   '/companies/.*/jobs/.*', // Updated regex for job details pages
   '/companies',
+  '/jobs/.*',  // Add this for job detail pages
+  '/[^/]+/jobs/[^/]+',  // Add this pattern for company job detail pages
+  '/companies/.*/jobs/.*',
   '/company/.*',
   '/api/.*',
   '/blog/.*',
   '/auth/callback',
+  '/pricing'
 ];
 
 const bypassRoutes = [
@@ -26,13 +29,16 @@ const bypassRoutes = [
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  console.log('Middleware - Processing request for:', pathname);
-
-  const isJobDetailsPage = pathname.match(/^\/companies\/[^/]+\/jobs\/[^/]+$/);
-  if (isJobDetailsPage) {
-    console.log('Middleware - Job details page detected:', pathname);
+  if (bypassRoutes.some(route => pathname.startsWith(route))) {
     return NextResponse.next();
   }
+
+  console.log('Middleware - Processing request for:', pathname);
+  if (pathname === '/') {
+    console.log('Middleware - Root path access');
+    return NextResponse.next();
+  }
+
 
   if (pathname === '/auth/callback') {
     console.log('Middleware - Processing auth callback');
@@ -50,6 +56,7 @@ export async function middleware(request: NextRequest) {
     pathname.match(new RegExp(`^${route}$`)));
 
   try {
+    if (pathname !== '/') {
     const response = await updateSession(request);
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -72,6 +79,8 @@ export async function middleware(request: NextRequest) {
     }
 
     return response;
+  }
+    return NextResponse.next();
   } catch (error) {
     console.error('Middleware - Error:', error);
     return NextResponse.redirect(new URL('/error', request.url));
@@ -80,7 +89,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-    '/companies/:companyName/jobs/:jobTitle*'
+    '/((?!_next/static|_next/image|favicon.ico).*)'
   ],
 }
