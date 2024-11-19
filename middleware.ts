@@ -1,3 +1,4 @@
+
 import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/app/utils/supabase/middleware'
 import { createClient } from "@/app/utils/supabase/server"
@@ -6,11 +7,10 @@ const publicRoutes = [
   '/',
   '/login',
   '/signup',
-  '/jobs/.*',
   '/jobs',
-  '/company/.*',
-  '/companies/.*',
+  '/companies/.*/jobs/.*', // Updated regex for job details pages
   '/companies',
+  '/company/.*',
   '/api/.*',
   '/blog/.*',
   '/auth/callback',
@@ -27,6 +27,12 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   console.log('Middleware - Processing request for:', pathname);
+
+  const isJobDetailsPage = pathname.match(/^\/companies\/[^/]+\/jobs\/[^/]+$/);
+  if (isJobDetailsPage) {
+    console.log('Middleware - Job details page detected:', pathname);
+    return NextResponse.next();
+  }
 
   if (pathname === '/auth/callback') {
     console.log('Middleware - Processing auth callback');
@@ -74,6 +80,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/companies/:companyName/jobs/:jobTitle*'
   ],
 }

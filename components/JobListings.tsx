@@ -18,12 +18,26 @@ import { JobSkeleton } from "@/components/JobSkeleton";
 import { Job } from "./types";
 
 function generateSlug(str: string): string {
+  if (!str) return "";
   return str
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "") // Remove non-word chars
-    .replace(/[\s_-]+/g, "-") // Replace spaces and underscores with hyphens
+    .trim()
+    .replace(/[\s_]+/g, "-") // Replace spaces and underscores with hyphens
+    .replace(/[^\w-]+/g, "") // Remove all non-word chars (except hyphens)
+    .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
     .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
 }
+
+// Inside JobListings component
+const generateJobUrl = (job: any) => {
+  const companySlug = job.company_name.toLowerCase().replace(/\s+/g, "-");
+  const jobSlug = job.job_slug.toLowerCase();
+  console.log("Generated URL:", `/companies/${companySlug}/jobs/${jobSlug}`);
+  //return `/companies/${companySlug}/jobs/${jobSlug}`;
+  return "/companies";
+};
+
+// In your render method, update the Link:
 
 interface JobListingsProps {
   jobs: Job[];
@@ -43,6 +57,17 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
         ))}
       </>
     );
+
+    const formatUrl = (url: string): string => {
+      if (!url) return "";
+
+      // If URL doesn't start with http:// or https://, add https://
+      if (!url.match(/^https?:\/\//i)) {
+        return `https://${url}`;
+      }
+
+      return url;
+    };
 
     return (
       <>
@@ -162,7 +187,7 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                           asChild
                         >
                           <Link
-                            href={`/companies/${generateSlug(
+                            href={`/${generateSlug(
                               job.company_name
                             )}/jobs/${generateSlug(job.job_slug)}`}
                           >
@@ -190,7 +215,7 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                             asChild
                           >
                             <a
-                              href={job.company_url}
+                              href={formatUrl(job.company_url)}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
