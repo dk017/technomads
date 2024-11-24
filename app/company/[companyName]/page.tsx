@@ -37,6 +37,9 @@ interface Job {
   experience: string;
   city: string;
   job_slug: string;
+  job_description: string;
+  job_requirements: string;
+  job_benefits: string;
   formatted_description: {
     sections: {
       title: string;
@@ -116,6 +119,13 @@ function CompanyJobsPage({ params }: { params: { companyName: string } }) {
           jobs={jobs.map((job) => ({
             ...job,
             skills: job.skills.split(",").map((skill) => skill.trim()),
+            job_description: job.job_description
+              ? job.job_description.split("\n")
+              : [],
+            job_requirements: job.job_requirements
+              ? job.job_requirements.split("\n")
+              : [],
+            job_benefits: job.job_benefits ? job.job_benefits.split("\n") : [],
           }))}
           isVerified={!!user?.email_confirmed_at}
           user={user}
