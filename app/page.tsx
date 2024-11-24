@@ -6,7 +6,14 @@ import JobListings from "@/components/JobListings";
 import JobExplorationSection from "@/components/JobExplorationSection";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import FAQSection from "@/components/FAQ";
-import { BriefcaseIcon, RocketIcon, GlobeIcon } from "lucide-react";
+import {
+  BriefcaseIcon,
+  RocketIcon,
+  GlobeIcon,
+  ShieldCheckIcon,
+  ClockIcon,
+  SearchCheckIcon,
+} from "lucide-react";
 import { useJobs } from "@/hooks/useJobs";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/app/utils/supabase/client";
@@ -222,10 +229,12 @@ export default function Home() {
     );
   }
 
+  const formattedJobCount = jobCount.toLocaleString();
+
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header Section */}
-      <HeaderSection />
+      <HeaderSection formattedJobCount={formattedJobCount} />
 
       {/* Job Filters */}
       <JobFilters
@@ -257,17 +266,21 @@ export default function Home() {
 }
 
 // Extracted components (define these at the bottom of the file or in separate files)
-const HeaderSection = () => (
+const HeaderSection = ({
+  formattedJobCount,
+}: {
+  formattedJobCount: string;
+}) => (
   <section className="mb-16">
     <h1 className="text-6xl font-semibold mb-8 text-center">
       Find Your Dream Remote Job
     </h1>
     <h2 className="mx-4 mt-6 mb-6 font-regular text-2xl  text-center">
-      Search 43,426 work from home jobs and get more job interviews
+      Search {formattedJobCount} work from home jobs and get more job interviews
     </h2>
 
     <div className="mx-4 mb-8 pt-6 flex justify-center">
-      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-center">
+      {/* <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-center">
         <div className="flex -space-x-2">
           {IMAGE_URLS.map((url, index) => (
             <div
@@ -298,6 +311,33 @@ const HeaderSection = () => (
             ))}
           </div>
           <span>Loved by 10,000+ remote workers</span>
+        </div>
+      </div> */}
+    </div>
+    <div className="mx-4 mb-8 pt-6 flex justify-center">
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-center">
+        <div className="flex items-center gap-6">
+          {/* Trust Badges */}
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-blue-50 rounded-full">
+              <ShieldCheckIcon className="w-6 h-6 text-blue-600" />
+            </div>
+            <span className="text-sm font-medium">Verified Jobs</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-green-50 rounded-full">
+              <ClockIcon className="w-6 h-6 text-green-600" />
+            </div>
+            <span className="text-sm font-medium">Daily Updates</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-purple-50 rounded-full">
+              <SearchCheckIcon className="w-6 h-6 text-purple-600" />
+            </div>
+            <span className="text-sm font-medium">Quality Checked</span>
+          </div>
         </div>
       </div>
     </div>

@@ -6,16 +6,25 @@ import { createClient } from "@/app/utils/supabase/client";
 
 interface AuthContextType {
   user: User | null;
+  isVerified: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   isLoading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   user: null,
+  isVerified: false,
+  signIn: async () => {},
+  signUp: async () => {},
+  signOut: async () => {},
   isLoading: true,
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = createClient();
 
@@ -48,8 +57,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     initializeAuth();
   }, []);
 
+  useEffect(() => {
+    setIsVerified(!!user?.email_confirmed_at);
+  }, [user]);
+
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isVerified,
+        signIn: async () => {},
+        signUp: async () => {},
+        signOut: async () => {},
+        isLoading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

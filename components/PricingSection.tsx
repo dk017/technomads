@@ -63,7 +63,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({
 
   const handleSubscribeClick = async (priceId: string) => {
     try {
-      await onSubscribe(priceId);
+      if (onSubscribe) {
+        await onSubscribe(priceId);
+      }
     } catch (error) {
       console.error("Subscription error:", error);
       alert("Failed to initiate checkout. Please try again.");

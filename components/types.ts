@@ -103,12 +103,15 @@ export interface Description {
     experience: string;
     city: string;
     job_slug: string;
-    formatted_description: {
-      sections: {
-        title: string;
-        items: string[];
-      }[];
-    };
+    job_description: string[];
+    job_requirements: string[];
+    job_benefits: string[];
+    // formatted_description: {
+    //   sections: {
+    //     title: string;
+    //     items: string[];
+    //   }[];
+    // };
   }
 
   export interface FilterParams {

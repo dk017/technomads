@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../BuilderKit-Starter"
+		},
+		{
+			"path": "../../findintern"
 		}
 	],
 	"settings": {}

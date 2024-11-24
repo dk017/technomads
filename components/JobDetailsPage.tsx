@@ -29,12 +29,9 @@ interface Job {
   experience: string;
   city: string;
   job_slug: string;
-  formatted_description: {
-    sections: {
-      title: string;
-      items: string[];
-    }[];
-  };
+  job_description: string[];
+  job_requirements: string[];
+  job_benefits: string[];
 }
 
 interface Company {
@@ -53,12 +50,26 @@ interface JobDetailPageProps {
 
 const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
   // Parse skills if they're a string
-  console.log("Job:", job, "Company:", company);
-  const skillsArray = Array.isArray(job.skills)
-    ? job.skills
-    : job.skills
-        ?.split(",")
-        .map((skill) => skill.trim().replace(/["\[\]]/g, "")) || [];
+  const parseStringToArray = (
+    str: string | string[] | null | undefined
+  ): string[] => {
+    if (!str) return [];
+    if (Array.isArray(str)) return str;
+
+    try {
+      // If it's a string representation of an array, parse it
+      const parsed = JSON.parse(str);
+      return Array.isArray(parsed) ? parsed : [str];
+    } catch {
+      // If parsing fails, return the string as a single item array
+      return [str];
+    }
+  };
+
+  const descriptionBullets = parseStringToArray(job.job_description);
+  const requirementsBullets = parseStringToArray(job.job_requirements);
+  const benefitsBullets = parseStringToArray(job.job_benefits);
+  const skillsArray = parseStringToArray(job.skills);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -110,12 +121,48 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Job Description */}
         <div className="lg:col-span-2">
-          <Card>
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">Job Description</h2>
-              <div className="prose prose-sm max-w-none dark:prose-invert">
-                {job.description}
+          <Card className="mt-6">
+            <CardContent className="p-6 space-y-8">
+              {/* Description Section */}
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Job Description</h2>
+                <div className="space-y-2">
+                  {descriptionBullets.map((description, index) => (
+                    <div key={index} className="flex items-baseline gap-2">
+                      <span className="text-primary">•</span>
+                      <p className="text-muted-foreground">{description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Requirements Section */}
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Requirements</h2>
+                <div className="space-y-2">
+                  {requirementsBullets.map((requirement, index) => (
+                    <div key={index} className="flex items-baseline gap-2">
+                      <span className="text-primary">•</span>
+                      <p className="text-muted-foreground">{requirement}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Benefits Section */}
+              {benefitsBullets.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-semibold mb-4">Benefits</h2>
+                  <div className="space-y-2">
+                    {benefitsBullets.map((benefit, index) => (
+                      <div key={index} className="flex items-baseline gap-2">
+                        <span className="text-primary">•</span>
+                        <p className="text-muted-foreground">{benefit}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

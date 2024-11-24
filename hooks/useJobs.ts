@@ -33,15 +33,19 @@ async function fetchJobsFromAPI(
   }
 
   if (filters.keyword) {
-    query = query.or(`
-      title.ilike.%${filters.keyword}%,
-      description.ilike.%${filters.keyword}%,
-      company_name.ilike.%${filters.keyword}%
-    `);
+    query = query.or([
+      `title.ilike.%${filters.keyword}%`,
+      `job_description.ilike.%${filters.keyword}%`,
+      `company_name.ilike.%${filters.keyword}%`,
+      `skills.ilike.%${filters.keyword}%`
+    ].join(','));
   }
 
   if (filters.title) {
-    query = query.ilike('title', `%${filters.title}%`);
+    query = query.or([
+      `title.ilike.%${filters.title}%`,
+      `skills.ilike.%${filters.title}%`
+    ].join(','));
   }
 
   if (filters.minSalary) {
