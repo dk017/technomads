@@ -3,6 +3,7 @@
 import { AuthProvider } from "./AuthContext";
 import { ThemeProvider } from "./ThemeProvider";
 import { Header } from "./Header";
+import { SubscriptionProvider } from "@/app/contexts/SubscriptionContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -13,10 +14,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       disableTransitionOnChange
     >
       <AuthProvider>
-        <div className="min-h-screen bg-background">
-          <Header />
-          <main>{children}</main>
-        </div>
+        <SubscriptionProvider>
+          <div className="min-h-screen bg-background">
+            <Header />
+            <main>{children}</main>
+          </div>
+        </SubscriptionProvider>
       </AuthProvider>
     </ThemeProvider>
   );

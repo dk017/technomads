@@ -4,7 +4,14 @@ import { useAuth } from "@/components/AuthContext";
 import JobFilters from "@/components/JobFilters";
 import JobListings from "@/components/JobListings";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useCallback, useEffect, useState, useMemo, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useContext,
+} from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { JobSkeleton } from "@/components/JobSkeleton";
@@ -16,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { useSubscription } from "@/hooks/useSubscription";
 import debounce from "lodash/debounce";
 export const runtime = "edge"; // Add this line
+import { useSubscriptionContext } from "@/app/contexts/SubscriptionContext";
 
 import { createClient } from "@/app/utils/supabase/client";
 // Type definitions
@@ -57,8 +65,17 @@ const generateHeaderText = (filters: FilterParams, jobCount: number) => {
 
 export default function JobsPage() {
   const { user, isLoading: authLoading } = useAuth();
-  const { isSubscribed, isLoading: subscriptionLoading } = useSubscription();
+  const { isSubscribed, isLoading: subscriptionLoading } =
+    useSubscriptionContext();
   const { isTrialActive, isLoading: trialLoading } = useTrialStatus();
+
+  const accessState = useMemo(
+    () => ({
+      isLoading: subscriptionLoading || trialLoading,
+      hasAccess: isSubscribed || isTrialActive,
+    }),
+    [subscriptionLoading, trialLoading, isSubscribed, isTrialActive]
+  );
 
   const pathname = usePathname();
   const searchParams = useSearchParams();

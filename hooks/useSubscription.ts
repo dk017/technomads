@@ -1,60 +1,76 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/components/AuthContext';
 import { createClient } from '@/app/utils/supabase/client';
-
+// hooks/useSubscription.ts
 export const useSubscription = () => {
   const { user } = useAuth();
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [state, setState] = useState({
+    isSubscribed: false,
+    isLoading: true,
+    lastChecked: 0,
+  });
+
+  // Add request tracking
+  const requestRef = useRef<AbortController | null>(null);
+  const CACHE_DURATION = 5000; // 5 seconds cache
 
   useEffect(() => {
-    const abortController = new AbortController();
-    let isMounted = true;
-
     const checkSubscription = async () => {
+      // Cancel any existing request
+      if (requestRef.current) {
+        requestRef.current.abort();
+      }
+
+      // If no user, return early
       if (!user) {
-        if (isMounted) {
-          setIsSubscribed(false);
-          setIsLoading(false);
-        }
+        setState(prev => ({ ...prev, isSubscribed: false, isLoading: false }));
         return;
       }
 
+      // Check cache
+      const now = Date.now();
+      if (now - state.lastChecked < CACHE_DURATION) {
+        return;
+      }
+
+      // Create new abort controller
+      requestRef.current = new AbortController();
+
       try {
         const supabase = createClient();
-
-        // Get the most recent active subscription
-        const { data: subscription, error } = await supabase
+        const { data, error } = await supabase
           .from('subscriptions')
           .select('*')
           .eq('user_id', user.id)
           .eq('status', 'active')
-          .order('created_at', { ascending: false })
-          .limit(1)
           .maybeSingle();
 
-        if (isMounted) {
-          setIsSubscribed(!!subscription);
-          setIsLoading(false);
-        }
+        if (error) throw error;
+
+        setState({
+          isSubscribed: !!data,
+          isLoading: false,
+          lastChecked: now,
+        });
       } catch (error) {
         console.error('Subscription check error:', error);
-        if (isMounted) {
-          setIsSubscribed(false);
-          setIsLoading(false);
-        }
+        setState(prev => ({ ...prev, isLoading: false }));
       }
     };
 
     checkSubscription();
 
     return () => {
-      isMounted = false;
-      abortController.abort();
+      if (requestRef.current) {
+        requestRef.current.abort();
+      }
     };
   }, [user?.id]); // Only depend on user.id, not the entire user object
 
-  return { isSubscribed, isLoading };
+  return {
+    isSubscribed: state.isSubscribed,
+    isLoading: state.isLoading,
+  };
 };

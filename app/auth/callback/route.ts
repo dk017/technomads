@@ -6,7 +6,8 @@ export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
   const supabase = createClient();
-
+  console.log("auth/callback");
+  console.log(code);
   if (code) {
     try {
       const { data: { user }, error: authError } = await supabase.auth.exchangeCodeForSession(code);

@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
       return NextResponse.json({ error: errorMessage }, { status: statusCode });
     }
-
+    console.log('User:', user);
     if (user) {
       const trialEnd = new Date();
       trialEnd.setDate(trialEnd.getDate() + 2);

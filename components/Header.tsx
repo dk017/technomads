@@ -31,8 +31,6 @@ export function Header() {
         user.email?.split("@")[0] ||
         "User";
       setUserName(name);
-
-      // Prefetch authenticated routes
     } else {
       setUserName(null);
     }
@@ -45,13 +43,13 @@ export function Header() {
 
   const getSubscriptionBadge = () => {
     if (!user) return null;
-
+    if (tier === "trial") {
+      const daysLeft = Math.ceil(
+        (new Date(expiresAt!).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      );
+      return daysLeft > 0 ? `Trial (${daysLeft} days left)` : null;
+    }
     switch (tier) {
-      case "trial":
-        const daysLeft = Math.ceil(
-          (new Date(expiresAt!).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-        );
-        return `Trial (${daysLeft} days left)`;
       case "monthly":
         return "Monthly Plan";
       case "annual":

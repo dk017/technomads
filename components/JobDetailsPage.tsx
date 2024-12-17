@@ -121,7 +121,7 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Job Description */}
         <div className="lg:col-span-2">
-          <Card className="mt-6">
+          <Card className="mt-6 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="p-6 space-y-8">
               {/* Description Section */}
               <div>
@@ -169,7 +169,7 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
 
         {/* Company Sidebar */}
         <div className="lg:col-span-1">
-          <Card>
+          <Card className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="p-6">
               <div className="flex flex-col items-center mb-4">
                 <div className="relative w-24 h-24 mb-4">

@@ -62,20 +62,6 @@ export default function Home() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isCheckingSubscription, setIsCheckingSubscription] = useState(false);
 
-  // Navigation
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
-
-  // Filters state
-  const [filters, setFilters] = useState<FilterParams>(() => ({
-    location: searchParams?.get("location") || "",
-    keyword: searchParams?.get("keyword") || "",
-    title: searchParams?.get("title") || "",
-    minSalary: searchParams?.get("minSalary") || "",
-  }));
-
-  // Memoized state derivations
   const loadingState = useMemo(
     () => ({
       isLoading: authLoading || trialLoading || isCheckingSubscription,
@@ -91,6 +77,18 @@ export default function Home() {
     ]
   );
 
+  // Navigation
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Filters state
+  const [filters, setFilters] = useState<FilterParams>(() => ({
+    location: searchParams?.get("location") || "",
+    keyword: searchParams?.get("keyword") || "",
+    title: searchParams?.get("title") || "",
+    minSalary: searchParams?.get("minSalary") || "",
+  }));
   // Jobs fetch and management
   const {
     jobs,

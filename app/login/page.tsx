@@ -80,6 +80,8 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     const supabase = createClient();
+    console.log("handleGoogleLogin");
+    console.log(process.env.NEXT_PUBLIC_SITE_URL);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",

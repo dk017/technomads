@@ -16,7 +16,7 @@ export function useTrialStatus(): TrialStatus {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function checkTrialStatus() {
+    const checkTrialStatus = async () => {
       if (!user) {
         setIsTrialActive(false);
         setTrialEndsAt(null);
@@ -36,9 +36,10 @@ export function useTrialStatus(): TrialStatus {
 
         if (subscription) {
           const trialEnd = new Date(subscription.trial_end);
-          const isActive = subscription.status === 'active' && trialEnd > new Date();
+          // Only check trial status, don't modify the subscription
+          const isTrialActive = trialEnd > new Date();
 
-          setIsTrialActive(isActive);
+          setIsTrialActive(isTrialActive);
           setTrialEndsAt(trialEnd);
         } else {
           setIsTrialActive(false);
@@ -51,7 +52,7 @@ export function useTrialStatus(): TrialStatus {
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     checkTrialStatus();
   }, [user]);

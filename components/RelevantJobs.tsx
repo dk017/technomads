@@ -80,7 +80,10 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({
     <div className="mt-8 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
       <div className="space-y-4">
         {displayedJobs.map((job) => (
-          <Card key={job.id}>
+          <Card
+            key={job.id}
+            className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center">
