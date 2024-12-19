@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/app/utils/supabase/client';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-10-28.acacia", // Use the latest API version
+  apiVersion: "2024-12-18.acacia", // Use the latest API version
 });
 
 export async function POST(req: Request) {
