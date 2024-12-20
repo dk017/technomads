@@ -388,6 +388,11 @@ export async function POST(request: Request) {
 
       case 'invoice.payment_succeeded':
         const invoice = event.data.object as Stripe.Invoice;
+        const userId = invoice.subscription_details?.metadata?.user_id;
+
+        if (!userId) {
+          throw new Error('No user_id found in subscription metadata');
+        }
         await handleInvoicePaymentSucceeded(invoice, supabase);
         break;
 
