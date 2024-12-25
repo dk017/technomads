@@ -4,6 +4,7 @@ import { AuthProvider } from "./AuthContext";
 import { ThemeProvider } from "./ThemeProvider";
 import { Header } from "./Header";
 import { SubscriptionProvider } from "@/app/contexts/SubscriptionContext";
+import { EmailCaptureWrapper } from "./EmailCaptureWrapper";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <div className="min-h-screen bg-background">
             <Header />
             <main>{children}</main>
+            <EmailCaptureWrapper />
           </div>
         </SubscriptionProvider>
       </AuthProvider>

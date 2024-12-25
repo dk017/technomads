@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import { EmailCaptureWrapper } from "@/components/EmailCaptureWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 

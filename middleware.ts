@@ -16,7 +16,15 @@ const publicRoutes = [
   '/api/.*',
   '/blog/.*',
   '/auth/callback',
-  '/pricing'
+  '/pricing',
+  '/blog',
+  '/resources',
+  '/about',
+  '/contact',
+  '/privacy',
+  '/terms',
+  '/faq',
+  '/support',
 ];
 
 const bypassRoutes = [
