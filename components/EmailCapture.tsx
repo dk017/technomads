@@ -19,7 +19,6 @@ interface EmailCaptureProps {
 export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
   const [open, setOpen] = useState(true);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -31,7 +30,7 @@ export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({ email }),
       });
 
       if (!response.ok) throw new Error("Subscription failed");
@@ -75,14 +74,6 @@ export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
               Join thousands of tech professionals getting the best remote jobs
               weekly.
             </p>
-            <Input
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full"
-            />
             <Input
               type="email"
               placeholder="Enter your email"
