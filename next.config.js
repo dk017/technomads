@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['technomads.pages.dev'],
+    domains: ['technomads.pages.dev', 'onlyremotejobs.me']
   },
 };
 
