@@ -28,8 +28,6 @@ import {
 } from "@/components/ui/select";
 
 interface JobFiltersProps {
-  user: User | null;
-  isVerified: boolean;
   onFilterChange: (
     location: string,
     keywords: string,
@@ -54,13 +52,11 @@ const salaryRanges = [
 
 const JobFilters: React.FC<JobFiltersProps> = memo(
   ({
-    user,
-    isVerified,
     onFilterChange,
     initialLocation,
     initialKeywords,
     initialTitle,
-    initialSalary = "",
+    initialSalary = "0",
   }) => {
     const [location, setLocation] = useState(initialLocation);
     const [keywords, setKeywords] = useState(initialKeywords);
@@ -135,7 +131,7 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
       (value: string) => {
         if (!isUpdatingFromProps.current) {
           setSalary(value);
-          console.log('Salary changed to:', value);
+          console.log("Salary changed to:", value);
           debouncedFilterChange(location, keywords, title, value);
         }
       },
