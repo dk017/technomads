@@ -6,11 +6,6 @@ import { createClient } from "@/app/utils/supabase/client";
 import JobDetailPage from "@/components/JobDetailsPage";
 import { useEffect, useState } from "react";
 import { Job } from "@/components/types";
-import { useAuth } from "@/components/AuthContext";
-import { useTrialStatus } from "@/hooks/useTrialStatus"; // Add this
-import { loadStripe } from "@stripe/stripe-js"; // Add this
-
-export const runtime = "edge";
 
 interface ScoredJob extends Job {
   relevanceScore: number;
@@ -23,46 +18,6 @@ interface JobPageProps {
 export default function JobPage({ params }: JobPageProps) {
   const [jobData, setJobData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { user, isVerified } = useAuth();
-  const { isTrialActive } = useTrialStatus(); // Add this
-
-  const handleSubscribe = async (priceId: string) => {
-    try {
-      const supabase = createClient();
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (!session) {
-        throw new Error("No session found");
-      }
-
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          priceId,
-          userId: session.user.id,
-        }),
-      });
-
-      const { sessionId } = await response.json();
-      const stripe = await loadStripe(
-        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-      );
-
-      if (stripe) {
-        const { error } = await stripe.redirectToCheckout({ sessionId });
-        if (error) {
-          console.error("Error redirecting to checkout:", error);
-        }
-      }
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
-    }
-  };
 
   useEffect(() => {
     async function fetchJobDetails() {
@@ -103,7 +58,7 @@ export default function JobPage({ params }: JobPageProps) {
           .single();
 
         // Fetch related jobs
-        const relatedJobs = await getRelatedJobs(job, isVerified);
+        const relatedJobs = await getRelatedJobs(job);
 
         setJobData({
           job,
@@ -119,14 +74,13 @@ export default function JobPage({ params }: JobPageProps) {
         });
       } catch (error) {
         console.error("Error:", error);
-        notFound();
       } finally {
         setIsLoading(false);
       }
     }
 
     fetchJobDetails();
-  }, [params.companyName, params.jobTitle, isVerified]);
+  }, [params.companyName, params.jobTitle]);
 
   if (isLoading) {
     return (
@@ -165,11 +119,6 @@ export default function JobPage({ params }: JobPageProps) {
               city: job.city || "Not specified",
               salary: job.salary || "Not specified",
             }))}
-            isVerified={isVerified}
-            user={user}
-            jobCount={relatedJobs.length}
-            isTrialActive={isTrialActive}
-            handleSubscribe={handleSubscribe}
           />
         </div>
       )}
@@ -177,7 +126,7 @@ export default function JobPage({ params }: JobPageProps) {
   );
 }
 
-const getRelatedJobs = async (job: Job, isVerified: boolean) => {
+const getRelatedJobs = async (job: Job) => {
   const supabase = createClient();
   try {
     const titleKeywords = job.title
@@ -198,15 +147,12 @@ const getRelatedJobs = async (job: Job, isVerified: boolean) => {
       .map((keyword) => `title.ilike.%${keyword}%`)
       .join(",");
 
-    // Apply limit based on verification status
-    const limit = isVerified ? 10 : 5;
-
     const { data: relatedJobs, error } = await supabase
       .from("jobs_tn")
       .select("*")
       .neq("id", job.id)
       .or(titleConditions)
-      .limit(limit);
+      .limit(5);
 
     if (error) {
       console.error("Error in related jobs query:", error);
@@ -222,10 +168,10 @@ const getRelatedJobs = async (job: Job, isVerified: boolean) => {
       relevanceScore: calculateRelevanceScore(job, relatedJob),
     }));
 
-    // Sort by relevance but don't slice for verified users
+    // Sort by relevance
     const sortedJobs = scoredJobs
       .sort((a, b) => b.relevanceScore - a.relevanceScore)
-      .slice(0, isVerified ? 10 : 5);
+      .slice(0, 5);
 
     console.log("Returning sorted related jobs:", sortedJobs.length);
     return sortedJobs;
@@ -235,7 +181,6 @@ const getRelatedJobs = async (job: Job, isVerified: boolean) => {
   }
 };
 
-// Separate function to calculate relevance
 const calculateRelevanceScore = (sourceJob: Job, relatedJob: Job): number => {
   let score = 0;
 

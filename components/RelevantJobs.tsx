@@ -11,9 +11,7 @@ import {
   BuildingIcon,
   MapPinIcon,
 } from "lucide-react";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
-import PricingSection from "./PricingSection";
 
 interface RelatedJob {
   id: number;
@@ -33,11 +31,6 @@ interface RelatedJob {
 
 interface RelatedJobsProps {
   jobs: RelatedJob[];
-  isVerified?: boolean;
-  user?: any;
-  jobCount: number;
-  isTrialActive?: boolean;
-  handleSubscribe?: (priceId: string) => Promise<void>;
 }
 
 function generateSlug(str: string): string {
@@ -48,38 +41,15 @@ function generateSlug(str: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-const RelatedJobs: React.FC<RelatedJobsProps> = ({
-  jobs,
-  isVerified,
-  user,
-  jobCount,
-  isTrialActive,
-  handleSubscribe,
-}) => {
+const RelatedJobs: React.FC<RelatedJobsProps> = ({ jobs }) => {
   const router = useRouter();
-
-  const showAllJobs = isVerified || isTrialActive;
-  const canAccessAllJobs = isVerified || isTrialActive;
-  const FREE_LIMIT = 5;
-
-  console.log({
-    totalJobs: jobs.length,
-    showAllJobs,
-    canAccessAllJobs,
-    isVerified,
-    isTrialActive,
-    user: !!user,
-  });
-
-  const shouldShowPricing = !canAccessAllJobs && jobs.length > FREE_LIMIT;
-  const displayedJobs = showAllJobs ? jobs : jobs.slice(0, FREE_LIMIT);
 
   if (jobs.length === 0) return null;
 
   return (
     <div className="mt-8 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
       <div className="space-y-4">
-        {displayedJobs.map((job) => (
+        {jobs.map((job) => (
           <Card
             key={job.id}
             className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -169,63 +139,6 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({
             </CardContent>
           </Card>
         ))}
-
-        <div className="text-center p-4 text-gray-400">
-          {!canAccessAllJobs && jobs.length > FREE_LIMIT ? (
-            <div>
-              <p>
-                Showing {displayedJobs.length} of {jobs.length} jobs
-              </p>
-              <p>
-                {jobs.length - FREE_LIMIT} more jobs available with subscription
-              </p>
-            </div>
-          ) : null}
-        </div>
-
-        {shouldShowPricing && (
-          <div className="relative mt-8">
-            <div
-              className="absolute -top-40 left-0 w-full h-40 bg-gradient-to-b from-transparent to-background z-10"
-              aria-hidden="true"
-            />
-            <div className="relative z-20">
-              {!user ? (
-                <div className="text-center mb-8">
-                  <p className="text-2xl font-bold text-primary">
-                    Start Your Free Trial
-                  </p>
-                  <p className="text-xl text-primary mt-2">
-                    Sign up now to get 2 days of full access to all jobs
-                  </p>
-                  <Button
-                    onClick={() => router.push("/signup")}
-                    className="mt-4"
-                  >
-                    Start Free Trial
-                  </Button>
-                </div>
-              ) : (
-                !isTrialActive && (
-                  <>
-                    <div className="text-center mb-8">
-                      <p className="text-2xl font-bold text-primary">
-                        +{jobs.length - FREE_LIMIT} More Jobs Available!
-                      </p>
-                      <p className="text-xl text-primary mt-2">
-                        Subscribe now to unlock all job opportunities
-                      </p>
-                    </div>
-                    <PricingSection
-                      onSubscribe={handleSubscribe!}
-                      isLoading={false}
-                    />
-                  </>
-                )
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

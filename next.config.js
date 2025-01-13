@@ -1,8 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   images: {
-    domains: ['technomads.pages.dev', 'onlyremotejobs.me']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'rabltqwnbbaymaemuvoo.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
+  experimental: {
+    serverActions: true,
   },
 };
 

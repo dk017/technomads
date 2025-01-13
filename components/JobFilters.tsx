@@ -70,14 +70,12 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
     const debouncedFilterChange = useMemo(
       () =>
         debounce((loc: string, kw: string, t: string, sal: string) => {
-          if (!isUpdatingFromProps.current) {
-            onFilterChange(loc, kw, t, sal);
-          }
-        }, 300),
+          onFilterChange(loc, kw, t, sal);
+        }, 500), // 500ms delay
       [onFilterChange]
     );
 
-    // Cleanup
+    // Cleanup on unmount
     useEffect(() => {
       return () => {
         debouncedFilterChange.cancel();

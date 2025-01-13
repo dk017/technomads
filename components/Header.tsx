@@ -13,15 +13,6 @@ export function Header() {
     <ul className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
       <li>
         <Link
-          href="/jobs"
-          className="text-foreground hover:text-primary block py-2 lg:py-0"
-          onClick={() => setIsOpen(false)}
-        >
-          Jobs
-        </Link>
-      </li>
-      <li>
-        <Link
           href="/companies"
           className="text-foreground hover:text-primary block py-2 lg:py-0"
           onClick={() => setIsOpen(false)}

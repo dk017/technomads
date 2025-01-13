@@ -94,7 +94,7 @@ export interface Description {
     company_size: string;
     employment_type: string;
     salary: string;
-    logo_url: string;
+    logo_filename: string;
     job_url: string;
     short_description: string;
     description: string;
@@ -106,6 +106,7 @@ export interface Description {
     job_description: string[];
     job_requirements: string[];
     job_benefits: string[];
+    created_at: string | Date;
     // formatted_description: {
     //   sections: {
     //     title: string;

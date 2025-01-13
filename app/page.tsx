@@ -2,21 +2,14 @@
 
 import JobFilters from "@/components/JobFilters";
 import JobListings from "@/components/JobListings";
-import FAQSection from "@/components/FAQ";
-import {
-  BriefcaseIcon,
-  RocketIcon,
-  GlobeIcon,
-  ShieldCheckIcon,
-  ClockIcon,
-  SearchCheckIcon,
-} from "lucide-react";
+import {} from "lucide-react";
 import { useJobs } from "@/hooks/useJobs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { JobSkeleton } from "@/components/JobSkeleton";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { debounce } from "lodash";
 
 interface FilterParams {
   location: string;
@@ -30,6 +23,9 @@ export default function Home() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const [debouncedRouter] = useState(() =>
+    debounce((url: string) => router.replace(url, { scroll: false }), 800)
+  );
 
   // Filters state
   const [filters, setFilters] = useState<FilterParams>(() => ({
@@ -51,20 +47,30 @@ export default function Home() {
     isLoading,
   } = useJobs(true);
 
+  const debouncedSetFilters = useMemo(
+    () =>
+      debounce((newFilters: FilterParams) => {
+        setFilters(newFilters);
+      }, 800),
+    []
+  );
+
   // Filter change handler
   const handleFilterChange = useCallback(
     (location: string, keywords: string, title: string, minSalary: string) => {
       const newFilters = { location, keyword: keywords, title, minSalary };
-      setFilters(newFilters);
 
       const params = new URLSearchParams();
-      Object.entries(newFilters).forEach(([key, value]) => {
-        if (value) params.set(key, value.toString());
-      });
+      if (location) params.set("location", location);
+      if (keywords) params.set("keyword", keywords);
+      if (title) params.set("title", title);
+      if (minSalary) params.set("minSalary", minSalary);
 
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      // Use debounced router update
+      debouncedRouter(`${pathname}?${params.toString()}`);
+      debouncedSetFilters(newFilters);
     },
-    [pathname, router]
+    [debouncedRouter, pathname, debouncedSetFilters]
   );
 
   useEffect(() => {
@@ -91,10 +97,10 @@ export default function Home() {
       {/* Job Filters */}
       <JobFilters
         onFilterChange={handleFilterChange}
-        initialLocation={filters.location}
-        initialKeywords={filters.keyword}
-        initialTitle={filters.title}
-        initialSalary={filters.minSalary}
+        initialLocation={searchParams?.get("location") || ""}
+        initialKeywords={searchParams?.get("keyword") || ""}
+        initialTitle={searchParams?.get("title") || ""}
+        initialSalary={searchParams?.get("minSalary") || ""}
       />
 
       {/* Job Listings */}
@@ -148,56 +154,5 @@ const HeaderSection = ({
     <h2 className="mx-4 mt-6 mb-6 font-regular text-2xl text-center">
       Search {formattedJobCount} work from home jobs and get more job interviews
     </h2>
-
-    <div className="mx-4 mb-8 pt-6 flex justify-center">
-      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-center">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-50 rounded-full">
-              <ShieldCheckIcon className="w-6 h-6 text-blue-600" />
-            </div>
-            <span className="text-sm font-medium">Verified Jobs</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-green-50 rounded-full">
-              <ClockIcon className="w-6 h-6 text-green-600" />
-            </div>
-            <span className="text-sm font-medium">Daily Updates</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-purple-50 rounded-full">
-              <SearchCheckIcon className="w-6 h-6 text-purple-600" />
-            </div>
-            <span className="text-sm font-medium">Quality Checked</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div className="text-center">
-        <RocketIcon className="mx-auto h-12 w-12 text-primary mb-4" />
-        <h3 className="text-xl font-semibold mb-2">Launch Your Career</h3>
-        <p className="text-muted-foreground">
-          Find the perfect remote job to take your career to new heights
-        </p>
-      </div>
-      <div className="text-center">
-        <GlobeIcon className="mx-auto h-12 w-12 text-primary mb-4" />
-        <h3 className="text-xl font-semibold mb-2">Work from Anywhere</h3>
-        <p className="text-muted-foreground">
-          Enjoy the flexibility of working from home or anywhere in the world
-        </p>
-      </div>
-      <div className="text-center">
-        <BriefcaseIcon className="mx-auto h-12 w-12 text-primary mb-4" />
-        <h3 className="text-xl font-semibold mb-2">Quality Opportunities</h3>
-        <p className="text-muted-foreground">
-          Access top remote jobs from leading companies worldwide
-        </p>
-      </div>
-    </div>
   </section>
 );
