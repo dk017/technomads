@@ -6,6 +6,7 @@ import { createClient } from "@/app/utils/supabase/client";
 import JobDetailPage from "@/components/JobDetailsPage";
 import { useEffect, useState } from "react";
 import { Job } from "@/components/types";
+export const runtime = "edge";
 
 interface ScoredJob extends Job {
   relevanceScore: number;
