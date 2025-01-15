@@ -42,12 +42,10 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
 
     useEffect(() => {
       const fetchCompanyLogos = async () => {
-        // Get unique company names
         const uniqueCompanies = Array.from(
           new Set(jobs.map((job) => job.company_name))
         );
 
-        // Fetch all logos in one query
         const { data: companies, error } = await supabase
           .from("companies")
           .select("name, logo_filename")
@@ -58,7 +56,7 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
           return;
         }
 
-        // Create a map of company names to their logo URLs
+        // Only set URLs for companies that have a logo_filename
         const urls: Record<string, string> = {};
         companies.forEach((company) => {
           if (company.logo_filename) {
@@ -68,8 +66,6 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
               .from("organization-logos")
               .getPublicUrl(company.logo_filename);
             urls[company.name] = publicUrl;
-          } else {
-            urls[company.name] = "/default-company-logo.png";
           }
         });
 
@@ -104,153 +100,152 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
             jobs.map((job) => (
               <Card key={job.id}>
                 <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center">
-                      <div className="w-16 h-16 mr-4 relative">
-                        <Image
-                          src={
-                            !imageError[job.id]
-                              ? logoUrls[job.company_name] ||
-                                "/default-company-logo.png"
-                              : "/default-company-logo.png"
-                          }
-                          alt={`${job.company_name} logo`}
-                          width={100}
-                          height={100}
-                          className="rounded-lg object-contain"
-                          onError={() =>
-                            setImageError((prev) => ({
-                              ...prev,
-                              [job.id]: true,
-                            }))
-                          }
-                        />
-                      </div>
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex items-start">
+                      {logoUrls[job.company_name] && !imageError[job.id] && (
+                        <div className="w-16 h-16 mr-4 relative">
+                          <Image
+                            src={logoUrls[job.company_name]}
+                            alt={`${job.company_name} logo`}
+                            width={100}
+                            height={100}
+                            className="rounded-lg object-contain"
+                            onError={() =>
+                              setImageError((prev) => ({
+                                ...prev,
+                                [job.id]: true,
+                              }))
+                            }
+                          />
+                        </div>
+                      )}
                       <div>
-                        <h2 className="text-2xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
+                        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
                           {job.title}
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-300 mb-2">
+                        <Link
+                          href={`/company/${job.company_name}`}
+                          className="inline-block text-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                          aria-label={`View ${job.company_name}'s profile`}
+                        >
                           {job.company_name}
-                        </p>
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        </Link>
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                           <BuildingIcon className="h-4 w-4 mr-2" />
                           <span>{job.company_size}</span>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <p className="mb-4 text-gray-700 dark:text-gray-200">
-                    {job.short_description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge
-                      variant="secondary"
-                      className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
-                    >
-                      <GlobeIcon className="h-3 w-3 mr-1" />
-                      {job.country}
-                    </Badge>
-                    <Badge
-                      variant="secondary"
-                      className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                    >
-                      <ClockIcon className="h-3 w-3 mr-1" />
-                      {job.employment_type}
-                    </Badge>
-                    <Badge
-                      variant="secondary"
-                      className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100"
-                    >
-                      <BriefcaseIcon className="h-3 w-3 mr-1" />
-                      {job.experience}
-                    </Badge>
-                    <Badge
-                      variant="secondary"
-                      className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
-                    >
-                      {job.category}
-                    </Badge>
-                    {job.visa_sponsorship && (
+                    <p className="text-gray-700 dark:text-gray-200">
+                      {job.short_description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
                       <Badge
                         variant="secondary"
-                        className="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100"
+                        className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
                       >
-                        Visa Sponsorship
+                        <GlobeIcon className="h-3 w-3 mr-1" />
+                        {job.country}
                       </Badge>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {(Array.isArray(job.skills)
-                      ? job.skills
-                      : (job.skills as string).split(",")
-                    ).map((skill: string, index: number) => (
                       <Badge
-                        key={index}
                         variant="secondary"
-                        className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                        className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
                       >
-                        {typeof skill === "string"
-                          ? skill.replace(/["\[\]]/g, "").trim()
-                          : skill}
+                        <ClockIcon className="h-3 w-3 mr-1" />
+                        {job.employment_type}
                       </Badge>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <MapPinIcon className="h-4 w-4 mr-2" />
-                      <span>{job.city}</span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <span>{job.salary}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
-                      asChild
-                    >
-                      <Link
-                        href={`/${generateSlug(
-                          job.company_name
-                        )}/jobs/${generateSlug(job.job_slug)}`}
+                      <Badge
+                        variant="secondary"
+                        className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100"
                       >
-                        View Job
-                      </Link>
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
-                      asChild
-                    >
-                      <a
-                        href={job.job_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Apply Now
-                      </a>
-                    </Button>
-                    {job.company_url && (
+                        <BriefcaseIcon className="h-3 w-3 mr-1" />
+                        {job.experience}
+                      </Badge>
+                      {job.visa_sponsorship && (
+                        <Badge
+                          variant="secondary"
+                          className="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100"
+                        >
+                          Visa Sponsorship
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {(typeof job.skills === "string"
+                        ? job.skills.split(",")
+                        : Array.isArray(job.skills)
+                        ? job.skills
+                        : []
+                      )
+                        .slice(0, 5)
+                        .map((skill: string, index: number) => (
+                          <Badge
+                            key={index}
+                            variant="secondary"
+                            className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                          >
+                            {typeof skill === "string"
+                              ? skill.replace(/["\[\]]/g, "").trim()
+                              : skill}
+                          </Badge>
+                        ))}
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                        <MapPinIcon className="h-4 w-4 mr-2" />
+                        <span>{job.city}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                        <span>{job.salary}</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2 items-center">
                       <Button
                         size="sm"
-                        variant="outline"
-                        className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900"
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                        asChild
+                      >
+                        <Link
+                          href={`/${generateSlug(job.company_name)}/jobs/${
+                            job.job_slug
+                          }`}
+                        >
+                          View Job
+                        </Link>
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
                         asChild
                       >
                         <a
-                          href={formatUrl(job.company_url)}
+                          href={job.job_url}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          Company Website
+                          Apply Now
                         </a>
                       </Button>
-                    )}
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <ClockIcon className="h-4 w-4 mr-2" />
-                      <span>{getTimeAgo(job.created_at)}</span>
+                      {job.company_url && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900"
+                          asChild
+                        >
+                          <a
+                            href={formatUrl(job.company_url)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Company Website
+                          </a>
+                        </Button>
+                      )}
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 ml-auto">
+                        <ClockIcon className="h-4 w-4 mr-2" />
+                        <span>{getTimeAgo(job.created_at)}</span>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

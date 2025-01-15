@@ -8,31 +8,9 @@ import {
   ClockIcon,
   BriefcaseIcon,
   BuildingIcon,
+  HomeIcon,
 } from "lucide-react";
-
-interface Job {
-  id: number;
-  title: string;
-  country: string;
-  skills: string | string[];
-  visa_sponsorship: boolean;
-  company_name: string;
-  company_size: string;
-  employment_type: string;
-  salary: string;
-  logo_url: string;
-  job_url: string;
-  short_description: string;
-  description: string;
-  category: string;
-  company_url: string;
-  experience: string;
-  city: string;
-  job_slug: string;
-  job_description: string[];
-  job_requirements: string[];
-  job_benefits: string[];
-}
+import { Job } from "./types";
 
 interface Company {
   name: string;
@@ -41,6 +19,7 @@ interface Company {
   tags: string[];
   size: string;
   jobCount: number;
+  logo_filename: string;
 }
 
 interface JobDetailPageProps {
@@ -101,6 +80,12 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
           {job.visa_sponsorship && (
             <Badge variant="secondary">Visa Sponsorship</Badge>
           )}
+          {job.work_type && (
+            <Badge variant="secondary">
+              <HomeIcon className="h-3 w-3 mr-1" />
+              {job.work_type}
+            </Badge>
+          )}
         </div>
 
         {/* Skills Section */}
@@ -118,10 +103,10 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Job Description */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Job Description Card */}
         <div className="lg:col-span-2">
-          <Card className="mt-6 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <Card className="bg-blue-50 dark:bg-gray-900 shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="p-6 space-y-8">
               {/* Description Section */}
               <div>
@@ -163,24 +148,46 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
                   </div>
                 </div>
               )}
+
+              {/* Action Buttons */}
+              <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex flex-col space-y-3">
+                  {job.job_url && (
+                    <Button className="w-full" asChild>
+                      <a
+                        href={job.job_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        Apply Now
+                      </a>
+                    </Button>
+                  )}
+                  {job.company_url && (
+                    <Button variant="outline" className="w-full" asChild>
+                      <a
+                        href={`/company/${job.company_name}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        View All Jobs
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Company Sidebar */}
         <div className="lg:col-span-1">
-          <Card className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <Card className="bg-blue-50 dark:bg-gray-900 shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="p-6">
-              <div className="flex flex-col items-center mb-4">
-                <div className="relative w-24 h-24 mb-4">
-                  <Image
-                    src="/default-company-logo.png"
-                    alt={`${job.company_name} logo`}
-                    fill
-                    className="object-contain rounded-lg"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-center mb-2">
+              <div className="flex flex-col items-center">
+                <h3 className="text-xl font-semibold text-center mb-4">
                   {job.company_name}
                 </h3>
 
@@ -201,7 +208,7 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
 
                 {/* Company Tags */}
                 {company.tags?.length > 0 && (
-                  <div className="flex flex-wrap justify-center gap-2 mb-6">
+                  <div className="flex flex-wrap justify-center gap-2">
                     {company.tags.map((tag, index) => (
                       <Badge key={index} variant="secondary">
                         {tag}
@@ -209,32 +216,6 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
                     ))}
                   </div>
                 )}
-
-                {/* Action Buttons */}
-                <div className="w-full space-y-3">
-                  {job.company_url && (
-                    <Button variant="outline" className="w-full" asChild>
-                      <a
-                        href={job.company_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Visit Company Website
-                      </a>
-                    </Button>
-                  )}
-                  {job.job_url && (
-                    <Button className="w-full" asChild>
-                      <a
-                        href={job.job_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Apply Now
-                      </a>
-                    </Button>
-                  )}
-                </div>
               </div>
             </CardContent>
           </Card>

@@ -11,6 +11,7 @@ interface FilterParams {
   title: string;
   category?: string;
   minSalary?: string;
+  workType?: string;
 }
 
 
@@ -51,6 +52,11 @@ async function fetchJobsFromAPI(
   if (filters.minSalary) {
     // Assuming salary is stored as a number
     query = query.gte('salary', filters.minSalary);
+  }
+
+  // Add work type filter
+  if (filters.workType && filters.workType !== 'all') {
+    query = query.eq('work_type', filters.workType);
   }
 
   // Add pagination
@@ -100,7 +106,8 @@ export const useJobs = (showAllJobs: boolean) => {
   const [currentFilters, setCurrentFilters] = useState<FilterParams>({
     location: '',
     keyword: '',
-    title: ''
+    title: '',
+    workType: 'all'
   });
 
   const fetchJobs = useCallback(async (filters: FilterParams, page: number) => {

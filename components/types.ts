@@ -88,7 +88,7 @@ export interface Description {
     id: number;
     title: string;
     country: string;
-    skills: string[];
+    skills: string | string[];
     visa_sponsorship: boolean;
     company_name: string;
     company_size: string;
@@ -107,6 +107,9 @@ export interface Description {
     job_requirements: string[];
     job_benefits: string[];
     created_at: string | Date;
+    work_type: 'Hybrid' | 'Remote OK' | 'Remote Only' | null;
+
+
     // formatted_description: {
     //   sections: {
     //     title: string;
@@ -137,6 +140,20 @@ export interface Description {
     max?: number;
     currency?: string;
   }
+
+
+export const WORK_TYPE_OPTIONS = [
+  { label: 'Work Type', value: 'all' },
+  { label: 'Hybrid', value: 'Hybrid' },
+  { label: 'Remote OK', value: 'Remote OK' },
+  { label: 'Remote Only', value: 'Remote Only' },
+] as const;
+
+export const WORK_TYPE_DESCRIPTIONS = {
+  'Hybrid': 'Split between office and home (typically 2-3 days WFH)',
+  'Remote OK': 'Fully remote with optional office access',
+  'Remote Only': '100% remote work, no office requirement'
+};
 
   export type EmploymentType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
 

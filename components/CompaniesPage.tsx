@@ -9,6 +9,7 @@ import {
   LinkedinIcon,
   BriefcaseIcon,
 } from "lucide-react";
+import { createClient } from "@/app/utils/supabase/client";
 
 interface CompanyProfileCardProps {
   name: string;
@@ -29,13 +30,18 @@ const CompanyProfileCard: React.FC<CompanyProfileCardProps> = ({
   jobCount,
   org_url,
 }) => {
+  const supabase = createClient();
+  const logoUrl = logo
+    ? supabase.storage.from("organization-logos").getPublicUrl(logo).data
+        ?.publicUrl
+    : null;
   return (
     <Card className="bg-blue-50 dark:bg-gray-900 shadow-md hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6 flex flex-col items-center text-center">
         <div className="space-y-4">
-          {logo && (
+          {logoUrl && (
             <Image
-              src={logo}
+              src={logoUrl}
               alt={`${name} Logo`}
               width={80}
               height={80}

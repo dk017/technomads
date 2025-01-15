@@ -17,7 +17,7 @@ export function Header() {
           className="text-foreground hover:text-primary block py-2 lg:py-0"
           onClick={() => setIsOpen(false)}
         >
-          Companies
+          Remote Hiring Companies
         </Link>
       </li>
       <li>

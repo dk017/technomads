@@ -16,6 +16,7 @@ interface Company {
   description: string;
   tags: string[];
   jobCount: number;
+  company_url?: string; // Add this
 }
 
 function CompanyJobsPage({ params }: { params: { companyName: string } }) {
@@ -82,7 +83,9 @@ function CompanyJobsPage({ params }: { params: { companyName: string } }) {
           tags={company.tags}
           size={company.size}
           jobCount={company.jobCount}
-          org_url={jobs[0].company_url}
+          org_url={
+            jobs.length > 0 ? jobs[0].company_url : company.company_url || "#"
+          }
         />
         <JobListings jobs={jobs} isLoading={loading} />
       </div>
