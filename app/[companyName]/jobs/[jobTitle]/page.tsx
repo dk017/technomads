@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Job } from "@/components/types";
 import { LoadingSpinner } from "@/components/loading-spinner";
 
+export const runtime = "edge";
 const normalizeCompanyName = (name: string): string => {
   return name
     .split("-")
