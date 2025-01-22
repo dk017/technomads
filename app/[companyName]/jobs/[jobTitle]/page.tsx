@@ -37,7 +37,8 @@ export default function Page({
         console.log(params.companyName);
         const supabase = createClient();
         const normalizedCompanyName = normalizeCompanyName(params.companyName);
-
+        console.log(normalizedCompanyName);
+        console.log(params.jobTitle);
         const { data: jobData, error: jobError } = await supabase
           .from("jobs_tn")
           .select("*")

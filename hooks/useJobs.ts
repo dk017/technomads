@@ -9,6 +9,7 @@ interface FilterParams {
   location: string;
   keyword: string;
   title: string;
+  experience?: string;
   category?: string;
   minSalary?: string;
   workType?: string;
@@ -30,7 +31,7 @@ async function fetchJobsFromAPI(
 
   // Apply filters
   if (filters.location) {
-    query = query.ilike('country', `%${filters.location}%`);
+    query = query.eq('country', filters.location);
   }
 
   if (filters.keyword) {
@@ -59,12 +60,15 @@ async function fetchJobsFromAPI(
     query = query.eq('work_type', filters.workType);
   }
 
+  // Add experience filter
+  if (filters.experience && filters.experience !== 'any') {
+    query = query.eq('experience_level', filters.experience);
+  }
+
   // Add pagination
   query = query
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
-
-  console.log('Supabase query:', query);
 
   try {
     const { data, error, count } = await query;
@@ -73,15 +77,6 @@ async function fetchJobsFromAPI(
       console.error('Supabase error:', error);
       throw error;
     }
-
-    console.log('Fetched jobs:', {
-      page,
-      limit,
-      offset,
-      count,
-      resultsCount: data?.length,
-      filters
-    });
 
     return {
       data: data || [],
@@ -115,22 +110,13 @@ export const useJobs = (showAllJobs: boolean) => {
     setIsLoading(true);
     try {
       const limit = showAllJobs ? ITEMS_PER_PAGE : FREE_USER_LIMIT;
-      console.log('Fetching jobs with params:', { filters, page, limit });
-
       const { data: newJobs, count } = await fetchJobsFromAPI(filters, page, limit);
-
-      console.log('Fetched jobs result:', {
-        jobsCount: newJobs?.length,
-        totalCount: count,
-        jobs: newJobs
-      });
 
       setJobs(newJobs || []);
       setJobCount(count || 0);
       setCurrentPage(page);
       setHasMore((newJobs?.length || 0) >= limit);
     } catch (error) {
-      console.error('Error in fetchJobs:', error);
       setJobs([]);
       setJobCount(0);
     } finally {

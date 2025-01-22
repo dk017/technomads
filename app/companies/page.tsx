@@ -105,15 +105,6 @@ export default function CompaniesPage() {
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center">
-                    <div className="w-16 h-16 mr-4 relative">
-                      <Image
-                        src={default_img}
-                        alt={`${company.name} logo`}
-                        width={100}
-                        height={100}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
                     <h2 className="text-2xl font-semibold text-gray-100">
                       {company.name}
                     </h2>

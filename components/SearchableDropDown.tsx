@@ -12,97 +12,62 @@ interface SearchableDropdownProps {
   options: Option[];
   placeholder: string;
   onSelect: (selected: string) => void;
+  onInput: (input: string) => void;
   value: string;
 }
-
 const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   options,
   placeholder,
   onSelect,
+  onInput,
   value,
 }) => {
+  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     setFilteredOptions(
-      options.filter((option) =>
-        option.label.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      options
+        .filter((option) =>
+          option.label.toLowerCase().includes(value.toLowerCase())
+        )
+        .map((option) => option.label)
     );
-  }, [searchTerm, options]);
+  }, [value, options]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    onSelect(""); // Clear the selected value when typing
+    const newValue = e.target.value;
+    onInput(newValue); // Just update the input value
     setIsOpen(true);
   };
 
-  const handleOptionSelect = (option: Option) => {
-    onSelect(option.value);
-    setSearchTerm(option.label);
+  const handleOptionClick = (option: string) => {
+    onSelect(option); // Trigger the search only when an option is selected
     setIsOpen(false);
   };
 
-  const clearSelection = () => {
-    onSelect("");
-    setSearchTerm("");
-  };
-
-  const selectedOption = options.find((option) => option.value === value);
-
   return (
-    <div className="relative w-full" ref={dropdownRef}>
-      <div className="relative">
-        <Input
-          type="text"
-          placeholder={placeholder}
-          value={searchTerm || (selectedOption ? selectedOption.label : "")}
-          onChange={handleInputChange}
-          onClick={() => setIsOpen(true)}
-          className="w-full pr-8"
-        />
-        {(value || searchTerm) && (
-          <button
-            onClick={clearSelection}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-          >
-            <XCircle size={18} />
-          </button>
-        )}
-      </div>
-      {isOpen && (
-        <div className="absolute z-50 w-full">
-          <ScrollArea className="mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-lg max-h-60">
-            {filteredOptions.map((option) => (
-              <div
-                key={option.value}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
-                onClick={() => handleOptionSelect(option)}
-              >
-                {option.label}
-              </div>
-            ))}
-          </ScrollArea>
-        </div>
+    <div className="relative w-full">
+      <Input
+        type="text"
+        value={value}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        className="w-full bg-background text-foreground"
+        onFocus={() => setIsOpen(true)}
+      />
+      {isOpen && filteredOptions.length > 0 && (
+        <ul className="absolute z-10 w-full mt-1 bg-background border border-input rounded-md shadow-lg max-h-60 overflow-auto">
+          {filteredOptions.map((option, index) => (
+            <li
+              key={index}
+              className="px-4 py-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-foreground"
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

@@ -15,6 +15,7 @@ import {
   DollarSignIcon,
   HomeIcon,
   InfoIcon,
+  BriefcaseIcon,
 } from "lucide-react";
 import { titleOptions } from "@/app/constants/titleOptions";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
@@ -33,6 +34,9 @@ import { WORK_TYPE_DESCRIPTIONS } from "./types";
 import { Popover } from "@radix-ui/react-popover";
 import { WORK_TYPE_OPTIONS } from "./types";
 import { Card, CardContent } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { generateSlug } from "@/utils/url";
+import { EXPERIENCE_LEVELS } from "@/app/constants/jobFilters";
 
 interface JobFiltersProps {
   onFilterChange: (
@@ -40,13 +44,15 @@ interface JobFiltersProps {
     keywords: string,
     title: string,
     minSalary: string,
-    workType: string
+    workType: string,
+    experience?: string
   ) => void;
   initialLocation: string;
   initialKeywords: string;
   initialTitle: string;
   initialSalary?: string;
   initialWorkType?: string;
+  initialExperience?: string;
 }
 
 const salaryRanges = [
@@ -67,12 +73,15 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
     initialTitle,
     initialSalary = "0",
     initialWorkType = "all",
+    initialExperience = "",
   }) => {
     const [location, setLocation] = useState(initialLocation);
     const [keywords, setKeywords] = useState(initialKeywords);
     const [title, setTitle] = useState(initialTitle);
     const [salary, setSalary] = useState(initialSalary);
     const [workType, setWorkType] = useState(initialWorkType);
+    const [experience, setExperience] = useState(initialExperience || "any");
+    const [isSearching, setIsSearching] = useState(false);
 
     // Track if filters are being updated from props
     const isUpdatingFromProps = useRef(false);
@@ -81,12 +90,21 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
     const debouncedFilterChange = useMemo(
       () =>
         debounce(
-          (loc: string, kw: string, t: string, sal: string, wt: string) => {
-            onFilterChange(loc, kw, t, sal, wt);
+          (
+            loc: string,
+            kw: string,
+            t: string,
+            sal: string,
+            wt: string,
+            exp: string
+          ) => {
+            if (!isSearching) {
+              onFilterChange(loc, kw, t, sal, wt, exp);
+            }
           },
           500
         ), // 500ms delay
-      [onFilterChange]
+      [onFilterChange, isSearching]
     );
 
     // Cleanup on unmount
@@ -103,51 +121,118 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
       setKeywords(initialKeywords);
       setTitle(initialTitle);
       setSalary(initialSalary);
+      setExperience(initialExperience);
       // Reset the flag after the state updates
       setTimeout(() => {
         isUpdatingFromProps.current = false;
       }, 0);
-    }, [initialLocation, initialKeywords, initialTitle, initialSalary]);
+    }, [
+      initialLocation,
+      initialKeywords,
+      initialTitle,
+      initialSalary,
+      initialExperience,
+    ]);
 
-    const handleLocationChange = useCallback(
+    const router = useRouter();
+
+    const handleTitleSelect = useCallback(
       (value: string) => {
         if (!isUpdatingFromProps.current) {
-          setLocation(value);
-          debouncedFilterChange(value, keywords, title, salary, workType);
+          setTitle(value);
+          setIsSearching(false);
+
+          // Generate and navigate to the SEO-friendly URL
+          const params = {
+            title: value,
+            location,
+            experience,
+          };
+
+          const url = generateSlug(params);
+          router.push(url);
         }
       },
-      [keywords, title, salary, workType, debouncedFilterChange]
+      [location, experience, router]
+    );
+
+    const handleTitleInput = useCallback((value: string) => {
+      setTitle(value);
+      setIsSearching(true);
+    }, []);
+
+    const handleLocationChange = useCallback(
+      (selectedLocation: string) => {
+        if (!isUpdatingFromProps.current) {
+          // Find the selected location option to get its value
+          const locationOption = jobLocationOptions.find(
+            (option) => option.label === selectedLocation
+          );
+
+          setLocation(selectedLocation);
+
+          const params = {
+            title,
+            location: locationOption?.value || "", // Use the value for URL/filtering
+            experience,
+          };
+
+          const url = generateSlug(params);
+          router.push(url);
+        }
+      },
+      [title, experience, router]
     );
 
     const handleKeywordsChange = useCallback(
       (value: string) => {
         if (!isUpdatingFromProps.current) {
           setKeywords(value);
-          debouncedFilterChange(location, value, title, salary, workType);
+          debouncedFilterChange(
+            location,
+            value,
+            title,
+            salary,
+            workType,
+            experience
+          );
         }
       },
-      [location, title, salary, workType, debouncedFilterChange]
+      [location, title, salary, workType, experience, debouncedFilterChange]
     );
 
     const handleTitleChange = useCallback(
       (value: string) => {
         if (!isUpdatingFromProps.current) {
           setTitle(value);
-          debouncedFilterChange(location, keywords, value, salary, workType);
+          debouncedFilterChange(
+            location,
+            keywords,
+            value,
+            salary,
+            workType,
+            experience
+          );
         }
       },
-      [location, keywords, salary, workType, debouncedFilterChange]
+      [location, keywords, salary, workType, experience, debouncedFilterChange]
     );
 
     const handleSalaryChange = useCallback(
       (value: string) => {
         if (!isUpdatingFromProps.current) {
           setSalary(value);
-          console.log("Salary changed to:", value);
-          debouncedFilterChange(location, keywords, title, value, workType);
+          debouncedFilterChange(
+            location,
+            keywords,
+            title,
+            value,
+            workType,
+            experience
+          );
         }
       },
-      [location, keywords, title, workType, debouncedFilterChange]
+      [location, keywords, title, workType, experience, debouncedFilterChange]
     );
 
     const handleWorkTypeChange = useCallback(
@@ -156,10 +241,40 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
           setWorkType(value);
           // Pass empty string when 'all' is selected, otherwise pass the value
           const filterValue = value === "all" ? "" : value;
-          debouncedFilterChange(location, keywords, title, salary, filterValue);
+          debouncedFilterChange(
+            location,
+            keywords,
+            title,
+            salary,
+            filterValue,
+            experience
+          );
         }
       },
-      [location, keywords, title, salary, debouncedFilterChange]
+      [location, keywords, title, salary, experience, debouncedFilterChange]
+    );
+
+    const handleLocationInput = useCallback((value: string) => {
+      setLocation(value);
+    }, []);
+
+    const handleExperienceChange = useCallback(
+      (value: string) => {
+        if (!isUpdatingFromProps.current) {
+          setExperience(value);
+          const filterValue = value === "any" ? "" : value;
+
+          const params = {
+            title,
+            location,
+            experience: filterValue,
+          };
+
+          const url = generateSlug(params);
+          router.push(url);
+        }
+      },
+      [title, location, router]
     );
 
     return (
@@ -171,7 +286,8 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
               <SearchableDropdown
                 options={titleOptions}
                 placeholder="🏝️ Job Title"
-                onSelect={handleTitleChange}
+                onSelect={handleTitleSelect}
+                onInput={handleTitleInput}
                 value={title}
               />
             </div>
@@ -182,6 +298,7 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
                 options={jobLocationOptions}
                 placeholder="🌎 Location"
                 onSelect={handleLocationChange}
+                onInput={handleLocationInput}
                 value={location}
               />
             </div>
@@ -272,6 +389,21 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
                   </PopoverContent>
                 </Popover>
               </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <BriefcaseIcon className="h-5 w-5 text-gray-400" />
+              <Select value={experience} onValueChange={handleExperienceChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Experience Level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {EXPERIENCE_LEVELS.map((level) => (
+                    <SelectItem key={level.value} value={level.value}>
+                      {level.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

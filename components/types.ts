@@ -108,6 +108,7 @@ export interface Description {
     job_benefits: string[];
     created_at: string | Date;
     work_type: 'Hybrid' | 'Remote OK' | 'Remote Only' | null;
+    experience_level?: string;
 
 
     // formatted_description: {
