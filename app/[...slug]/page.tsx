@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { JobsLayout } from "@/components/JobsLayout";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
-
+export const runtime = "edge";
 interface PageProps {
   params: {
     slug: string[];
