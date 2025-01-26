@@ -35,6 +35,7 @@ const CompanyProfileCard: React.FC<CompanyProfileCardProps> = ({
     ? supabase.storage.from("organization-logos").getPublicUrl(logo).data
         ?.publicUrl
     : null;
+
   return (
     <Card className="bg-blue-50 dark:bg-gray-900 shadow-md hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6 flex flex-col items-center text-center">
@@ -64,15 +65,19 @@ const CompanyProfileCard: React.FC<CompanyProfileCardProps> = ({
               <BriefcaseIcon className="h-3 w-3 mr-1" />
               {jobCount} open positions
             </Badge>
-            {tags.map((tag, index) => (
-              <Badge
-                key={index}
-                variant="secondary"
-                className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-              >
-                {tag}
-              </Badge>
-            ))}
+            {Array.isArray(tags) && tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag, index) => (
+                  <Badge
+                    key={`${tag}-${index}`}
+                    variant="secondary"
+                    className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
           </div>
           {org_url && (
             <div className="flex justify-center">

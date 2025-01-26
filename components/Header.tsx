@@ -13,7 +13,7 @@ export function Header() {
     <ul className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
       <li>
         <Link
-          href="/companies"
+          href="/remote-hiring-companies"
           className="text-foreground hover:text-primary block py-2 lg:py-0"
           onClick={() => setIsOpen(false)}
         >
