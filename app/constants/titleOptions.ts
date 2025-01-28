@@ -1,4 +1,5 @@
 export const titleOptions = [
+  { value: '3d artist', label: '3D Artist' },
   { value: 'engineer', label: 'Engineer' },
   { value: 'executive', label: 'Executive' },
   { value: 'senior', label: 'Senior' },

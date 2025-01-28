@@ -10,7 +10,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/jobs?location=United+States"
+                  href="/remote-jobs-in-the-united-states"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in the United States
@@ -18,7 +18,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=India"
+                  href="/remote-jobs-in-india"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in India
@@ -26,7 +26,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Canada"
+                  href="/remote-jobs-in-canada"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Canada
@@ -34,7 +34,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Mexico"
+                  href="/remote-jobs-in-mexico"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Mexico
@@ -42,7 +42,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Germany"
+                  href="/remote-jobs-in-germany"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Germany
@@ -50,7 +50,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=United+Kingdom"
+                  href="/remote-jobs-in-the-united-kingdom"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in the United Kingdom
@@ -58,7 +58,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Australia"
+                  href="/remote-jobs-in-australia"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Australia
@@ -66,7 +66,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Spain"
+                  href="/remote-jobs-in-spain"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Spain
@@ -74,7 +74,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=France"
+                  href="/remote-jobs-in-france"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in France
@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?location=Brazil"
+                  href="/remote-jobs-in-brazil"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Jobs in Brazil
@@ -95,7 +95,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/jobs?title=developer"
+                  href="/remote-developer-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Software Developer Jobs
@@ -103,7 +103,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=sales"
+                  href="/remote-sales-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Sales Jobs
@@ -111,7 +111,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=analyst"
+                  href="/remote-analyst-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Analyst Jobs
@@ -119,7 +119,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=product"
+                  href="/remote-product-manager-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Product Manager Jobs
@@ -127,7 +127,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=customer+support"
+                  href="/remote-customer-support-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Customer Support Jobs
@@ -135,7 +135,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=design"
+                  href="/remote-design-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Design Jobs
@@ -143,7 +143,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=marketing"
+                  href="/remote-marketing-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote Marketing Jobs
@@ -151,7 +151,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/jobs?title=devops"
+                  href="/remote-devops-jobs"
                   className="text-muted-foreground hover:text-primary"
                 >
                   Remote DevOps Jobs
@@ -235,7 +235,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 text-center text-muted-foreground">
-          <p>&copy; 2024 Remote Launchpad. All rights reserved.</p>
+          <p>&copy; 2025 Only Remote Jobs. All rights reserved.</p>
         </div>
       </div>
     </footer>

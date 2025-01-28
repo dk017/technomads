@@ -87,36 +87,33 @@ export interface Description {
   export interface Job {
     id: number;
     title: string;
-    country: string;
-    skills: string | string[];
-    visa_sponsorship: boolean;
     company_name: string;
-    company_size: string;
-    employment_type: string;
-    salary: string;
-    logo_filename: string;
+    company_url?: string;
+    company_size?: string;
+    logo_url?: string;
+    logo_filename?: string;
     job_url: string;
-    short_description: string;
-    description: string;
-    category: string;
-    company_url: string;
-    experience: string;
-    city: string;
+    short_description?: string;
+    job_description?: string[];
+    job_requirements?: string[];
+    job_benefits?: string[];
+    employment_type?: string;
+    experience?: string;
+    salary?: string;
+    skills?: string | string[];
+    tags?: string[];
+    country?: string;
+    city?: string;
     job_slug: string;
-    job_description: string[];
-    job_requirements: string[];
-    job_benefits: string[];
-    created_at: string | Date;
-    work_type: 'Hybrid' | 'Remote OK' | 'Remote Only' | null;
-    experience_level?: string;
-
-
-    // formatted_description: {
-    //   sections: {
-    //     title: string;
-    //     items: string[];
-    //   }[];
-    // };
+    visa_sponsorship?: boolean;
+    work_type?: string;
+    created_at: string;
+    formatted_description?: {
+      sections: {
+        title: string;
+        items: string[];
+      }[];
+    };
   }
 
   export interface FilterParams {

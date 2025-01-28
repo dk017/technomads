@@ -86,20 +86,21 @@ export default function Page({
     async function fetchJobAndCompany() {
       try {
         const supabase = createClient();
-        const normalizedCompanyName = normalizeCompanyName(params.companyName);
-
+        const companySlug = params.companyName;
+        console.log("Company Slug:", companySlug);
+        console.log("Job Title:", params.jobTitle);
         const [jobResponse, companyResponse] = await Promise.all([
           supabase
             .from("jobs_tn")
             .select("*")
             .eq("job_slug", params.jobTitle)
-            .ilike("company_name", normalizedCompanyName)
+            .eq("company_slug", companySlug)
             .order("created_at", { ascending: false })
             .limit(1),
           supabase
             .from("companies")
             .select("*")
-            .eq("name", normalizedCompanyName)
+            .eq("company_slug", companySlug)
             .single(),
         ]);
 

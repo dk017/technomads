@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { Label } from "@/components/ui/label";
 
 interface EmailCaptureProps {
   onSubscribe: () => void;
@@ -18,7 +19,12 @@ interface EmailCaptureProps {
 
 export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
   const [open, setOpen] = useState(true);
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    keywords: "",
+    location: "",
+  });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -30,7 +36,7 @@ export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) throw new Error("Subscription failed");
@@ -53,6 +59,11 @@ export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleOpenChange = (open: boolean) => {
     setOpen(open);
     if (!open) {
@@ -69,23 +80,82 @@ export function EmailCapture({ onSubscribe, onClose }: EmailCaptureProps) {
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">
-              Join thousands of tech professionals getting the best remote jobs
-              weekly.
-            </p>
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full"
-            />
+          <p className="text-sm text-muted-foreground">
+            Join thousands of tech professionals getting the best remote jobs
+            weekly.
+          </p>
+
+          <div className="space-y-4">
+            {/* Name Field */}
+            <div className="space-y-2">
+              <Label htmlFor="name">
+                Full Name <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Enter your full name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full"
+              />
+            </div>
+
+            {/* Email Field */}
+            <div className="space-y-2">
+              <Label htmlFor="email">
+                Email Address <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full"
+              />
+            </div>
+
+            {/* Keywords Field */}
+            <div className="space-y-2">
+              <Label htmlFor="keywords">Interested Keywords</Label>
+              <Input
+                id="keywords"
+                name="keywords"
+                type="text"
+                placeholder="e.g., React, DevOps, Python"
+                value={formData.keywords}
+                onChange={handleChange}
+                className="w-full"
+              />
+              <p className="text-xs text-muted-foreground">
+                Separate keywords with commas
+              </p>
+            </div>
+
+            {/* Location Field */}
+            <div className="space-y-2">
+              <Label htmlFor="location">Preferred Location</Label>
+              <Input
+                id="location"
+                name="location"
+                type="text"
+                placeholder="e.g., Europe, Americas, Worldwide"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full"
+              />
+            </div>
           </div>
+
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Subscribing..." : "Get Job Updates"}
           </Button>
+
           <p className="text-xs text-center text-muted-foreground">
             No spam. Unsubscribe anytime.
           </p>

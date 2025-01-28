@@ -31,7 +31,7 @@ function generateSlug(str: string): string {
 
 interface JobListingsProps {
   jobs: Job[];
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const JobListings: React.FC<JobListingsProps> = React.memo(
@@ -170,15 +170,14 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                         </Badge>
                       )}
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {(typeof job.skills === "string"
-                        ? job.skills.split(",")
-                        : Array.isArray(job.skills)
-                        ? job.skills
-                        : []
-                      )
-                        .slice(0, 5)
-                        .map((skill: string, index: number) => (
+                    {job.skills && (
+                      <div className="flex flex-wrap gap-2">
+                        {(typeof job.skills === "string"
+                          ? job.skills.split(",")
+                          : Array.isArray(job.skills)
+                          ? job.skills
+                          : []
+                        ).map((skill: string, index: number) => (
                           <Badge
                             key={index}
                             variant="secondary"
@@ -189,7 +188,8 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                               : skill}
                           </Badge>
                         ))}
-                    </div>
+                      </div>
+                    )}
                     <div className="flex items-center gap-4">
                       <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                         <MapPinIcon className="h-4 w-4 mr-2" />

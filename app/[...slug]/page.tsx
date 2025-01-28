@@ -76,6 +76,8 @@ function parseSlug(slug: string[]): {
 export default function JobsPage({ params }: PageProps) {
   const { title, location, experience } = parseSlug(params.slug);
 
+  console.log("Slug parsing result:", { title, location, experience });
+
   return (
     <JobsLayout
       initialTitle={title}

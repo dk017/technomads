@@ -15,6 +15,13 @@ interface FilterParams {
   workType?: string;
 }
 
+const createFlexibleTitlePattern = (title: string) => {
+  const tokens = title.toLowerCase()
+    .split(/[\s-]+/)  // Split on both spaces and hyphens
+    .filter(Boolean);
+  console.log("Title search tokens:", tokens);
+  return `%${tokens.join('%')}%`;
+};
 
 async function fetchJobsFromAPI(
   filters: FilterParams,
@@ -44,9 +51,14 @@ async function fetchJobsFromAPI(
   }
 
   if (filters.title) {
+    console.log("Searching for title:", filters.title);
+    const pattern = createFlexibleTitlePattern(filters.title);
+    console.log("Search pattern:", pattern);
+
     query = query.or([
-      `title.ilike.%${filters.title}%`,
-      `skills.ilike.%${filters.title}%`
+      `title.ilike.${pattern}`,
+      `tags.ilike.${pattern}`,
+      `skills.ilike.${pattern}`
     ].join(','));
   }
 
