@@ -1,71 +1,38 @@
 import { createClient } from "@/app/utils/supabase/client";
-import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
 
 export async function GET() {
   const supabase = createClient();
+  const baseUrl = 'https://onlyremotejobs.me';
 
   // Fetch all unique job titles and experience levels
   const { data: jobs } = await supabase
     .from('jobs_tn')
-    .select('title, experience_level')
-    .order('title');
+    .select('title, experience_level, company_name, created_at')
+    .order('created_at', { ascending: false });
 
-  // Generate URLs for different page types
-  const urls: string[] = [];
-  const baseUrl = 'https://onlyremotejobs.me'; // Replace with your actual domain
+  const urlEntries = new Set<string>();
 
   // Add static pages
-  urls.push(baseUrl);
-  urls.push(`${baseUrl}/jobs`);
+  urlEntries.add(generateUrlEntry(baseUrl, 1.0, 'yearly'));
+  urlEntries.add(generateUrlEntry(`${baseUrl}/jobs`, 0.9, 'daily'));
 
-  // Add location-based pages
-  jobLocationOptions.forEach(location => {
-    urls.push(`${baseUrl}/remote-jobs-in-${location.slug}`);
-  });
-
-  // Process jobs data to generate dynamic URLs
+  // Add job pages
   if (jobs) {
-    const processedTitles = new Set<string>();
-
     jobs.forEach(job => {
-      if (job.title) {
-        // Convert title to URL-friendly slug
-        const titleSlug = job.title
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '');
-
-        // Basic job title URL
-        if (!processedTitles.has(titleSlug)) {
-          urls.push(`${baseUrl}/remote-${titleSlug}-jobs`);
-          processedTitles.add(titleSlug);
-
-          // Add experience level variants
-          if (job.experience_level) {
-            const expLevel = job.experience_level.toLowerCase().replace(/\s+/g, '-');
-            urls.push(`${baseUrl}/${expLevel}-remote-${titleSlug}-jobs`);
-          }
-
-          // Add location variants
-          jobLocationOptions.forEach(location => {
-            urls.push(`${baseUrl}/remote-${titleSlug}-jobs-in-${location.slug}`);
-          });
-        }
+      if (job.title && job.company_name) {
+        const companySlug = encodeURIComponent(job.company_name);
+        const jobSlug = encodeURIComponent(job.title.toLowerCase().replace(/\s+/g, '-'));
+        const jobUrl = `${baseUrl}/companies/${companySlug}/jobs/${jobSlug}`;
+        urlEntries.add(generateUrlEntry(jobUrl, 0.8, 'daily'));
       }
     });
   }
 
-  // Generate XML
+  // Generate the complete XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${urls.map(url => `
-        <url>
-          <loc>${url}</loc>
-          <changefreq>daily</changefreq>
-          <priority>0.7</priority>
-        </url>
-      `).join('')}
-    </urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${Array.from(urlEntries).join('\n')}
+</urlset>`;
 
   return new Response(xml, {
     headers: {
@@ -73,4 +40,22 @@ export async function GET() {
       'Cache-Control': 'public, max-age=3600',
     },
   });
+}
+
+function generateUrlEntry(url: string, priority: number, changefreq: string): string {
+  const escapedUrl = url
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+
+  const lastmod = new Date().toISOString();
+
+  return `  <url>
+    <loc>${escapedUrl}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
 }
