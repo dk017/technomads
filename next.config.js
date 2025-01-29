@@ -10,6 +10,11 @@ const nextConfig = {
       },
     ],
   },
+  rewrites: async () => [{
+    source: "/sitemap-:id.xml",
+    destination: "/sitemap.xml/:id",
+  },],
 };
+
 
 module.exports = nextConfig;

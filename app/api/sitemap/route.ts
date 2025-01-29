@@ -1,6 +1,7 @@
 import { createClient } from "@/app/utils/supabase/client";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
-
+import { jobTitleOptions } from "@/app/constants/jobTitleOptions";
+import { titleOptions } from "@/app/constants/titleOptions";
 export async function GET() {
   const supabase = createClient();
   const baseUrl = 'https://onlyremotejobs.me';
@@ -22,17 +23,21 @@ export async function GET() {
     urlEntries.add(generateUrlEntry(`${baseUrl}/remote-jobs-in-${location.slug}`, 0.8, 'weekly'));
   });
 
+  titleOptions.forEach(title => {
+    urlEntries.add(generateUrlEntry(`${baseUrl}/remote-${title.value}-jobs`, 0.8, 'weekly'));
+  });
+
   // Add job pages
-  if (jobs) {
-    jobs.forEach(job => {
-      if (job.title && job.company_name) {
-        const companySlug = encodeURIComponent(job.company_name);
-        const jobSlug = encodeURIComponent(job.title.toLowerCase().replace(/\s+/g, '-'));
-        const jobUrl = `${baseUrl}/companies/${companySlug}/jobs/${jobSlug}`;
-        urlEntries.add(generateUrlEntry(jobUrl, 0.8, 'daily'));
-      }
-    });
-  }
+//   if (jobs) {
+//     jobs.forEach(job => {
+//       if (job.title && job.company_name) {
+//         const companySlug = encodeURIComponent(job.company_name);
+//         const jobSlug = encodeURIComponent(job.title.toLowerCase().replace(/\s+/g, '-'));
+//         const jobUrl = `${baseUrl}/companies/${companySlug}/jobs/${jobSlug}`;
+//         urlEntries.add(generateUrlEntry(jobUrl, 0.8, 'daily'));
+//       }
+//     });
+//   }
 
   // Generate the complete XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
