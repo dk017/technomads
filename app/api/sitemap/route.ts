@@ -12,7 +12,7 @@ export async function GET() {
 
   // Generate URLs for different page types
   const urls: string[] = [];
-  const baseUrl = 'https://technomads.com'; // Replace with your actual domain
+  const baseUrl = 'https://onlyremotejobs.me'; // Replace with your actual domain
 
   // Add static pages
   urls.push(baseUrl);
