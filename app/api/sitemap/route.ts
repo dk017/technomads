@@ -1,4 +1,5 @@
 import { createClient } from "@/app/utils/supabase/client";
+import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
 
 export async function GET() {
   const supabase = createClient();
@@ -13,8 +14,13 @@ export async function GET() {
   const urlEntries = new Set<string>();
 
   // Add static pages
-  urlEntries.add(generateUrlEntry(baseUrl, 1.0, 'yearly'));
+  urlEntries.add(generateUrlEntry(`${baseUrl}`, 1.0, 'yearly'));
   urlEntries.add(generateUrlEntry(`${baseUrl}/jobs`, 0.9, 'daily'));
+
+  // Add location pages
+  jobLocationOptions.forEach(location => {
+    urlEntries.add(generateUrlEntry(`${baseUrl}/remote-jobs-in-${location.slug}`, 0.8, 'weekly'));
+  });
 
   // Add job pages
   if (jobs) {
