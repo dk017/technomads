@@ -77,6 +77,10 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <meta
+          name="google-site-verification"
+          content="YOUR_VERIFICATION_CODE"
+        />
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <Providers>

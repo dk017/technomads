@@ -4,12 +4,19 @@ export const runtime = 'edge';
 
 export async function POST(request: Request) {
   try {
-    const { email, name } = await request.json();
+    const { email, name, keyword = null, location = null } = await request.json();
     const supabase = createClient();
+
+    const payload = {
+      email,
+      name,
+      ...(keyword && { keyword }),
+      ...(location && { location })
+    };
 
     const { error } = await supabase
       .from('subscribers')
-      .insert([{ email, name }]);
+      .insert([payload]);
 
     if (error) throw error;
 
