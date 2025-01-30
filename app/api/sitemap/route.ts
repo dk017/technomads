@@ -17,12 +17,23 @@ export async function GET() {
   // Add static pages
   urlEntries.add(generateUrlEntry(`${baseUrl}`, 1.0, 'yearly'));
   urlEntries.add(generateUrlEntry(`${baseUrl}/jobs`, 0.9, 'daily'));
+  urlEntries.add(generateUrlEntry(`${baseUrl}/remote-hiring-companies`, 0.9, 'daily'));
 
-  // Add location pages
   jobLocationOptions.forEach(location => {
+    // Basic location pages
     urlEntries.add(generateUrlEntry(`${baseUrl}/remote-jobs-in-${location.slug}`, 0.8, 'weekly'));
+
+    // Combination of title and location pages
+    titleOptions.forEach(title => {
+      urlEntries.add(generateUrlEntry(
+        `${baseUrl}/remote-${title.value}-jobs-in-${location.slug}`,
+        0.8,
+        'weekly'
+      ));
+    });
   });
 
+  // Add title-only pages
   titleOptions.forEach(title => {
     urlEntries.add(generateUrlEntry(`${baseUrl}/remote-${title.value}-jobs`, 0.8, 'weekly'));
   });
