@@ -93,12 +93,15 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
 
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        <div className="space-y-6 pt-3">
+        <div className="space-y-1">
           {isLoading ? (
             <LoadingSkeletons />
           ) : (
             jobs.map((job) => (
-              <Card key={job.id}>
+              <Card
+                key={job.id}
+                className="hover:shadow-md transition-shadow duration-200"
+              >
                 <CardContent className="p-4">
                   <div className="flex flex-col space-y-3">
                     <div className="flex items-start">
@@ -130,10 +133,12 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                         >
                           {job.company_name}
                         </Link>
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                          <BuildingIcon className="h-4 w-4 mr-2" />
-                          <span>{job.company_size}</span>
-                        </div>
+                        {job.company_size && (
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <BuildingIcon className="h-4 w-4 mr-2" />
+                            <span>{job.company_size}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                     <p className="text-gray-700 dark:text-gray-200">
@@ -177,17 +182,19 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
                           : Array.isArray(job.skills)
                           ? job.skills
                           : []
-                        ).map((skill: string, index: number) => (
-                          <Badge
-                            key={index}
-                            variant="secondary"
-                            className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                          >
-                            {typeof skill === "string"
-                              ? skill.replace(/["\[\]]/g, "").trim()
-                              : skill}
-                          </Badge>
-                        ))}
+                        )
+                          .slice(0, 5)
+                          .map((skill: string, index: number) => (
+                            <Badge
+                              key={index}
+                              variant="secondary"
+                              className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                            >
+                              {typeof skill === "string"
+                                ? skill.replace(/["\[\]]/g, "").trim()
+                                : skill}
+                            </Badge>
+                          ))}
                       </div>
                     )}
                     <div className="flex items-center gap-4">

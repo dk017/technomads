@@ -32,12 +32,56 @@ function parseSlug(slug: string[]): {
 } {
   const fullSlug = slug.join("-");
 
+  // Pattern for experience level only (new pattern)
+  if (fullSlug.match(/^(senior|entry-level|mid-level)-remote-jobs$/)) {
+    const [_, experience] = fullSlug.match(
+      /^(senior|entry-level|mid-level)-remote-jobs$/
+    )!;
+    return { experience };
+  }
+
+  // Pattern for experience + title + location
+  if (
+    fullSlug.match(
+      /^(senior|entry-level|mid-level)-remote-([^-]+)-jobs-in-(.+)$/
+    )
+  ) {
+    const [_, experience, title, locationSlug] = fullSlug.match(
+      /^(senior|entry-level|mid-level)-remote-([^-]+)-jobs-in-(.+)$/
+    )!;
+    const locationOption = jobLocationOptions.find(
+      (option) => option.slug === locationSlug
+    );
+    return {
+      experience,
+      title,
+      location: locationOption?.value || locationSlug,
+    };
+  }
+
   // Pattern matching for different URL formats
   if (fullSlug.match(/^(senior|entry-level|mid-level)-remote-(.+)-jobs$/)) {
     const [_, experience, title] = fullSlug.match(
       /^(senior|entry-level|mid-level)-remote-(.+)-jobs$/
     )!;
     return { experience, title };
+  }
+
+  // Add new pattern for experience + title + location combination
+  if (
+    fullSlug.match(/^(senior|entry-level|mid-level)-remote-(.+)-jobs-in-(.+)$/)
+  ) {
+    const [_, experience, title, locationSlug] = fullSlug.match(
+      /^(senior|entry-level|mid-level)-remote-(.+)-jobs-in-(.+)$/
+    )!;
+    const locationOption = jobLocationOptions.find(
+      (option) => option.slug === locationSlug
+    );
+    return {
+      experience,
+      title,
+      location: locationOption?.value || locationSlug,
+    };
   }
 
   if (fullSlug.match(/^remote-(.+)-jobs-in-(.+)$/)) {
@@ -69,14 +113,11 @@ function parseSlug(slug: string[]): {
       location: locationOption?.value || locationSlug,
     };
   }
-
   return {};
 }
 
 export default function JobsPage({ params }: PageProps) {
   const { title, location, experience } = parseSlug(params.slug);
-
-  console.log("Slug parsing result:", { title, location, experience });
 
   return (
     <JobsLayout

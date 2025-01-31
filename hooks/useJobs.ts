@@ -19,7 +19,6 @@ const createFlexibleTitlePattern = (title: string) => {
   const tokens = title.toLowerCase()
     .split(/[\s-]+/)  // Split on both spaces and hyphens
     .filter(Boolean);
-  console.log("Title search tokens:", tokens);
   return `%${tokens.join('%')}%`;
 };
 
@@ -51,9 +50,7 @@ async function fetchJobsFromAPI(
   }
 
   if (filters.title) {
-    console.log("Searching for title:", filters.title);
     const pattern = createFlexibleTitlePattern(filters.title);
-    console.log("Search pattern:", pattern);
 
     query = query.or([
       `title.ilike.${pattern}`,
@@ -71,10 +68,24 @@ async function fetchJobsFromAPI(
   if (filters.workType && filters.workType !== 'all') {
     query = query.eq('work_type', filters.workType);
   }
-
   // Add experience filter
   if (filters.experience && filters.experience !== 'any') {
-    query = query.eq('experience_level', filters.experience);
+    // Define experience level mappings
+    const experienceMappings: { [key: string]: string[] } = {
+      'entry-level': ['0-2', 'entry-level', 'junior', '0-1', '1-2'],
+      'mid-level': ['2-5', '3-5', 'mid-level', 'intermediate'],
+      'senior': ['5+', '5-10', '7+', '10+', 'senior', 'lead', 'principal']
+    };
+
+    // Get the array of possible experience values for the selected level
+    const experienceValues = experienceMappings[filters.experience];
+
+    if (experienceValues) {
+      // Create an OR condition for all possible experience values
+      query = query.or(
+        experienceValues.map(value => `experience.ilike.%${value}%`).join(',')
+      );
+    }
   }
 
   // Add pagination
@@ -95,7 +106,6 @@ async function fetchJobsFromAPI(
       count: count || 0
     };
   } catch (error) {
-    console.error('Error in fetchJobsFromAPI:', error);
     return {
       data: [],
       count: 0

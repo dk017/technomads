@@ -1,16 +1,11 @@
 import { createClient } from "@/app/utils/supabase/client";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
-import { jobTitleOptions } from "@/app/constants/jobTitleOptions";
 import { titleOptions } from "@/app/constants/titleOptions";
 export async function GET() {
   const supabase = createClient();
   const baseUrl = 'https://onlyremotejobs.me';
-
-  // Fetch all unique job titles and experience levels
-  const { data: jobs } = await supabase
-    .from('jobs_tn')
-    .select('title, experience_level, company_name, created_at')
-    .order('created_at', { ascending: false });
+  const experienceLevels = ['senior', 'mid-level', 'entry-level'];
+  const urlPrefixes = ['remote', 'work-from-home'];
 
   const urlEntries = new Set<string>();
 
@@ -19,36 +14,49 @@ export async function GET() {
   urlEntries.add(generateUrlEntry(`${baseUrl}/jobs`, 0.9, 'daily'));
   urlEntries.add(generateUrlEntry(`${baseUrl}/remote-hiring-companies`, 0.9, 'daily'));
 
+  // Add location pages with variations
   jobLocationOptions.forEach(location => {
-    // Basic location pages
-    urlEntries.add(generateUrlEntry(`${baseUrl}/remote-jobs-in-${location.slug}`, 0.8, 'weekly'));
+    urlPrefixes.forEach(prefix => {
+      // Basic location pages
+      urlEntries.add(generateUrlEntry(`${baseUrl}/${prefix}-jobs-in-${location.slug}`, 0.8, 'weekly'));
 
-    // Combination of title and location pages
-    titleOptions.forEach(title => {
-      urlEntries.add(generateUrlEntry(
-        `${baseUrl}/remote-${title.value}-jobs-in-${location.slug}`,
-        0.8,
-        'weekly'
-      ));
+      // Combination with titles
+      titleOptions.forEach(title => {
+        // Basic title + location
+        urlEntries.add(generateUrlEntry(
+          `${baseUrl}/${prefix}-${title.value}-jobs-in-${location.slug}`,
+          0.8,
+          'weekly'
+        ));
+
+        // Experience + title + location
+        experienceLevels.forEach(exp => {
+          urlEntries.add(generateUrlEntry(
+            `${baseUrl}/${exp}-${prefix}-${title.value}-jobs-in-${location.slug}`,
+            0.8,
+            'weekly'
+          ));
+        });
+      });
     });
   });
 
-  // Add title-only pages
+  // Add title-only pages with variations
   titleOptions.forEach(title => {
-    urlEntries.add(generateUrlEntry(`${baseUrl}/remote-${title.value}-jobs`, 0.8, 'weekly'));
-  });
+    urlPrefixes.forEach(prefix => {
+      // Basic title
+      urlEntries.add(generateUrlEntry(`${baseUrl}/${prefix}-${title.value}-jobs`, 0.8, 'weekly'));
 
-  // Add job pages
-//   if (jobs) {
-//     jobs.forEach(job => {
-//       if (job.title && job.company_name) {
-//         const companySlug = encodeURIComponent(job.company_name);
-//         const jobSlug = encodeURIComponent(job.title.toLowerCase().replace(/\s+/g, '-'));
-//         const jobUrl = `${baseUrl}/companies/${companySlug}/jobs/${jobSlug}`;
-//         urlEntries.add(generateUrlEntry(jobUrl, 0.8, 'daily'));
-//       }
-//     });
-//   }
+      // Experience + title
+      experienceLevels.forEach(exp => {
+        urlEntries.add(generateUrlEntry(
+          `${baseUrl}/${exp}-${prefix}-${title.value}-jobs`,
+          0.8,
+          'weekly'
+        ));
+      });
+    });
+  });
 
   // Generate the complete XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

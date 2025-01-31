@@ -32,5 +32,9 @@ export function generateSlug(params: {
     return `/remote-jobs-in-${sanitizedLocation}`;
   }
 
+  if (sanitizedExperience) {
+    return `/${sanitizedExperience}-remote-jobs`;
+  }
+
   return '/';
 }
