@@ -1,4 +1,4 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { compileMDX } from "next-mdx-remote/rsc";
 import "../../../mdx.css";
 import Link from "next/link";
 
@@ -23,16 +23,14 @@ const BrowseJobsButton = () => (
 
 // Simplified components object
 const components = {
-  BrowseJobsButton: BrowseJobsButton,
-  // Add other safe components here
+  BrowseJobsButton,
   a: (props: any) => <a {...props} className="text-blue-600 hover:underline" />,
-  // You can add more basic components here
 };
 
 async function getPost(slug: string[]): Promise<BlogPost | null> {
   try {
     const response = await fetch(
-      `https://raw.githubusercontent.com/dk017/technomads/main/content/blog/${slug.join(
+      `https://raw.githubusercontent.com/technomads-in/technomads/main/content/blog/${slug.join(
         "/"
       )}.mdx`
     );
@@ -90,6 +88,20 @@ export default async function BlogPost({
     return <div>Post not found</div>;
   }
 
+  const { content } = await compileMDX({
+    source: post.content,
+    components,
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        development: false,
+        // Disable runtime JavaScript evaluation
+        jsxRuntime: "automatic",
+        format: "mdx",
+      },
+    },
+  });
+
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
       <header className="mb-12">
@@ -101,18 +113,7 @@ export default async function BlogPost({
         </div>
       </header>
 
-      <div className="mdx-article prose prose-lg max-w-none">
-        <MDXRemote
-          source={post.content}
-          components={components}
-          options={{
-            parseFrontmatter: false,
-            mdxOptions: {
-              development: false,
-            },
-          }}
-        />
-      </div>
+      <div className="mdx-article prose prose-lg max-w-none">{content}</div>
     </article>
   );
 }

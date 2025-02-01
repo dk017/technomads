@@ -14,6 +14,9 @@ const nextConfig = {
     source: "/sitemap-:id.xml",
     destination: "/sitemap.xml/:id",
   },],
+  experimental: {
+    mdxRs: true,
+  },
 };
 
 
