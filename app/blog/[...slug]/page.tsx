@@ -4,6 +4,15 @@ import Link from "next/link";
 
 export const runtime = "edge";
 
+// Get GitHub details from environment variables
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
+const GITHUB_REPO = process.env.GITHUB_REPO;
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
+
+if (!GITHUB_USERNAME || !GITHUB_REPO) {
+  throw new Error("GitHub environment variables are not set");
+}
+
 interface BlogPost {
   title: string;
   author: string;
@@ -30,7 +39,7 @@ const components = {
 async function getPost(slug: string[]): Promise<BlogPost | null> {
   try {
     const response = await fetch(
-      `https://raw.githubusercontent.com/dk017/technomads/main/content/blog/${slug.join(
+      `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/content/blog/${slug.join(
         "/"
       )}.mdx`
     );
