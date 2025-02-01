@@ -11,11 +11,28 @@ interface BlogPost {
   content: string;
 }
 
+// Simple component that doesn't require evaluation
+const BrowseJobsButton = () => (
+  <Link
+    href="/"
+    className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  >
+    Browse Remote Jobs
+  </Link>
+);
+
+// Simplified components object
+const components = {
+  BrowseJobsButton: BrowseJobsButton,
+  // Add other safe components here
+  a: (props: any) => <a {...props} className="text-blue-600 hover:underline" />,
+  // You can add more basic components here
+};
+
 async function getPost(slug: string[]): Promise<BlogPost | null> {
   try {
-    // Instead of reading from filesystem, fetch from public URL
     const response = await fetch(
-      `https://raw.githubusercontent.com/dk017/technomads/main/content/blog/${slug.join(
+      `https://raw.githubusercontent.com/technomads-in/technomads/main/content/blog/${slug.join(
         "/"
       )}.mdx`
     );
@@ -26,7 +43,7 @@ async function getPost(slug: string[]): Promise<BlogPost | null> {
 
     const source = await response.text();
 
-    // Simple frontmatter parsing since we can't use gray-matter in Edge
+    // Simple frontmatter parsing
     const frontMatterRegex = /---\n([\s\S]*?)\n---/;
     const match = source.match(frontMatterRegex);
 
@@ -38,11 +55,15 @@ async function getPost(slug: string[]): Promise<BlogPost | null> {
     const content = source.replace(frontMatterRegex, "").trim();
 
     // Parse frontmatter manually
-    const data: any = {};
+    const data: Record<string, string> = {};
     frontMatter.split("\n").forEach((line) => {
       const [key, ...valueParts] = line.split(":");
       if (key && valueParts.length) {
-        data[key.trim()] = valueParts.join(":").trim();
+        const value = valueParts
+          .join(":")
+          .trim()
+          .replace(/^["'](.*)["']$/, "$1");
+        data[key.trim()] = value;
       }
     });
 
@@ -57,21 +78,6 @@ async function getPost(slug: string[]): Promise<BlogPost | null> {
     return null;
   }
 }
-
-// Create a Button component
-const BrowseJobsButton = () => (
-  <Link
-    href="/"
-    className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  >
-    Browse Remote Jobs
-  </Link>
-);
-
-// Add it to your MDX components
-const components = {
-  BrowseJobsButton,
-};
 
 export default async function BlogPost({
   params,
@@ -92,12 +98,20 @@ export default async function BlogPost({
           <span>{post.author}</span>
           <span>•</span>
           <span>{new Date(post.date).toLocaleDateString()}</span>
-          <span>•</span>
         </div>
       </header>
 
       <div className="mdx-article prose prose-lg max-w-none">
-        <MDXRemote source={post.content} components={components} />
+        <MDXRemote
+          source={post.content}
+          components={components}
+          options={{
+            parseFrontmatter: false,
+            mdxOptions: {
+              development: false,
+            },
+          }}
+        />
       </div>
     </article>
   );
