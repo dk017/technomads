@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_noStore as noStore } from "next/cache";
 import { createClient } from "@/app/utils/supabase/client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -213,6 +214,8 @@ const NoResultsFound = () => (
 );
 
 export default function CompaniesPage() {
+  noStore();
+
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
@@ -225,7 +228,8 @@ export default function CompaniesPage() {
 
   const fetchCompanies = useCallback(
     async (start = 0) => {
-      console.log("Fetching companies from:", start); // Debug log
+      noStore();
+      console.log("Fetching companies from:", start);
       setLoading(true);
 
       const supabase = createClient();
