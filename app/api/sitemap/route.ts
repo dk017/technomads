@@ -9,6 +9,9 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+export const dynamic = 'force-dynamic'; // Mark as dynamic route
+export const runtime = 'edge'; // Use edge runtime
+
 const URLS_PER_SITEMAP = 45000;
 
 export async function GET() {
@@ -43,6 +46,7 @@ export async function GET() {
     return new NextResponse(xml, {
       headers: {
         'Content-Type': 'application/xml',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600'
       },
     });
   } catch (error) {

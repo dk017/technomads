@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -14,10 +17,10 @@ export async function GET(
 ) {
   try {
     const sitemapId = parseInt(params.id);
-
+    
     // Calculate range for this sitemap
     const startRange = (sitemapId - 1) * URLS_PER_SITEMAP;
-
+    
     // Get jobs for this range
     const { data: jobs } = await supabase
       .from('jobs_tn')
@@ -44,6 +47,7 @@ export async function GET(
     return new NextResponse(xml, {
       headers: {
         'Content-Type': 'application/xml',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600'
       },
     });
   } catch (error) {
