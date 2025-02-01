@@ -17,10 +17,10 @@ export async function GET(
 ) {
   try {
     const sitemapId = parseInt(params.id);
-    
+
     // Calculate range for this sitemap
     const startRange = (sitemapId - 1) * URLS_PER_SITEMAP;
-    
+
     // Get jobs for this range
     const { data: jobs } = await supabase
       .from('jobs_tn')
