@@ -5,8 +5,8 @@ import Link from "next/link";
 export const runtime = "edge";
 
 // Get GitHub details from environment variables
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
-const GITHUB_REPO = process.env.GITHUB_REPO;
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "dk017";
+const GITHUB_REPO = process.env.GITHUB_REPO || "technomads";
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
 
 if (!GITHUB_USERNAME || !GITHUB_REPO) {

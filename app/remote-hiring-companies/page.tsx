@@ -144,37 +144,44 @@ const useIntersectionObserver = (callback: () => void, deps: any[] = []) => {
   const observer = useRef<IntersectionObserver | null>(null);
   const currentElement = useRef<Element | null>(null);
 
-  useEffect(() => {
-    if (observer.current) {
-      if (currentElement.current) {
-        observer.current.unobserve(currentElement.current);
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        console.log("Intersection detected!"); // Debug log
+        callback();
       }
+    },
+    [callback]
+  );
+
+  useEffect(() => {
+    // Cleanup previous observer
+    if (observer.current) {
       observer.current.disconnect();
     }
 
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          callback();
-        }
-      },
-      { threshold: 1.0 }
-    );
+    // Create new observer
+    observer.current = new IntersectionObserver(handleIntersection, {
+      root: null,
+      rootMargin: "100px", // Load earlier, before the user reaches the bottom
+      threshold: 0.1, // Trigger when even 10% of the element is visible
+    });
+
+    // Observe current element if it exists
+    if (currentElement.current) {
+      observer.current.observe(currentElement.current);
+    }
 
     return () => {
       if (observer.current) {
         observer.current.disconnect();
       }
     };
-  }, [callback, ...deps]);
+  }, [handleIntersection, ...deps]);
 
   const ref = useCallback((element: Element | null) => {
     if (element) {
-      if (currentElement.current) {
-        if (observer.current) {
-          observer.current.unobserve(currentElement.current);
-        }
-      }
       currentElement.current = element;
       if (observer.current) {
         observer.current.observe(element);
@@ -209,22 +216,18 @@ export default function CompaniesPage() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(0);
   const [filters, setFilters] = useState<Filters>({
     search: "",
     size: "all",
     minJobs: "all",
   });
 
-  // Last element ref for infinite scroll
-  const lastCompanyRef = useRef<HTMLDivElement>(null);
-  const infiniteScrollRef = useIntersectionObserver(() => {
-    if (hasMore && !loading) {
-      fetchCompanies(companies.length);
-    }
-  }, [hasMore, loading, companies.length]);
-
   const fetchCompanies = useCallback(
     async (start = 0) => {
+      console.log("Fetching companies from:", start); // Debug log
+      setLoading(true);
+
       const supabase = createClient();
       let query = supabase
         .from("companies")
@@ -232,7 +235,6 @@ export default function CompaniesPage() {
         .order("name")
         .range(start, start + PAGE_SIZE - 1);
 
-      // Apply filters
       if (filters.search) {
         query = query.ilike("name", `%${filters.search}%`);
       }
@@ -247,8 +249,11 @@ export default function CompaniesPage() {
 
       if (error) {
         console.error("Error fetching companies:", error);
+        setLoading(false);
         return;
       }
+
+      console.log("Received data:", data?.length, "Total count:", count); // Debug log
 
       if (start === 0) {
         setCompanies(data || []);
@@ -258,13 +263,30 @@ export default function CompaniesPage() {
 
       setHasMore((count || 0) > start + PAGE_SIZE);
       setLoading(false);
+      setPage(Math.floor(start / PAGE_SIZE));
     },
     [filters]
   );
 
+  // Load more when intersection is detected
+  const loadMore = useCallback(() => {
+    if (!loading && hasMore) {
+      console.log("Loading more..."); // Debug log
+      const nextPage = page + 1;
+      fetchCompanies(nextPage * PAGE_SIZE);
+    }
+  }, [loading, hasMore, page, fetchCompanies]);
+
+  // Intersection observer reference
+  const infiniteScrollRef = useIntersectionObserver(loadMore, [
+    loading,
+    hasMore,
+    page,
+  ]);
+
   // Initial load
   useEffect(() => {
-    setLoading(true);
+    setPage(0);
     fetchCompanies(0);
   }, [filters, fetchCompanies]);
 
@@ -320,7 +342,7 @@ export default function CompaniesPage() {
         </div>
 
         {/* Companies Grid */}
-        {loading ? (
+        {loading && companies.length === 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(3)].map((_, i) => (
               <CompanyCardSkeleton key={i} />
@@ -338,6 +360,15 @@ export default function CompaniesPage() {
                 <CompanyCard company={company} />
               </div>
             ))}
+            {(loading || hasMore) && (
+              <div className="col-span-full flex justify-center py-4">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="h-8 w-8 bg-primary/20 rounded-full"></div>
+                  <div className="h-8 w-8 bg-primary/20 rounded-full"></div>
+                  <div className="h-8 w-8 bg-primary/20 rounded-full"></div>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <NoResultsFound />
