@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import "../../../mdx.css";
+import Link from "next/link";
 
 export const runtime = "edge";
 
@@ -14,7 +15,7 @@ async function getPost(slug: string[]): Promise<BlogPost | null> {
   try {
     // Instead of reading from filesystem, fetch from public URL
     const response = await fetch(
-      `https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/content/blog/${slug.join(
+      `https://raw.githubusercontent.com/dk017/technomads/main/content/blog/${slug.join(
         "/"
       )}.mdx`
     );
@@ -57,6 +58,21 @@ async function getPost(slug: string[]): Promise<BlogPost | null> {
   }
 }
 
+// Create a Button component
+const BrowseJobsButton = () => (
+  <Link
+    href="/"
+    className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  >
+    Browse Remote Jobs
+  </Link>
+);
+
+// Add it to your MDX components
+const components = {
+  BrowseJobsButton,
+};
+
 export default async function BlogPost({
   params,
 }: {
@@ -81,7 +97,7 @@ export default async function BlogPost({
       </header>
 
       <div className="mdx-article prose prose-lg max-w-none">
-        <MDXRemote source={post.content} />
+        <MDXRemote source={post.content} components={components} />
       </div>
     </article>
   );
