@@ -1,75 +1,54 @@
-import { createClient } from "@/app/utils/supabase/client";
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
 import { titleOptions } from "@/app/constants/titleOptions";
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+const URLS_PER_SITEMAP = 45000;
+
 export async function GET() {
-  const supabase = createClient();
-  const baseUrl = 'https://onlyremotejobs.me';
-  const experienceLevels = ['senior', 'mid-level', 'entry-level'];
-  const urlPrefixes = ['remote', 'work-from-home'];
+  try {
+    // Get total count of jobs
+    const { count } = await supabase
+      .from('jobs_tn')
+      .select('*', { count: 'exact', head: true });
 
-  const urlEntries = new Set<string>();
+    if (!count) {
+      throw new Error('Could not get job count');
+    }
 
-  // Add static pages
-  urlEntries.add(generateUrlEntry(`${baseUrl}`, 1.0, 'yearly'));
-  urlEntries.add(generateUrlEntry(`${baseUrl}/jobs`, 0.9, 'daily'));
-  urlEntries.add(generateUrlEntry(`${baseUrl}/remote-hiring-companies`, 0.9, 'daily'));
+    // Calculate number of needed sitemaps
+    const sitemapCount = Math.ceil(count / URLS_PER_SITEMAP);
 
-  // Add location pages with variations
-  jobLocationOptions.forEach(location => {
-    urlPrefixes.forEach(prefix => {
-      // Basic location pages
-      urlEntries.add(generateUrlEntry(`${baseUrl}/${prefix}-jobs-in-${location.slug}`, 0.8, 'weekly'));
+    // Generate sitemap index XML
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      ${Array.from({ length: sitemapCount }, (_, i) => `
+        <sitemap>
+          <loc>https://onlyremotejobs.me/api/sitemap/${i + 1}</loc>
+          <lastmod>${new Date().toISOString()}</lastmod>
+        </sitemap>
+      `).join('')}
+      <sitemap>
+        <loc>https://onlyremotejobs.me/api/sitemap/blog</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+      </sitemap>
+    </sitemapindex>`;
 
-      // Combination with titles
-      titleOptions.forEach(title => {
-        // Basic title + location
-        urlEntries.add(generateUrlEntry(
-          `${baseUrl}/${prefix}-${title.value}-jobs-in-${location.slug}`,
-          0.8,
-          'weekly'
-        ));
-
-        // Experience + title + location
-        experienceLevels.forEach(exp => {
-          urlEntries.add(generateUrlEntry(
-            `${baseUrl}/${exp}-${prefix}-${title.value}-jobs-in-${location.slug}`,
-            0.8,
-            'weekly'
-          ));
-        });
-      });
+    return new NextResponse(xml, {
+      headers: {
+        'Content-Type': 'application/xml',
+      },
     });
-  });
-
-  // Add title-only pages with variations
-  titleOptions.forEach(title => {
-    urlPrefixes.forEach(prefix => {
-      // Basic title
-      urlEntries.add(generateUrlEntry(`${baseUrl}/${prefix}-${title.value}-jobs`, 0.8, 'weekly'));
-
-      // Experience + title
-      experienceLevels.forEach(exp => {
-        urlEntries.add(generateUrlEntry(
-          `${baseUrl}/${exp}-${prefix}-${title.value}-jobs`,
-          0.8,
-          'weekly'
-        ));
-      });
-    });
-  });
-
-  // Generate the complete XML
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${Array.from(urlEntries).join('\n')}
-</urlset>`;
-
-  return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600',
-    },
-  });
+  } catch (error) {
+    console.error('Error generating sitemap index:', error);
+    return new NextResponse('Error generating sitemap', { status: 500 });
+  }
 }
 
 function generateUrlEntry(url: string, priority: number, changefreq: string): string {

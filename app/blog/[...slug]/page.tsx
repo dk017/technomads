@@ -30,7 +30,7 @@ const components = {
 async function getPost(slug: string[]): Promise<BlogPost | null> {
   try {
     const response = await fetch(
-      `https://raw.githubusercontent.com/technomads-in/technomads/main/content/blog/${slug.join(
+      `https://raw.githubusercontent.com/dk017/technomads/main/content/blog/${slug.join(
         "/"
       )}.mdx`
     );
