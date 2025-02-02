@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SearchX } from "lucide-react";
-
+export const runtime = "edge";
 interface Company {
   id: string;
   name: string;
