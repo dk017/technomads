@@ -11,17 +11,28 @@ const supabase = createClient(
 
 const URLS_PER_SITEMAP = 45000;
 
+// Helper function to escape special characters in XML
+function escapeXml(unsafe: string) {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case "'": return '&apos;';
+      case '"': return '&quot;';
+      default: return c;
+    }
+  });
+}
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
     const sitemapId = parseInt(params.id);
-
-    // Calculate range for this sitemap
     const startRange = (sitemapId - 1) * URLS_PER_SITEMAP;
 
-    // Get jobs for this range
     const { data: jobs } = await supabase
       .from('jobs_tn')
       .select('job_slug, created_at')
@@ -32,17 +43,16 @@ export async function GET(
       throw new Error('Could not fetch jobs');
     }
 
+    // Format XML with proper escaping
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${jobs.map(job => `
-          <url>
-            <loc>https://onlyremotejobs.me/job/${job.job_slug}</loc>
-            <lastmod>${new Date(job.created_at).toISOString()}</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.8</priority>
-          </url>
-        `).join('')}
-      </urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${jobs.map(job => `  <url>
+    <loc>https://onlyremotejobs.me/job/${escapeXml(job.job_slug)}</loc>
+    <lastmod>${new Date(job.created_at).toISOString()}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('\n')}
+</urlset>`;
 
     return new NextResponse(xml, {
       headers: {
