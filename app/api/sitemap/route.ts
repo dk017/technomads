@@ -12,7 +12,7 @@ const supabase = createClient(
 export const dynamic = 'force-dynamic'; // Mark as dynamic route
 export const runtime = 'edge'; // Use edge runtime
 
-const URLS_PER_SITEMAP = 45000;
+const URLS_PER_SITEMAP = 45000; // Keep under 50k limit
 
 export async function GET() {
   try {
@@ -25,23 +25,22 @@ export async function GET() {
       throw new Error('Could not get job count');
     }
 
-    // Calculate number of needed sitemaps
-    const sitemapCount = Math.ceil(count / URLS_PER_SITEMAP);
+    // Calculate number of sitemaps needed
+    const numberOfSitemaps = Math.ceil(count / URLS_PER_SITEMAP);
 
     // Generate sitemap index XML
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${Array.from({ length: sitemapCount }, (_, i) => `
-        <sitemap>
-          <loc>https://onlyremotejobs.me/api/sitemap/${i + 1}</loc>
-          <lastmod>${new Date().toISOString()}</lastmod>
-        </sitemap>
-      `).join('')}
-      <sitemap>
-        <loc>https://onlyremotejobs.me/api/sitemap/blog</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-      </sitemap>
-    </sitemapindex>`;
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${Array.from({ length: numberOfSitemaps }, (_, i) => `
+  <sitemap>
+    <loc>https://onlyremotejobs.me/api/sitemap/${i + 1}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </sitemap>`).join('')}
+  <sitemap>
+    <loc>https://onlyremotejobs.me/api/sitemap/static</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </sitemap>
+</sitemapindex>`;
 
     return new NextResponse(xml, {
       headers: {
@@ -51,7 +50,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Error generating sitemap index:', error);
-    return new NextResponse('Error generating sitemap', { status: 500 });
+    return new NextResponse('Error generating sitemap index', { status: 500 });
   }
 }
 

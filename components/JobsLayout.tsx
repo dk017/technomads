@@ -21,12 +21,24 @@ interface HeaderSectionProps {
   experience?: string;
 }
 
+const HeaderSkeleton = () => (
+  <section className="mb-16 text-center animate-pulse">
+    <div className="h-14 w-3/4 bg-primary/10 rounded-lg mx-auto mb-4" />
+    <div className="h-16 w-full max-w-3xl bg-primary/5 rounded-lg mx-auto" />
+  </section>
+);
+
 const HeaderSection = ({
   jobCount,
   title,
   location,
   experience,
-}: HeaderSectionProps) => {
+  isLoading,
+}: HeaderSectionProps & { isLoading: boolean }) => {
+  if (isLoading) {
+    return <HeaderSkeleton />;
+  }
+
   const formattedCount = jobCount.toLocaleString();
 
   // Capitalize first letter of each word
@@ -99,6 +111,7 @@ export function JobsLayout({
         title={initialTitle}
         location={initialLocation}
         experience={initialExperience}
+        isLoading={isLoading && jobCount === 0}
       />
 
       <JobFilters
