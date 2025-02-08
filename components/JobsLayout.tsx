@@ -54,10 +54,11 @@ const HeaderSection = ({
     ? jobLocationOptions.find((option) => option.value === location)
     : null;
 
-  const jobTitle = title ? capitalizeWords(title.replace(/-/g, " ")) : "Remote";
-  const locationText = locationOption
-    ? ` in ${locationOption.value}` // Use the value for display
-    : "";
+  // Format the title to always include "Remote" before the job title
+  const jobTitle = title
+    ? `Remote ${capitalizeWords(title.replace(/-/g, " "))}`
+    : "Remote";
+  const locationText = locationOption ? ` in ${locationOption.value}` : "";
   const experienceText = experience ? `${capitalizeWords(experience)} ` : "";
 
   return (

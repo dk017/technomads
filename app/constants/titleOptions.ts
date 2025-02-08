@@ -103,4 +103,5 @@ export const titleOptions = [
   { value: 'data-entry', label: 'Data Entry' },
   { value: 'nursing', label: 'Nursing' },
   { value: 'human-resource', label: 'Human Resource' },
+  { value: 'psychiatrist', label: 'Psychiatrist' },
 ];
