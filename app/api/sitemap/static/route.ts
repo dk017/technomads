@@ -20,57 +20,42 @@ function escapeXml(unsafe: string) {
 
 export async function GET() {
   try {
-    // Generate static URLs (title-based, location-based, and combinations)
     const staticUrls = [
-      // Title-based URLs
       ...titleOptions.map(title => ({
-        loc: `https://onlyremotejobs.me/remote-${title.value}-jobs`,
+        loc: `https://onlyremotejobs.me/remote-${escapeXml(title.value)}-jobs`,
         changefreq: 'daily',
         priority: '0.7'
       })),
-
-      // Location-based URLs
       ...jobLocationOptions.map(location => ({
-        loc: `https://onlyremotejobs.me/remote-jobs-in-${location.slug}`,
+        loc: `https://onlyremotejobs.me/remote-jobs-in-${escapeXml(location.slug)}`,
         changefreq: 'daily',
         priority: '0.7'
       })),
-
-      // Combined URLs
       ...titleOptions.flatMap(title =>
         jobLocationOptions.map(location => ({
-          loc: `https://onlyremotejobs.me/remote-${title.value}-jobs-in-${location.slug}`,
+          loc: `https://onlyremotejobs.me/remote-${escapeXml(title.value)}-jobs-in-${escapeXml(location.slug)}`,
           changefreq: 'daily',
           priority: '0.6'
         }))
       ),
-
-      // Experience level variations
       ...['entry-level', 'mid-level', 'senior'].flatMap(exp => [
         {
-          loc: `https://onlyremotejobs.me/${exp}-remote-jobs`,
+          loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-jobs`,
           changefreq: 'daily',
           priority: '0.7'
         },
         ...titleOptions.map(title => ({
-          loc: `https://onlyremotejobs.me/${exp}-remote-${title.value}-jobs`,
+          loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-${escapeXml(title.value)}-jobs`,
           changefreq: 'daily',
           priority: '0.6'
-        })),
-        ...titleOptions.flatMap(title =>
-          jobLocationOptions.map(location => ({
-            loc: `https://onlyremotejobs.me/${exp}-remote-${title.value}-jobs-in-${location.slug}`,
-            changefreq: 'daily',
-            priority: '0.6'
-          }))
-        )
+        }))
       ])
     ];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticUrls.map(url => `  <url>
-    <loc>${escapeXml(url.loc)}</loc>
+    <loc>${url.loc}</loc>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join('\n')}
@@ -86,4 +71,4 @@ ${staticUrls.map(url => `  <url>
     console.error('Error generating static sitemap:', error);
     return new NextResponse('Error generating static sitemap', { status: 500 });
   }
-} 
+}

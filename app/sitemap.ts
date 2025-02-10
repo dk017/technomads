@@ -1,36 +1,50 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/app/utils/supabase/client'
 
+const URLS_PER_SITEMAP = 45000; // Keep under 50k limit
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Use the Cloudflare Pages URL if available, otherwise fallback to relative paths
-  const baseUrl = process.env.CF_PAGES_URL || ''
+  const baseUrl = process.env.CF_PAGES_URL || 'https://onlyremotejobs.me'
   const supabase = createClient()
 
-  // Fetch all jobs
-  const { data: jobs } = await supabase
+  // Get total count of jobs
+  const { count } = await supabase
     .from('jobs_tn')
-    .select('company_name, job_slug')
+    .select('*', { count: 'exact', head: true });
 
-  const jobsUrls = jobs?.map((job) => ({
-    url: `${baseUrl}/companies/${job.company_name}/jobs/${job.job_slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 0.8,
-  })) || []
+  if (!count) {
+    return [];
+  }
 
-  return [
+  // Calculate number of sitemaps needed
+  const numberOfSitemaps = Math.ceil(count / URLS_PER_SITEMAP);
+
+  const sitemaps: MetadataRoute.Sitemap = [
     {
-      url: baseUrl || '/',
+      url: `${baseUrl}/`,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/jobs`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'daily' as const,
       priority: 0.9,
     },
-    ...jobsUrls,
-  ]
+    ...Array.from({ length: numberOfSitemaps }, (_, i) => ({
+      url: `${baseUrl}/api/sitemap/${i + 1}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    })),
+    {
+      url: `${baseUrl}/api/sitemap/static`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.7,
+    }
+  ];
+
+  return sitemaps;
 }
