@@ -142,18 +142,31 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
           setTitle(value);
           setIsSearching(false);
 
-          // Generate and navigate to the SEO-friendly URL
+          // Find the title option to get the correct value
+          const titleOption = titleOptions.find(
+            (option) => option.label === value
+          );
+
           const params = {
-            title: value,
+            title: titleOption?.value || "", // Use value instead of label
             location,
             experience,
           };
+
+          onFilterChange(
+            location,
+            keywords,
+            titleOption?.value || "", // Use value for filtering
+            salary,
+            workType,
+            experience === "any" ? "" : experience
+          );
 
           const url = generateSlug(params);
           router.push(url);
         }
       },
-      [location, experience, router]
+      [location, experience, router, keywords, salary, workType, onFilterChange]
     );
 
     const handleTitleInput = useCallback((value: string) => {
@@ -173,32 +186,40 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
 
           const params = {
             title,
-            location: locationOption?.value || "", // Use the value for URL/filtering
+            location: locationOption?.slug || "", // Use slug instead of value for URL
             experience,
           };
+
+          // Pass the value to the filter change handler
+          onFilterChange(
+            locationOption?.value || "", // Use value for filtering
+            keywords,
+            title,
+            salary,
+            workType,
+            experience === "any" ? "" : experience
+          );
 
           const url = generateSlug(params);
           router.push(url);
         }
       },
-      [title, experience, router]
+      [title, experience, router, keywords, salary, workType, onFilterChange]
     );
 
     const handleKeywordsChange = useCallback(
       (value: string) => {
-        if (!isUpdatingFromProps.current) {
-          setKeywords(value);
-          debouncedFilterChange(
-            location,
-            value,
-            title,
-            salary,
-            workType,
-            experience
-          );
-        }
+        setKeywords(value);
+        onFilterChange(
+          location,
+          value,
+          title,
+          salary,
+          workType,
+          experience === "any" ? "" : experience
+        );
       },
-      [location, title, salary, workType, experience, debouncedFilterChange]
+      [location, title, salary, workType, experience, onFilterChange]
     );
 
     const handleTitleChange = useCallback(
@@ -390,7 +411,7 @@ const JobFilters: React.FC<JobFiltersProps> = memo(
                 </Popover>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 pb-2">
               <BriefcaseIcon className="h-5 w-5 text-gray-400" />
               <Select value={experience} onValueChange={handleExperienceChange}>
                 <SelectTrigger className="w-full">

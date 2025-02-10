@@ -3,15 +3,18 @@
 import JobFilters from "@/components/JobFilters";
 import JobListings from "@/components/JobListings";
 import { useJobs } from "@/hooks/useJobs";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { JobSkeleton } from "@/components/JobSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { jobLocationOptions } from "@/app/constants/jobLocationOptions";
+import { generateSlug } from "@/utils/url";
+import { useRouter } from "next/navigation";
 
 interface JobsLayoutProps {
   initialTitle?: string;
   initialLocation?: string;
   initialExperience?: string;
+  initialKeywords?: string;
 }
 
 interface HeaderSectionProps {
@@ -80,6 +83,7 @@ export function JobsLayout({
   initialTitle,
   initialLocation,
   initialExperience,
+  initialKeywords,
 }: JobsLayoutProps) {
   const {
     jobs,
@@ -91,19 +95,71 @@ export function JobsLayout({
     setJobs,
   } = useJobs(true);
 
+  const router = useRouter();
+
+  const handleFilterChange = useCallback(
+    (
+      location: string,
+      keywords: string,
+      title: string,
+      minSalary: string,
+      workType: string,
+      experience?: string
+    ) => {
+      setJobs([]);
+
+      // Find the location option to get the slug for URL
+      const locationOption = jobLocationOptions.find(
+        (option) => option.value === location
+      );
+
+      // Generate URL only for title, location, experience, and keywords
+      const params = {
+        title: title || initialTitle || "",
+        location: locationOption?.slug || "", // Use slug for URL
+        experience: experience || initialExperience || "",
+        keywords: keywords || "",
+      };
+
+      // Update URL
+      const url = generateSlug(params);
+      router.push(url);
+
+      // Fetch jobs with all filters using the actual values
+      fetchJobs(
+        {
+          title: title || initialTitle || "",
+          location: location || "", // Use the actual location value
+          experience: experience || initialExperience || "",
+          keyword: keywords || "",
+          workType: workType || "all",
+          minSalary: minSalary || "",
+        },
+        1
+      );
+    },
+    [initialTitle, initialExperience, fetchJobs, router, setJobs]
+  );
+
   useEffect(() => {
     fetchJobs(
       {
         title: initialTitle || "",
         location: initialLocation || "",
         experience: initialExperience || "",
-        keyword: "",
+        keyword: initialKeywords || "", // Include initial keywords
         workType: "all",
         minSalary: "",
       },
       1
     );
-  }, [initialTitle, initialLocation, initialExperience, fetchJobs]);
+  }, [
+    initialTitle,
+    initialLocation,
+    initialExperience,
+    initialKeywords,
+    fetchJobs,
+  ]);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -119,10 +175,10 @@ export function JobsLayout({
         initialTitle={initialTitle || ""}
         initialLocation={initialLocation || ""}
         initialExperience={initialExperience || ""}
-        initialKeywords=""
+        initialKeywords={initialKeywords || ""}
         initialSalary=""
         initialWorkType="all"
-        onFilterChange={() => {}} // URL-based navigation handled in JobFilters
+        onFilterChange={handleFilterChange} // Pass the handler here
       />
 
       <div className="relative">

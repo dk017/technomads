@@ -1,40 +1,43 @@
-export function generateSlug(params: {
-  title?: string;
-  location?: string;
-  experience?: string;
-}): string {
-  const { title, location, experience } = params;
+interface SlugParams {
+    title?: string;
+    location?: string;
+    experience?: string;
+    keywords?: string;
+}
 
-  // Sanitize inputs
-  const sanitize = (str?: string) =>
-    str?.toLowerCase()
-       .replace(/[^a-z0-9]+/g, '-')
-       .replace(/^-|-$/g, '') ?? '';
+export function generateSlug(params: SlugParams): string {
+    const { title, location, experience, keywords } = params;
+    let segments: string[] = [];
 
-  const sanitizedTitle = sanitize(title);
-  const sanitizedLocation = sanitize(location);
-  const sanitizedExperience = sanitize(experience);
+    // Add experience level if present
+    if (experience && experience !== 'any') {
+        segments.push(experience);
+    }
 
-  // Generate appropriate URL based on available params
-  if (sanitizedExperience && sanitizedTitle) {
-    return `/${sanitizedExperience}-remote-${sanitizedTitle}-jobs`;
-  }
+    // Add "remote"
+    segments.push('remote');
 
-  if (sanitizedTitle && sanitizedLocation) {
-    return `/remote-${sanitizedTitle}-jobs-in-${sanitizedLocation}`;
-  }
+    // Add title if present
+    if (title) {
+        segments.push(title);
+    }
 
-  if (sanitizedTitle) {
-    return `/remote-${sanitizedTitle}-jobs`;
-  }
+    // Add "jobs" segment
+    segments.push('jobs');
 
-  if (sanitizedLocation) {
-    return `/remote-jobs-in-${sanitizedLocation}`;
-  }
+    // Add location if present
+    if (location) {
+        segments.push('in');
+        segments.push(location);
+    }
 
-  if (sanitizedExperience) {
-    return `/${sanitizedExperience}-remote-jobs`;
-  }
+    // Create the base path
+    let path = '/' + segments.join('-');
 
-  return '/';
+    // Add keywords as query parameter if present
+    if (keywords && keywords.trim()) {
+        path += `?q=${encodeURIComponent(keywords.trim())}`;
+    }
+
+    return path;
 }

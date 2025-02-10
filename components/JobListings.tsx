@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
-import { createClient } from "@/app/utils/supabase/client";
-
 import {
   GlobeIcon,
   ClockIcon,
@@ -15,7 +12,6 @@ import {
 } from "lucide-react";
 import { JobSkeleton } from "@/components/JobSkeleton";
 import { Job } from "./types";
-import { getCompanyLogoUrl } from "@/utils/companyLogos";
 import { getTimeAgo } from "@/hooks/dateUtils";
 
 function generateSlug(str: string): string {
@@ -36,45 +32,6 @@ interface JobListingsProps {
 
 const JobListings: React.FC<JobListingsProps> = React.memo(
   ({ jobs, isLoading }) => {
-    const [imageError, setImageError] = useState<Record<string, boolean>>({});
-    const [logoUrls, setLogoUrls] = useState<Record<string, string>>({});
-    const supabase = createClient();
-
-    useEffect(() => {
-      const fetchCompanyLogos = async () => {
-        const uniqueCompanies = Array.from(
-          new Set(jobs.map((job) => job.company_name))
-        );
-
-        const { data: companies, error } = await supabase
-          .from("companies")
-          .select("name, logo_filename")
-          .in("name", uniqueCompanies);
-
-        if (error || !companies) {
-          console.error("Error fetching logos:", error);
-          return;
-        }
-
-        // Only set URLs for companies that have a logo_filename
-        const urls: Record<string, string> = {};
-        companies.forEach((company) => {
-          if (company.logo_filename) {
-            const {
-              data: { publicUrl },
-            } = supabase.storage
-              .from("organization-logos")
-              .getPublicUrl(company.logo_filename);
-            urls[company.name] = publicUrl;
-          }
-        });
-
-        setLogoUrls(urls);
-      };
-
-      fetchCompanyLogos();
-    }, [jobs, supabase]);
-
     const LoadingSkeletons = () => (
       <>
         {[...Array(5)].map((_, index) => (
@@ -104,42 +61,23 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
               >
                 <CardContent className="p-4">
                   <div className="flex flex-col space-y-3">
-                    <div className="flex items-start">
-                      {logoUrls[job.company_name] && !imageError[job.id] && (
-                        <div className="w-16 h-16 mr-4 relative">
-                          <Image
-                            src={logoUrls[job.company_name]}
-                            alt={`${job.company_name} logo`}
-                            width={100}
-                            height={100}
-                            className="rounded-lg object-contain"
-                            onError={() =>
-                              setImageError((prev) => ({
-                                ...prev,
-                                [job.id]: true,
-                              }))
-                            }
-                          />
+                    <div>
+                      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+                        {job.title}
+                      </h2>
+                      <Link
+                        href={`/company/${job.company_name}`}
+                        className="inline-block text-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                        aria-label={`View ${job.company_name}'s profile`}
+                      >
+                        {job.company_name}
+                      </Link>
+                      {job.company_size && (
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                          <BuildingIcon className="h-4 w-4 mr-2" />
+                          <span>{job.company_size}</span>
                         </div>
                       )}
-                      <div>
-                        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-                          {job.title}
-                        </h2>
-                        <Link
-                          href={`/company/${job.company_name}`}
-                          className="inline-block text-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                          aria-label={`View ${job.company_name}'s profile`}
-                        >
-                          {job.company_name}
-                        </Link>
-                        {job.company_size && (
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                            <BuildingIcon className="h-4 w-4 mr-2" />
-                            <span>{job.company_size}</span>
-                          </div>
-                        )}
-                      </div>
                     </div>
                     <p className="text-gray-700 dark:text-gray-200">
                       {job.short_description}
@@ -261,12 +199,6 @@ const JobListings: React.FC<JobListingsProps> = React.memo(
           )}
         </div>
       </div>
-    );
-  },
-  (prevProps, nextProps) => {
-    return (
-      prevProps.jobs.length === nextProps.jobs.length &&
-      prevProps.isLoading === nextProps.isLoading
     );
   }
 );

@@ -43,8 +43,6 @@ async function fetchJobsFromAPI(
   if (filters.keyword) {
     query = query.or([
       `title.ilike.%${filters.keyword}%`,
-      `job_description.ilike.%${filters.keyword}%`,
-      `company_name.ilike.%${filters.keyword}%`,
       `skills.ilike.%${filters.keyword}%`
     ].join(','));
   }

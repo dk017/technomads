@@ -6,6 +6,7 @@ interface PageProps {
   params: {
     slug: string[];
   };
+  searchParams: { q?: string };
 }
 
 export async function generateMetadata({
@@ -94,7 +95,7 @@ function parseSlug(slug: string[]): {
     );
     return {
       title,
-      location: locationOption?.value || locationSlug,
+      location: locationOption?.value || "", // Use value instead of slug
     };
   }
 
@@ -116,7 +117,13 @@ function parseSlug(slug: string[]): {
   return {};
 }
 
-export default function JobsPage({ params }: PageProps) {
+export default function JobsPage({
+  params,
+  searchParams,
+}: {
+  params: { slug: string[] };
+  searchParams: { q?: string };
+}) {
   const { title, location, experience } = parseSlug(params.slug);
 
   return (
@@ -124,6 +131,7 @@ export default function JobsPage({ params }: PageProps) {
       initialTitle={title}
       initialLocation={location}
       initialExperience={experience}
+      initialKeywords={searchParams.q || ""}
     />
   );
 }
