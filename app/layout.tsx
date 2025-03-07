@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { EmailCaptureWrapper } from "@/components/EmailCaptureWrapper";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -81,6 +82,19 @@ export default function RootLayout({
           name="google-site-verification"
           content="YOUR_VERIFICATION_CODE"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8BK4H0XYM0"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8BK4H0XYM0');
+          `}
+        </Script>
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <Providers>

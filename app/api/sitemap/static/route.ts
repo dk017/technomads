@@ -20,36 +20,74 @@ function escapeXml(unsafe: string) {
 
 export async function GET() {
   try {
+    const experienceLevels = ['entry-level', 'mid-level', 'senior'];
+
     const staticUrls = [
+      // Base URL
+      {
+        loc: 'https://onlyremotejobs.me',
+        changefreq: 'daily',
+        priority: '1.0'
+      },
+
+      // Title only URLs
       ...titleOptions.map(title => ({
         loc: `https://onlyremotejobs.me/remote-${escapeXml(title.value)}-jobs`,
         changefreq: 'daily',
-        priority: '0.7'
+        priority: '0.9'
       })),
+
+      // Location only URLs
       ...jobLocationOptions.map(location => ({
         loc: `https://onlyremotejobs.me/remote-jobs-in-${escapeXml(location.slug)}`,
         changefreq: 'daily',
-        priority: '0.7'
+        priority: '0.9'
       })),
+
+      // Title + Location combinations
       ...titleOptions.flatMap(title =>
         jobLocationOptions.map(location => ({
           loc: `https://onlyremotejobs.me/remote-${escapeXml(title.value)}-jobs-in-${escapeXml(location.slug)}`,
           changefreq: 'daily',
-          priority: '0.6'
+          priority: '0.8'
         }))
       ),
-      ...['entry-level', 'mid-level', 'senior'].flatMap(exp => [
-        {
-          loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-jobs`,
-          changefreq: 'daily',
-          priority: '0.7'
-        },
-        ...titleOptions.map(title => ({
+
+      // Experience level only URLs
+      ...experienceLevels.map(exp => ({
+        loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-jobs`,
+        changefreq: 'daily',
+        priority: '0.9'
+      })),
+
+      // Experience + Title combinations
+      ...experienceLevels.flatMap(exp =>
+        titleOptions.map(title => ({
           loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-${escapeXml(title.value)}-jobs`,
           changefreq: 'daily',
-          priority: '0.6'
+          priority: '0.8'
         }))
-      ])
+      ),
+
+      // Experience + Location combinations
+      ...experienceLevels.flatMap(exp =>
+        jobLocationOptions.map(location => ({
+          loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-jobs-in-${escapeXml(location.slug)}`,
+          changefreq: 'daily',
+          priority: '0.8'
+        }))
+      ),
+
+      // Experience + Title + Location combinations
+      ...experienceLevels.flatMap(exp =>
+        titleOptions.flatMap(title =>
+          jobLocationOptions.map(location => ({
+            loc: `https://onlyremotejobs.me/${escapeXml(exp)}-remote-${escapeXml(title.value)}-jobs-in-${escapeXml(location.slug)}`,
+            changefreq: 'daily',
+            priority: '0.7'
+          }))
+        )
+      )
     ];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

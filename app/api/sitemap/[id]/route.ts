@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { jobLocationOptions } from '@/app/constants/jobLocationOptions';
-import { titleOptions } from '@/app/constants/titleOptions';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
-const URLS_PER_SITEMAP = 45000;
-
+const URLS_PER_SITEMAP = 45000; // Keep under 50k limit
 
 // Helper function to escape special characters in XML
 function escapeXml(unsafe: string) {
@@ -36,14 +33,31 @@ export async function GET(
     const sitemapId = parseInt(params.id);
     const startRange = (sitemapId - 1) * URLS_PER_SITEMAP;
 
+    // First, get total count
+    const { count } = await supabase
+      .from('jobs_tn')
+      .select('*', { count: 'exact', head: true });
+
+    if (!count) {
+      throw new Error('Could not get job count');
+    }
+
+    // Calculate the end range, ensuring we don't exceed the total count
+    const endRange = Math.min(startRange + URLS_PER_SITEMAP - 1, count - 1);
+
+    // Fetch jobs for this page
     const { data: jobs, error } = await supabase
       .from('jobs_tn')
       .select('company_slug, job_slug, created_at')
-      .range(startRange, startRange + URLS_PER_SITEMAP - 1)
+      .range(startRange, endRange)
       .order('created_at', { ascending: false });
 
-    if (error || !jobs) {
-      throw error || new Error('Could not fetch jobs');
+    if (error) {
+      throw error;
+    }
+
+    if (!jobs || jobs.length === 0) {
+      return new NextResponse('No jobs found for this page', { status: 404 });
     }
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
