@@ -75,7 +75,7 @@ const InterviewPrepCTA = () => (
     </p>
     <Button asChild>
       <a
-        href="https://www.tryexponent.com/?ref=mzc4yja"
+        href="https://www.tryexponent.com/?ref=heydk17"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center"
