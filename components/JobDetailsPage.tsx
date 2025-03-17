@@ -26,9 +26,14 @@ interface Company {
 interface JobDetailPageProps {
   job: Job;
   company: Company;
+  additionalContent?: React.ReactNode;
 }
 
-const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
+const JobDetailPage: React.FC<JobDetailPageProps> = ({
+  job,
+  company,
+  additionalContent,
+}) => {
   const parseStringToArray = (
     str: string | string[] | null | undefined
   ): string[] => {
@@ -176,49 +181,54 @@ const JobDetailPage: React.FC<JobDetailPageProps> = ({ job, company }) => {
 
         {/* Company Sidebar */}
         <div className="lg:col-span-1">
-          <Card className="bg-card/50 sticky top-8">
-            <CardContent className="p-6 space-y-6">
-              <div className="text-center">
-                <h3 className="text-xl font-semibold mb-2">{company.name}</h3>
-                {company.size && (
-                  <div className="flex items-center justify-center text-sm text-muted-foreground">
-                    <BuildingIcon className="h-4 w-4 mr-2" />
-                    <span>{company.size}</span>
+          <div className="sticky top-8 space-y-6">
+            <Card className="bg-card/50">
+              <CardContent className="p-6 space-y-6">
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold mb-2">{company.name}</h3>
+                  {company.size && (
+                    <div className="flex items-center justify-center text-sm text-muted-foreground">
+                      <BuildingIcon className="h-4 w-4 mr-2" />
+                      <span>{company.size}</span>
+                    </div>
+                  )}
+                </div>
+
+                {company.description && (
+                  <p className="text-sm text-muted-foreground text-center border-t border-border pt-4">
+                    {company.description}
+                  </p>
+                )}
+
+                {Array.isArray(company.tags) && company.tags.length > 0 && (
+                  <div className="border-t border-border pt-4">
+                    <h4 className="text-sm font-medium mb-3">Company Focus</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {company.tags.map((tag, index) => (
+                        <Badge
+                          key={`${company.name}-${tag}-${index}`}
+                          variant="outline"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 )}
-              </div>
 
-              {company.description && (
-                <p className="text-sm text-muted-foreground text-center border-t border-border pt-4">
-                  {company.description}
-                </p>
-              )}
-
-              {Array.isArray(company.tags) && company.tags.length > 0 && (
                 <div className="border-t border-border pt-4">
-                  <h4 className="text-sm font-medium mb-3">Company Focus</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {company.tags.map((tag, index) => (
-                      <Badge
-                        key={`${company.name}-${tag}-${index}`}
-                        variant="outline"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
+                  <Button variant="outline" className="w-full" asChild>
+                    <a href={`/company/${company.name}`}>
+                      View All {company.jobCount} Jobs
+                    </a>
+                  </Button>
                 </div>
-              )}
+              </CardContent>
+            </Card>
 
-              <div className="border-t border-border pt-4">
-                <Button variant="outline" className="w-full" asChild>
-                  <a href={`/company/${company.name}`}>
-                    View All {company.jobCount} Jobs
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            {/* Additional content (Interview Prep CTA) will now stick with the company card */}
+            {additionalContent}
+          </div>
         </div>
       </div>
     </div>

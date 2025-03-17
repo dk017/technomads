@@ -66,6 +66,27 @@ const JobNotFound = () => (
   </div>
 );
 
+const InterviewPrepCTA = () => (
+  <div className="bg-card rounded-lg p-6 border border-border mt-6">
+    <h3 className="text-lg font-semibold mb-2">Prepare for Your Interview</h3>
+    <p className="text-muted-foreground mb-4">
+      Get ready for your tech interview with expert-led courses and mock
+      interviews.
+    </p>
+    <Button asChild>
+      <a
+        href="https://www.tryexponent.com/?ref=mzc4yja"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center"
+        aria-label="Prepare for your interview with Exponent"
+      >
+        Start Interview Prep
+      </a>
+    </Button>
+  </div>
+);
+
 export default function Page({
   params,
 }: {
@@ -142,5 +163,11 @@ export default function Page({
     return <JobNotFound />;
   }
 
-  return <JobDetailsPage job={job} company={company} />;
+  return (
+    <JobDetailsPage
+      job={job}
+      company={company}
+      additionalContent={<InterviewPrepCTA />}
+    />
+  );
 }
